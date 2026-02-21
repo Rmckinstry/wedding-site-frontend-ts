@@ -20,7 +20,7 @@ function RSVPPage() {
   const guestQuery = useQuery<Guest[], ErrorType>({
     queryKey: ["allGuests"],
     queryFn: async () => {
-      const response = await fetch(`${import.meta.env.VITE_API_URLAPI_URL}/guests`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/guests`);
 
       if (!response.ok) {
         const errorData: ErrorType = await response.json();

@@ -249,7 +249,7 @@ function RSVPForm({
 
   const submitRsvpsMutation = useMutation<RSVPResponseType, ErrorType, { rsvpList: RSVPPostBody }>({
     mutationFn: async (data) => {
-      const response = await fetch(`${import.meta.env.VITE_API_URLAPI_URL}/rsvps`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/rsvps`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -179,7 +179,7 @@ const SongEditForm = ({
   //#region song mutation
   const songSubmitMutation = useMutation<CustomResponseType, ErrorType, string>({
     mutationFn: async (songString) => {
-      const response = await fetch(`${import.meta.env.VITE_API_URLAPI_URL}/rsvps/songs/${rsvp.rsvp_id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/rsvps/songs/${rsvp.rsvp_id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -355,7 +355,7 @@ const EmailForm = ({ guest, rsvp, handleDataRefresh }: { guest: Guest; rsvp: RSV
 
   const emailSubmitMutation = useMutation<CustomResponseType, ErrorType, { email: string | null; guestId: number }>({
     mutationFn: async ({ email, guestId }) => {
-      const response = await fetch(`${import.meta.env.VITE_API_URLAPI_URL}/guests/email/${guestId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/guests/email/${guestId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -565,7 +565,7 @@ function RSVPStatusMenu({
     { postData: AdditionalGuestBodyType; type: "plus_one" | "dependent" }
   >({
     mutationFn: async ({ postData, type }) => {
-      const response = await fetch(`${import.meta.env.VITE_API_URLAPI_URL}/rsvps/additional`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/rsvps/additional`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

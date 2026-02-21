@@ -14,7 +14,7 @@ function RSVPPortal({ groupId, groupName }: { groupId: number; groupName: string
   const groupRSVPs = useQuery<RSVP[], ErrorType>({
     queryKey: ["groupRSVP"],
     queryFn: async () => {
-      const response = await fetch(`${import.meta.env.VITE_API_URLAPI_URL}/rsvps/group/${groupId}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/rsvps/group/${groupId}`);
 
       if (!response.ok) {
         const errorData: ErrorType = await response.json();
@@ -39,7 +39,7 @@ function RSVPPortal({ groupId, groupName }: { groupId: number; groupName: string
   const groupData = useQuery<GroupData, ErrorType>({
     queryKey: ["groupData"],
     queryFn: async () => {
-      const response = await fetch(`${import.meta.env.VITE_API_URLAPI_URL}/guests/group/${groupId}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/guests/group/${groupId}`);
 
       if (!response.ok) {
         const errorData: ErrorType = await response.json();
