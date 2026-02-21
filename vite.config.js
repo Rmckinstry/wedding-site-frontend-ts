@@ -9,6 +9,7 @@ export default defineConfig(() => {
         plugins: [react()],
         server: {
             port: 3000, // To keep the same port as CRA
+            open: true
         },
     };
 });
