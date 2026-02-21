@@ -89,7 +89,7 @@ function AdminGroupEditor({
 
   const addGuestsMutation = useMutation<CustomResponseType, ErrorType>({
     mutationFn: async () => {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/guests`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/guests`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

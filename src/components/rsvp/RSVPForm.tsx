@@ -89,7 +89,7 @@ function RSVPForm({
     .some((value) => value);
 
   const isPlusOneInvalid = rsvps.some(
-    (rsvp) => rsvp.additionalGuests.length > 0 && !isValidName(rsvp.additionalGuests[0].name)
+    (rsvp) => rsvp.additionalGuests.length > 0 && !isValidName(rsvp.additionalGuests[0].name),
   );
 
   const isChildrenInvalid = childrenRsvps.some((rsvp) => !isValidName(rsvp.name));
@@ -97,7 +97,8 @@ function RSVPForm({
   const separator = "\u00A7";
 
   const designatedDependentGuest = groupData.guests.find(
-    (guest) => guest.has_dependents && rsvps.some((rsvp) => rsvp.guestId === guest.guest_id && rsvp.attendance === true)
+    (guest) =>
+      guest.has_dependents && rsvps.some((rsvp) => rsvp.guestId === guest.guest_id && rsvp.attendance === true),
   );
 
   const isAddNewChildDisabled = () => {
@@ -123,7 +124,7 @@ function RSVPForm({
           ...acc,
           [guest.guest_id]: 0,
         }),
-        {}
+        {},
       );
       setSongInputsCount(initialCounts);
     }
@@ -248,7 +249,7 @@ function RSVPForm({
 
   const submitRsvpsMutation = useMutation<RSVPResponseType, ErrorType, { rsvpList: RSVPPostBody }>({
     mutationFn: async (data) => {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/rsvps`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/rsvps`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -299,8 +300,8 @@ function RSVPForm({
               spotify: !attendance ? Array(rsvp.spotify.length).fill("") : rsvp.spotify,
               additionalGuests: [],
             }
-          : rsvp
-      )
+          : rsvp,
+      ),
     );
     if (!attendance) {
       setSongValidationErrors((prevErrors) => {
@@ -328,7 +329,7 @@ function RSVPForm({
               updatedAdditionalGuests = rsvp.additionalGuests.filter((_, index) => index !== existingPlusOneIndex);
             } else {
               updatedAdditionalGuests = rsvp.additionalGuests.map((additionalGuest, index) =>
-                index === existingPlusOneIndex ? { ...additionalGuest, name: value } : additionalGuest
+                index === existingPlusOneIndex ? { ...additionalGuest, name: value } : additionalGuest,
               );
             }
           } else {
@@ -341,7 +342,7 @@ function RSVPForm({
         } else {
           return rsvp;
         }
-      })
+      }),
     );
   };
 
@@ -352,7 +353,7 @@ function RSVPForm({
           return { ...child, name: value };
         }
         return child;
-      })
+      }),
     );
   };
 
@@ -441,7 +442,7 @@ function RSVPForm({
         }));
 
         return { ...rsvp, spotify: newSpotify };
-      })
+      }),
     );
   };
 
@@ -464,7 +465,7 @@ function RSVPForm({
         prev.map((rsvp) => {
           if (rsvp.guestId !== guestId) return rsvp;
           return { ...rsvp, spotify: [...rsvp.spotify, ""] };
-        })
+        }),
       );
 
       // Initialize error state for the new song input
@@ -490,7 +491,7 @@ function RSVPForm({
         // removing song based off of index
         const updatedSpotify = rsvp.spotify.filter((_, idx) => idx !== index);
         return { ...rsvp, spotify: updatedSpotify };
-      })
+      }),
     );
 
     //reset error index
@@ -1095,7 +1096,7 @@ function RSVPForm({
                     {rsvps.some(
                       (rsvp) =>
                         rsvp.attendance === true &&
-                        groupData.guests.find((guest) => guest.guest_id === rsvp.guestId)?.has_dependents
+                        groupData.guests.find((guest) => guest.guest_id === rsvp.guestId)?.has_dependents,
                     ) && (
                       <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                         <p className="font-sm secondary-text">
