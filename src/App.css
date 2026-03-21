@@ -4,9 +4,9 @@
     /* --base-background: #F7E6CA; */
 
     /* warmer beach theme */
-    --base-background: #f2d6cd;
+    --base-background: #F0AF80;
 
-    --default-text: #646440;
+    --default-text: #d87732;
     --secondary-text: #606060;
     --btn-disabled: #A3A39b;
     --default-text-transparent: #64644042;
@@ -50,6 +50,35 @@ body {
     src: url(./fonts/CormorantUpright-Regular.ttf) format('truetype');
 }
 
+/* NEW FONTS */
+@font-face {
+    font-family: 'Jost';
+    src: url(./fonts/Jost-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    /* Medium weight */
+    font-family: 'Jost';
+    src: url(./fonts/Jost-Medium.ttf) format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    /* Medium weight - italic */
+    font-family: 'Jost';
+    src: url(./fonts/Jost-MediumItalic.ttf) format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    /* Semi-bold */
+    font-family: 'Jost';
+    src: url(./fonts/Jost-SemiBold.ttf) format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
 
 /* elements */
 html {
