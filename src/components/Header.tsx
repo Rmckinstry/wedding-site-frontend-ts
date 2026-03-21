@@ -1,11 +1,12 @@
 import React from "react";
-import HeaderImage from "../assets/header_1024.webp";
+import HeaderImage from "../assets/header-desktop-2880.png";
 
 function Header() {
   return (
     <>
       <div className="header-container">
         {/* <img id="header-img" src={HeaderImage} alt={"Green Vines"} /> */}
+        <img id="header-img" src={HeaderImage} alt={"Green Vines"} />
         <div id="header-info-container" className="flex-col">
           <h1 id="header-name" className="contain-text-center">
             SHELBY & TYLER

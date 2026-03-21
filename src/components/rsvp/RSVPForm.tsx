@@ -543,7 +543,7 @@ function RSVPForm({
         <div
           id="child-popup-container"
           className="font-sm"
-          style={{ color: "var(--default-text)", padding: "1rem", fontFamily: "Cormorant Garamond, serif" }}
+          style={{ color: "var(--default-text)", padding: "1rem", fontFamily: "Jost, Verdana" }}
         >
           <p>
             For the ceremony, we kindly ask that infants and toddlers, accompanied by an adult, be in one of the other

@@ -24,7 +24,7 @@ const theme = createTheme({
           fontSize: "1.5rem",
           marginRight: "1rem",
           marginLeft: "1rem",
-          fontFamily: "Cormorant Garamond",
+          fontFamily: "Jost, Verdana",
           "&.Mui-selected": {
             color: "var(--default-text)",
           },
@@ -59,7 +59,7 @@ const theme = createTheme({
     MuiTypography: {
       styleOverrides: {
         root: {
-          fontFamily: "Cormorant Garamond",
+          fontFamily: "Jost, Verdana",
           fontWeight: "600",
         },
       },
@@ -69,14 +69,14 @@ const theme = createTheme({
         root: {
           color: "var(--default-text)",
           fontSize: "1.25rem",
-          fontFamily: "Cormorant Garamond",
+          fontFamily: "Jost, Verdana",
         },
       },
     },
     MuiStepLabel: {
       styleOverrides: {
         root: {
-          fontFamily: "Cormorant Garamond",
+          fontFamily: "Jost, Verdana",
           fontWeight: "600",
         },
         label: {
@@ -95,7 +95,7 @@ const theme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          fontFamily: "Cormorant Garamond",
+          fontFamily: "Jost, Verdana",
           fontWeight: "600",
           "&.Mui-focused": {
             color: "var(--default-text)",
@@ -182,7 +182,7 @@ const theme = createTheme({
         root: ({ theme }) => ({
           color: "var(--default-text)",
           fontSize: "1.25rem",
-          fontFamily: "Cormorant Garamond",
+          fontFamily: "Jost, Verdana",
           [theme.breakpoints.down("md")]: {
             fontSize: "1.75rem",
           },

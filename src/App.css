@@ -1,12 +1,8 @@
 /* Variables */
 :root {
-    /* "champagene */
-    /* --base-background: #F7E6CA; */
-
-    /* warmer beach theme */
     --base-background: #F0AF80;
+    --default-text: #783C1C;
 
-    --default-text: #d87732;
     --secondary-text: #606060;
     --btn-disabled: #A3A39b;
     --default-text-transparent: #64644042;
@@ -17,34 +13,7 @@ body {
     background-color: var(--base-background);
 }
 
-@font-face {
-    font-family: 'Cormorant Garamond';
-    src: url(./fonts/CormorantGaramond-Regular.ttf) format('truetype');
-}
-
-@font-face {
-    font-family: 'Cormorant Garamond';
-    src: url(./fonts/CormorantGaramond-Medium.ttf) format('truetype');
-    font-weight: 500;
-    /* Medium weight */
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Cormorant Garamond';
-    src: url(./fonts/CormorantGaramond-MediumItalic.ttf) format('truetype');
-    font-weight: 500;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Cormorant Garamond';
-    src: url(./fonts/CormorantGaramond-SemiBold.ttf) format('truetype');
-    font-weight: 600;
-    /* semi bold */
-    font-style: normal;
-}
-
+/* replace this secondary text */
 @font-face {
     font-family: 'Cormorant Upright';
     src: url(./fonts/CormorantUpright-Regular.ttf) format('truetype');
@@ -93,7 +62,7 @@ p,
 a,
 select {
     color: var(--default-text);
-    font-family: Cormorant Garamond, serif;
+    font-family: Jost, Verdana;
 }
 
 h1 {
@@ -261,7 +230,7 @@ button:hover {
     display: block;
     background-color: var(--default-text);
     color: var(--base-background);
-    font-family: Cormorant Garamond, serif;
+    font-family: Jost, Verdana;
     border-style: none;
     border-radius: .25rem;
     font-size: 1.25rem;
@@ -491,7 +460,7 @@ button:hover {
 .btn-link {
     background-color: var(--default-text);
     color: var(--base-background);
-    font-family: Cormorant Garamond, serif;
+    font-family: Jost, Verdana;
     border-style: none;
     width: 8rem;
     height: 3rem;
@@ -524,7 +493,7 @@ button:hover {
 .btn-rsvp {
     background-color: var(--default-text);
     color: var(--base-background);
-    font-family: Cormorant Garamond, serif;
+    font-family: Jost, Verdana;
     border-style: none;
     border-radius: .25rem;
     font-size: 1.25rem;
@@ -534,7 +503,7 @@ button:hover {
 .btn-rsvp-sm {
     background-color: var(--default-text);
     color: var(--base-background);
-    font-family: Cormorant Garamond, serif;
+    font-family: Jost, Verdana;
     border-style: none;
     border-radius: .25rem;
     font-size: 1.25rem;
@@ -566,7 +535,7 @@ button:hover {
 .btn-stripped {
     all: unset;
     color: var(--default-text);
-    font-family: Cormorant Garamond, serif;
+    font-family: Jost, Verdana;
     font-size: 1.5rem;
 }
 
@@ -700,7 +669,7 @@ button.status-menu-btn:hover {
 
 .status-menu-text {
     color: var(--default-text);
-    font-family: Cormorant Garamond, serif;
+    font-family: Jost, Verdana;
     text-align: center;
 }
 
