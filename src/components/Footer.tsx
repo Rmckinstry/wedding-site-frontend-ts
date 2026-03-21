@@ -8,15 +8,15 @@ function Footer({ showText = false }) {
         {showText && (
           <div id="footer-info" className="flex-col">
             <p id="footer-text" className="font-lg">
-              B & R
+              S & T
             </p>
             <div id="divider-horiz"></div>
             <p id="footer-date" className="font-med">
-              11.15.2025
+              09.19.2026
             </p>
           </div>
         )}
-        <img id="footer-img" src={FooterImage} alt={"Flowers"} />
+        {/* <img id="footer-img" src={FooterImage} alt={"Flowers"} /> */}
       </div>
     </>
   );

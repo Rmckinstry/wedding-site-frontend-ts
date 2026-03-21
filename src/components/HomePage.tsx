@@ -1,12 +1,14 @@
 import React from "react";
-import HomeImage from "../assets/italy_ring.jpg";
+import HomeImage from "../assets/horiz-home-img-1.jpeg";
 import { useNavigation } from "../context/NavigationContext.tsx";
 function HomePage() {
   const { navigateTo } = useNavigation();
 
   return (
     <div id="home-page-container" className="flex-col">
-      <div className="btn-container" style={{ paddingBottom: "0" }}>
+      <img src={HomeImage} alt={"Proposal in Italy"} id="home-page-image" />
+      {/* uncomment for day of */}
+      {/* <div className="btn-container" style={{ paddingBottom: "0" }}>
         <button
           onClick={() => {
             navigateTo(1);
@@ -17,8 +19,8 @@ function HomePage() {
         >
           Click Here For Day Of Information
         </button>
-      </div>
-      <img src={HomeImage} alt={"Proposal in Italy"} id="home-page-image" />
+      </div> */}
+      {/* uncomment for RSVP */}
       {/* <div className="btn-container" style={{ paddingBottom: "0" }}>
           <button
             onClick={() => {
@@ -34,13 +36,13 @@ function HomePage() {
 
       <div id="home-page-info-container" className="flex-row">
         <div className="flex-col font-lg home-footer">
-          <p>November</p>
-          <p>15, 2025</p>
+          <p>September</p>
+          <p>19, 2026</p>
         </div>
         <div id="divider-vert">{/* divider */}</div>
         <div className="flex-col font-lg home-footer">
-          <p>Rossville,</p>
-          <p>TN</p>
+          <p>Santa Rosa Beach,</p>
+          <p>FL</p>
         </div>
       </div>
     </div>
