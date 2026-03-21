@@ -1,6 +1,11 @@
 /* Variables */
 :root {
-    --base-background: #FFFDFB;
+    /* "champagene */
+    /* --base-background: #F7E6CA; */
+
+    /* warmer beach theme */
+    --base-background: #f2d6cd;
+
     --default-text: #646440;
     --secondary-text: #606060;
     --btn-disabled: #A3A39b;
