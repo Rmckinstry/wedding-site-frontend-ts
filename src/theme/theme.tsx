@@ -3,10 +3,10 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#646440",
+      main: "#783C1C",
     },
     secondary: {
-      main: "#646440",
+      main: "#783C1C",
     },
   },
   components: {
@@ -24,7 +24,7 @@ const theme = createTheme({
           fontSize: "1.5rem",
           marginRight: "1rem",
           marginLeft: "1rem",
-          fontFamily: "Jost, Verdana",
+          fontFamily: "var(--font-main)",
           "&.Mui-selected": {
             color: "var(--default-text)",
           },
@@ -32,6 +32,14 @@ const theme = createTheme({
             color: "var(--default-text)",
             fontWeight: "600",
           },
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "var(--base-background)",
+          //todo: find a complementary color for cards that still fits the aesthetic but provides more contrast with the background
         },
       },
     },
@@ -59,8 +67,8 @@ const theme = createTheme({
     MuiTypography: {
       styleOverrides: {
         root: {
-          fontFamily: "Jost, Verdana",
-          fontWeight: "600",
+          fontFamily: "var(--font-main)",
+          fontWeight: "var(--weight-semibold)",
         },
       },
     },
@@ -69,15 +77,15 @@ const theme = createTheme({
         root: {
           color: "var(--default-text)",
           fontSize: "1.25rem",
-          fontFamily: "Jost, Verdana",
+          fontFamily: "var(--font-main)",
         },
       },
     },
     MuiStepLabel: {
       styleOverrides: {
         root: {
-          fontFamily: "Jost, Verdana",
-          fontWeight: "600",
+          fontFamily: "var(--font-main)",
+          fontWeight: "var(--weight-semibold)",
         },
         label: {
           "&.Mui-active": {
@@ -95,8 +103,8 @@ const theme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          fontFamily: "Jost, Verdana",
-          fontWeight: "600",
+          fontFamily: "var(--font-main)",
+          fontWeight: "var(--weight-semibold)",
           "&.Mui-focused": {
             color: "var(--default-text)",
           },
@@ -182,7 +190,7 @@ const theme = createTheme({
         root: ({ theme }) => ({
           color: "var(--default-text)",
           fontSize: "1.25rem",
-          fontFamily: "Jost, Verdana",
+          fontFamily: "var(--font-main)",
           [theme.breakpoints.down("md")]: {
             fontSize: "1.75rem",
           },
