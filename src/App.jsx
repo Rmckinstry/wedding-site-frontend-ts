@@ -23,7 +23,7 @@ function UserLayout() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+      <div className="App app-container">
         <Header />
         <div id="nav-container">
           <Navigation />

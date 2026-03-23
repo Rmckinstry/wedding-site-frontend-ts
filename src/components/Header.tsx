@@ -5,22 +5,40 @@ function Header() {
   return (
     <>
       <div className="header-container">
-        {/* <img id="header-img" src={HeaderImage} alt={"Green Vines"} /> */}
-        <img id="header-img" src={HeaderImage} alt={"Green Vines"} />
-        <div id="header-info-container" className="flex-col">
-          <h1 id="header-name" className="contain-text-center">
+        <div className="img-box-a">
+          <div className="img-box-b">
+            <div className="img-box-c">
+              <img
+                id="header-img"
+                src={HeaderImage}
+                alt={"Our Day Groovy Image"}
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  left: "0",
+                  top: "0",
+                  right: "0",
+                  bottom: "0",
+                  color: "transparent",
+                }}
+              />
+            </div>
+          </div>
+        </div>
+        <header id="header-info-container" className="flex-col">
+          <h1 id="header-name" className="contain-text-center font-xl">
             SHELBY & TYLER
           </h1>
-          <p id="header-event-info-desktop" className="font-med-lg">
+          <span id="header-event-info-desktop" className="font-med-lg">
             September 19, 2026, 5:30 PM • Santa Rosa Beach, FL
-          </p>
-          <p id="header-event-info-mobile" className="font-med-lg">
+          </span>
+          <span id="header-event-info-mobile" className="font-med-lg">
             September 19, 2026 • Santa Rosa Beach, FL
-          </p>
-          <p id="header-event-time-mobile" className="font-med">
+          </span>
+          <span id="header-event-time-mobile" className="font-med">
             5:30 PM
-          </p>
-        </div>
+          </span>
+        </header>
       </div>
     </>
   );
