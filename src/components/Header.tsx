@@ -26,7 +26,7 @@ function Header() {
           </div>
         </div>
         <header id="header-info-container" className="flex-col">
-          <h1 id="header-name" className="contain-text-center font-xl">
+          <h1 id="header-name" className="contain-text-center font-xl uppercase">
             Shelby & Tyler
           </h1>
           <span id="header-event-info-desktop" className="font-med-lg uppercase">
