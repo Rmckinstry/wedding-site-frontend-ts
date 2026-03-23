@@ -34,7 +34,7 @@ function HomePage() {
           </button>
         </div> */}
 
-      <div id="home-page-info-container" className="flex-row">
+      <div id="home-page-info-container-desktop" className="flex-row">
         <div className="flex-col font-lg home-footer">
           <p>September</p>
           <p>19, 2026</p>
@@ -44,6 +44,11 @@ function HomePage() {
           <p>Santa Rosa Beach,</p>
           <p>FL</p>
         </div>
+      </div>
+
+      <div id="home-page-info-container-mobile" className="flex-col">
+        <span className="uppercase font-lg">Wedding Day</span>
+        <span className="font-med uppercase contain-text-center">Saturday, September 19, 2026</span>
       </div>
     </div>
   );

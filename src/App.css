@@ -128,9 +128,16 @@ button:hover {
     border-radius: .5rem;
 }
 
-#home-page-info-container {
+#home-page-info-container-desktop {
     margin: 3.5rem 0;
     gap: 2rem;
+}
+
+#home-page-info-container-mobile {
+    display: none;
+    margin: 3.5rem 0;
+    gap: 2rem;
+    letter-spacing: .25rem;
 }
 
 #divider-vert {
@@ -825,6 +832,14 @@ button.status-menu-btn:hover {
         padding-bottom: 1rem;
     }
 
+    #home-page-info-container-desktop {
+        display: none;
+    }
+
+    #home-page-info-container-mobile {
+        display: flex
+    }
+
 
     /* rsvp */
 
@@ -928,6 +943,14 @@ button.status-menu-btn:hover {
     .btn-rsvp-sm {
         font-size: 1.5rem;
         padding: .5rem 1.25rem;
+    }
+
+    #home-page-info-container-desktop {
+        display: flex;
+    }
+
+    #home-page-info-container-mobile {
+        display: none
     }
 
 }
