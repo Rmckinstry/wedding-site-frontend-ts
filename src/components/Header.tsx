@@ -27,16 +27,16 @@ function Header() {
         </div>
         <header id="header-info-container" className="flex-col">
           <h1 id="header-name" className="contain-text-center font-xl">
-            SHELBY & TYLER
+            Shelby & Tyler
           </h1>
-          <span id="header-event-info-desktop" className="font-med-lg">
+          <span id="header-event-info-desktop" className="font-med-lg uppercase">
             September 19, 2026, 5:30 PM • Santa Rosa Beach, FL
           </span>
-          <span id="header-event-info-mobile" className="font-med-lg">
-            September 19, 2026 • Santa Rosa Beach, FL
+          <span id="header-event-info-mobile" className="font-med uppercase">
+            September 19, 2026 • 5:30 PM
           </span>
-          <span id="header-event-time-mobile" className="font-med">
-            5:30 PM
+          <span id="header-event-time-mobile" className="font-med uppercase">
+            Santa Rosa Beach, FL
           </span>
         </header>
       </div>

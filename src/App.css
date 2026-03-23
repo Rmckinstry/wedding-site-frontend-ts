@@ -104,7 +104,6 @@ button:hover {
     margin: 16px auto;
     font-family: var(--font-main);
     font-weight: var(--weight-medium);
-    text-transform: uppercase;
     letter-spacing: 6px;
     padding-top: 180px;
     padding-bottom: 10px;
@@ -114,7 +113,7 @@ button:hover {
     position: sticky;
     top: 0;
     z-index: 10;
-    background-color: var(--base-background);
+    /* background-color: var(--base-background); */
     /* padding-bottom: 3rem; */
 }
 
@@ -447,6 +446,10 @@ button:hover {
 
 .strong-text {
     font-weight: var(--weight-semibold);
+}
+
+.uppercase {
+    text-transform: uppercase;
 }
 
 .primary-text {
@@ -784,6 +787,10 @@ button.status-menu-btn:hover {
     #nav-mobile-container {
         display: block;
         padding: 1rem 20%;
+    }
+
+    #header-name {
+        padding-top: 0px;
     }
 
     /* change to horiz divider */
