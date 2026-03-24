@@ -1,7 +1,7 @@
 import React from "react";
 import HomeImage from "../assets/horiz-home-img-1 169.jpeg";
 import { useNavigation } from "../context/NavigationContext.tsx";
-import HomeImageVert from "../assets/vert-home-img-1.jpeg";
+import HomeImageVert from "../assets/vert-home-img-1 4 5.jpeg";
 function HomePage() {
   const { navigateTo } = useNavigation();
 
