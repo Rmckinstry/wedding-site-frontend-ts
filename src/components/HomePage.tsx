@@ -1,5 +1,5 @@
 import React from "react";
-import HomeImage from "../assets/horiz-home-img-1.jpeg";
+import HomeImage from "../assets/horiz-home-img-1 169.jpeg";
 import { useNavigation } from "../context/NavigationContext.tsx";
 import HomeImageVert from "../assets/vert-home-img-1.jpeg";
 function HomePage() {
@@ -38,13 +38,13 @@ function HomePage() {
 
       <div id="home-page-info-container-desktop" className="flex-row">
         <div className="flex-col font-lg home-footer">
-          <p className="contain-text-center">September</p>
-          <p className="contain-text-center">19, 2026</p>
+          <p className="contain-text-center uppercase">September</p>
+          <p className="contain-text-center uppercase">19, 2026</p>
         </div>
         <div id="divider-vert">{/* divider */}</div>
         <div className="flex-col font-lg home-footer">
-          <p className="contain-text-center">Santa Rosa Beach,</p>
-          <p className="contain-text-center">Florida</p>
+          <p className="contain-text-center uppercase">Santa Rosa Beach,</p>
+          <p className="contain-text-center uppercase">Florida</p>
         </div>
       </div>
 

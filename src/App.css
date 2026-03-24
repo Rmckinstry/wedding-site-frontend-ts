@@ -1068,11 +1068,11 @@ button.status-menu-btn:hover {
     }
 
     #header-name {
-        padding-top: 16rem;
+        padding-top: 12rem;
     }
 
     #header-img {
-        max-width: 75% !important;
+        max-width: 70% !important;
     }
 
     #header-event-info-desktop {
