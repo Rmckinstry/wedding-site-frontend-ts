@@ -19,7 +19,7 @@
 
 body {
     background-color: var(--base-background);
-    background: linear-gradient(180deg, rgba(247, 172, 125, 1) 50%, rgba(242, 133, 0, 1) 100%);
+    background: linear-gradient(180deg, rgba(247, 172, 125, 1) 50%, #f38b4e 100%);
     font-family: var(--font-main);
     font-weight: var(--weight-regular);
 }
