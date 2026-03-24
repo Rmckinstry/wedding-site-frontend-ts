@@ -38,13 +38,13 @@ function HomePage() {
 
       <div id="home-page-info-container-desktop" className="flex-row">
         <div className="flex-col font-lg home-footer">
-          <p>September</p>
-          <p>19, 2026</p>
+          <p className="contain-text-center">September</p>
+          <p className="contain-text-center">19, 2026</p>
         </div>
         <div id="divider-vert">{/* divider */}</div>
         <div className="flex-col font-lg home-footer">
-          <p>Santa Rosa Beach,</p>
-          <p>FL</p>
+          <p className="contain-text-center">Santa Rosa Beach,</p>
+          <p className="contain-text-center">Florida</p>
         </div>
       </div>
 

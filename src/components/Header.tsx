@@ -14,7 +14,6 @@ function Header() {
                 alt={"Our Day Groovy Image"}
                 style={{
                   position: "absolute",
-                  width: "100%",
                   left: "0",
                   top: "0",
                   right: "0",
@@ -29,7 +28,7 @@ function Header() {
           <h1 id="header-name" className="contain-text-center font-xl uppercase">
             Shelby & Tyler
           </h1>
-          <span id="header-event-info-desktop" className="font-med-lg uppercase">
+          <span id="header-event-info-desktop" className="font-med-lg uppercase contain-text-center">
             September 19, 2026, 5:30 PM • Santa Rosa Beach, FL
           </span>
           <span id="header-event-info-mobile" className="font-med uppercase">

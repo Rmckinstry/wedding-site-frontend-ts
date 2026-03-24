@@ -112,7 +112,7 @@ button:hover {
 #nav-container {
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 2;
     /* background-color: var(--base-background); */
     /* padding-bottom: 3rem; */
 }
@@ -126,10 +126,12 @@ button:hover {
     width: 100%;
     height: auto;
     border-radius: .5rem;
+    z-index: 1;
 }
 
 #home-page-image-vert {
     display: none;
+    z-index: 1;
 }
 
 #home-page-info-container-desktop {
@@ -856,7 +858,6 @@ button.status-menu-btn:hover {
         display: flex
     }
 
-
     /* rsvp */
 
     #rsvp-now-btn {
@@ -951,6 +952,24 @@ button.status-menu-btn:hover {
         padding: 1rem 0rem;
     }
 
+    .header-img {
+        max-width: 75% !important;
+    }
+
+    #header-name {
+        padding-top: 10%;
+    }
+
+    #header-event-info-desktop {
+        display: none;
+    }
+
+    #header-event-info-mobile,
+    #header-event-time-mobile {
+        display: block;
+    }
+
+
     .btn-rsvp {
         padding: 1rem;
         font-size: 2rem;
@@ -982,7 +1001,20 @@ button.status-menu-btn:hover {
     }
 
     #header-name {
-        padding-top: 100px;
+        padding-top: 8rem;
+    }
+
+    .header-img {
+        max-width: 75% !important;
+    }
+
+    #header-event-info-desktop {
+        display: none;
+    }
+
+    #header-event-info-mobile,
+    #header-event-time-mobile {
+        display: block;
     }
 
 }
@@ -998,6 +1030,23 @@ button.status-menu-btn:hover {
 
     #confirmation-card-container {
         width: 80% !important;
+    }
+
+    #header-name {
+        padding-top: 15%;
+    }
+
+    .header-img {
+        max-width: 75% !important;
+    }
+
+    #header-event-info-desktop {
+        display: none;
+    }
+
+    #header-event-info-mobile,
+    #header-event-time-mobile {
+        display: block;
     }
 }
 
@@ -1016,6 +1065,23 @@ button.status-menu-btn:hover {
 
     #page-container {
         margin: 1rem 15%;
+    }
+
+    #header-name {
+        padding-top: 16rem;
+    }
+
+    #header-img {
+        max-width: 75% !important;
+    }
+
+    #header-event-info-desktop {
+        display: block;
+    }
+
+    #header-event-info-mobile,
+    #header-event-time-mobile {
+        display: none;
     }
 
 }
