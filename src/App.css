@@ -19,6 +19,7 @@
 
 body {
     background-color: var(--base-background);
+    background: linear-gradient(180deg, rgba(247, 172, 125, 1) 50%, rgba(242, 133, 0, 1) 100%);
     font-family: var(--font-main);
     font-weight: var(--weight-regular);
 }
@@ -328,7 +329,6 @@ button:hover {
 /* classes */
 .App {
     padding: 0 7rem;
-    background-color: var(--base-background);
 }
 
 .app-container {
