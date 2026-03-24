@@ -1,12 +1,14 @@
 import React from "react";
 import HomeImage from "../assets/horiz-home-img-1.jpeg";
 import { useNavigation } from "../context/NavigationContext.tsx";
+import HomeImageVert from "../assets/vert-home-img-1.jpeg";
 function HomePage() {
   const { navigateTo } = useNavigation();
 
   return (
     <div id="home-page-container" className="flex-col">
-      <img src={HomeImage} alt={"Proposal in Italy"} id="home-page-image" />
+      <img src={HomeImage} alt={"Tyler & Shelby"} id="home-page-image" />
+      <img src={HomeImageVert} alt={"Tyler & Shelby"} id="home-page-image-vert" />
       {/* uncomment for day of */}
       {/* <div className="btn-container" style={{ paddingBottom: "0" }}>
         <button
