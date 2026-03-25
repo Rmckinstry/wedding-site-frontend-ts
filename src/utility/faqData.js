@@ -1,7 +1,7 @@
 const faqData = [
     {
         question: "How do I RSVP?",
-        answer: "TBD"
+        answer: "RSVP's will be sent out in May with a QR code leading to the RSVP page. You will be able to RSVP through this site then."
     },
     {
         question: "Is there seating at the beach venue?",
@@ -9,7 +9,11 @@ const faqData = [
     },
     {
         question: "Are kids allowed at the wedding?",
-        answer: "TBD"
+        answer: "Unless specified on your invitation, children are not allowed. Alcohol will be served at the reception and we want to ensure a safe environment for all guests."
+    },
+    {
+        question: "Are plus ones allowed at the wedding?",
+        answer: "Unless specified on your invitation, plus ones are not allowed."
     },
     {
         question: "Is there a dress code?",
@@ -25,11 +29,7 @@ const faqData = [
     // },
     {
         question: "How do I access the wedding registry?",
-        answer: "TBD"
-    },
-    {
-        question: "Are plus ones allowed at the wedding?",
-        answer: "Unless specified on your invitation, plus ones are not allowed."
+        answer: "TBA"
     },
     {
         question: "What kind of ceremony is this?",
