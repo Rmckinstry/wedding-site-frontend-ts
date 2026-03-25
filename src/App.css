@@ -1,19 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,400;0,500;0,600;1,400;1,500&display=swap');
 
 /* Variables */
 :root {
     --base-background: #f7ac7d;
-    --default-text: #783C1C;
     --base-background-transparent: #f7ac7d98;
     --gradient-end: #F38B4E;
 
+    --default-text: #783C1C;
+    --default-text-transparent: #783C1C42;
+
     --secondary-text: #606060;
-    --default-text-transparent: #64644042;
 
     /* Font Variables */
     --font-main: 'Jost', sans-serif;
 
     /* Weight Variables */
+    --weight-extralight: 200;
     --weight-regular: 400;
     --weight-medium: 500;
     --weight-semibold: 600;
@@ -25,12 +27,6 @@ body {
     font-family: var(--font-main);
     font-weight: var(--weight-regular);
     min-height: 100dvh;
-}
-
-/* replace this secondary text */
-@font-face {
-    font-family: 'Cormorant Upright';
-    src: url(./fonts/CormorantUpright-Regular.ttf) format('truetype');
 }
 
 /* elements */
@@ -477,7 +473,7 @@ button:hover {
 
 .secondary-text {
     color: var(--secondary-text);
-    font-family: Cormorant Upright, serif;
+    font-weight: var(--weight-extralight);
     margin: 0px;
 }
 
