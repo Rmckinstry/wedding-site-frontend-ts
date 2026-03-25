@@ -18,29 +18,11 @@
     --weight-semibold: 600;
 }
 
-html {
-    min-height: 100%;
-    background: linear-gradient(180deg, rgba(247, 172, 125, 1) 0%, #f38b4e 100%);
-    background-color: var(--base-background);
-    background-repeat: no-repeat;
-}
-
 body {
-    min-height: 100vh;
-    /* keep screen fill when content is short */
-    background: transparent;
-    background-color: transparent;
-    overscroll-behavior-x: none;
-    /* keep horizontal from bouncing through white */
-    overscroll-behavior-y: contain;
-    /* preserve vertical overscroll bounce but keep background color */
+    /* background-color: var(--base-background); */
+    background: linear-gradient(180deg, rgba(247, 172, 125, 1) 0%, #f38b4e 100%);
     font-family: var(--font-main);
     font-weight: var(--weight-regular);
-}
-
-#root,
-#page-container {
-    background: transparent !important;
 }
 
 /* replace this secondary text */
@@ -49,12 +31,9 @@ body {
     src: url(./fonts/CormorantUpright-Regular.ttf) format('truetype');
 }
 
+/* elements */
 html {
     font-size: 16px;
-    background: linear-gradient(180deg, rgba(247, 172, 125, 1) 0%, #f38b4e 100%);
-    background-color: var(--base-background);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
 }
 
 h1,
