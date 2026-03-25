@@ -20,16 +20,19 @@
 
 html {
     min-height: 100%;
+    background: linear-gradient(180deg, rgba(247, 172, 125, 1) 0%, #f38b4e 100%);
     background-color: var(--base-background);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 body {
     min-height: 100vh;
     /* keep screen fill when content is short */
-    background: linear-gradient(180deg, rgba(247, 172, 125, 1) 0%, #f38b4e 100%);
-    background-color: var(--base-background);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: inherit;
+    background-color: inherit;
+    background-repeat: inherit;
+    background-attachment: inherit;
     overscroll-behavior-x: none;
     /* keep horizontal from bouncing through white */
     overscroll-behavior-y: contain;
