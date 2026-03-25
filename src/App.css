@@ -24,6 +24,7 @@ body {
     font-family: var(--font-main);
     font-weight: var(--weight-regular);
     min-height: 100vh;
+    overscroll-behavior: none;
 }
 
 /* replace this secondary text */
@@ -35,6 +36,8 @@ body {
 html {
     font-size: 16px;
     overscroll-behavior: none;
+    background: linear-gradient(180deg, rgba(247, 172, 125, 1) 0%, #f38b4e 100%);
+
 }
 
 h1,
