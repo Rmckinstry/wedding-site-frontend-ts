@@ -1,5 +1,6 @@
 import React from "react";
-import HeaderImage from "../assets/header-desktop-2880.png";
+// import HeaderImage from "../assets/header-desktop-2880.png";
+import HeaderImage from "../assets/header-desktop-vivid.png";
 
 function Header() {
   return (
