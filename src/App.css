@@ -19,7 +19,7 @@
 
 body {
     background-color: var(--base-background);
-    background: linear-gradient(180deg, rgba(247, 172, 125, 1) 50%, #f38b4e 100%);
+    background: linear-gradient(180deg, rgba(247, 172, 125, 1) 0%, #f38b4e 100%);
     font-family: var(--font-main);
     font-weight: var(--weight-regular);
 }
@@ -79,6 +79,7 @@ button:hover {
     margin: 1rem 3%;
     padding-top: 50px;
     padding-bottom: 20px;
+    z-index: 1;
 }
 
 #header-img {
@@ -102,12 +103,12 @@ button:hover {
 
 #header-name {
     line-height: 1;
-    margin: 16px auto;
+    margin: 1rem auto;
     font-family: var(--font-main);
     font-weight: var(--weight-medium);
-    letter-spacing: 6px;
-    padding-top: 180px;
-    padding-bottom: 10px;
+    letter-spacing: .33rem;
+    padding-top: 11rem;
+    padding-bottom: 1rem;
 }
 
 #nav-container {
@@ -128,6 +129,7 @@ button:hover {
     height: auto;
     border-radius: .5rem;
     z-index: 1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #home-page-image-vert {
@@ -1072,11 +1074,12 @@ button.status-menu-btn:hover {
     }
 
     #header-img {
-        max-width: 70% !important;
+        max-width: 65% !important;
     }
 
     #header-event-info-desktop {
         display: block;
+        letter-spacing: .25rem;
     }
 
     #header-event-info-mobile,

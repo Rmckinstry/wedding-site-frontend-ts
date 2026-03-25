@@ -8,7 +8,9 @@ function HomePage() {
   return (
     <div id="home-page-container" className="flex-col">
       <img src={HomeImage} alt={"Tyler & Shelby"} id="home-page-image" />
-      <img src={HomeImageVert} alt={"Tyler & Shelby"} id="home-page-image-vert" />
+      {/* change this to the vertical image after testing */}
+      <img src={HomeImage} alt={"Tyler & Shelby"} id="home-page-image-vert" />
+
       {/* uncomment for day of */}
       {/* <div className="btn-container" style={{ paddingBottom: "0" }}>
         <button
