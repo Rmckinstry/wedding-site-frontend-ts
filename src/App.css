@@ -1,28 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,400;0,500;0,600;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;1,400;1,500&display=swap');
 
 /* Variables */
 :root {
     --base-background: #f7ac7d;
     --base-background-transparent: #f7ac7d98;
     --gradient-end: #F38B4E;
+    --secondary-background: #FFF3E0;
 
     --default-text: #783C1C;
     --default-text-transparent: #783C1C42;
 
-    --secondary-text: #606060;
+    /* Dark Slate Grey */
+    /* --secondary-text: #1B4D4B; */
+    /* Dark Spruce */
+    /* --secondary-text: #2D3D1A; */
+    /* Deep Forest */
+    --secondary-text: #004225;
+
+    /* this probably clashes */
+    --accent: #D1FF2A;
+
+    /* needs to be tested */
+    --btn-disabled: #E5D1B8;
+
+
 
     /* Font Variables */
     --font-main: 'Jost', sans-serif;
 
     /* Weight Variables */
     --weight-extralight: 200;
+    --weight-light: 300;
     --weight-regular: 400;
     --weight-medium: 500;
     --weight-semibold: 600;
 }
 
 body {
-    /* background-color: var(--base-background); */
     background: linear-gradient(180deg, rgba(247, 172, 125, 1) 10%, var(--gradient-end) 100%);
     font-family: var(--font-main);
     font-weight: var(--weight-regular);
@@ -455,7 +469,7 @@ button:hover {
     text-decoration: underline;
     text-decoration-color: var(--default-text);
     text-decoration-thickness: 3px;
-    text-underline-offset: 8px;
+    text-underline-offset: 1rem;
     padding-bottom: 1rem;
 }
 
@@ -473,7 +487,7 @@ button:hover {
 
 .secondary-text {
     color: var(--secondary-text);
-    font-weight: var(--weight-extralight);
+    font-weight: var(--weight-light);
     margin: 0px;
 }
 
@@ -599,8 +613,11 @@ button:hover {
 }
 
 /* --- FAQ Styles --- */
-.faq-mobile-container,
+/* .faq-mobile-container,
 .faq-desktop-container {
+    margin-bottom: 1.5rem;
+} */
+.faq-mobile-container {
     margin-bottom: 1.5rem;
 }
 

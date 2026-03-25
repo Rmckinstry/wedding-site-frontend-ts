@@ -38,8 +38,7 @@ const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          backgroundColor: "var(--base-background)",
-          //todo: find a complementary color for cards that still fits the aesthetic but provides more contrast with the background
+          backgroundColor: "var(--secondary-background)",
         },
       },
     },
@@ -53,14 +52,14 @@ const theme = createTheme({
     MuiAccordion: {
       styleOverrides: {
         root: {
-          backgroundColor: "var(--base-background)",
+          backgroundColor: "var(--secondary-background)",
         },
       },
     },
     MuiAccordionDetails: {
       styleOverrides: {
         root: {
-          backgroundColor: "var(--base-background)",
+          backgroundColor: "var(--secondary-background)",
         },
       },
     },

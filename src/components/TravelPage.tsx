@@ -5,9 +5,9 @@ function TravelPage() {
     <>
       <div id="travel-page-container">
         <div id="venue-container" className="flex-col">
-          <h2 className="title">Venue - Beach Access Point</h2>
+          <h2 className="title">Venue</h2>
           <div id="venue-info" className="info-container contain-text-center">
-            <p className="primary-text font-med-lg">Fort Panic</p>
+            <p className="primary-text font-med-lg">Fort Panic (Beach Access Point)</p>
             <a
               href="https://maps.app.goo.gl/va4MYbT1qhPicKSN9"
               className="secondary-text font-med"
