@@ -112,9 +112,9 @@ button:hover {
 }
 
 #nav-container {
-    position: sticky;
+    /* position: sticky;
     top: 0;
-    z-index: 2;
+    z-index: 2; */
     /* background-color: var(--base-background); */
     /* padding-bottom: 3rem; */
 }
@@ -767,6 +767,10 @@ button.status-menu-btn:hover {
 
 /* Small devices (phones, 600px and below) */
 @media (max-width: 600px) {
+    body {
+        background: linear-gradient(180deg, rgb(247, 172, 125) 20%, #f38b4e 100%);
+    }
+
     html {
         font-size: 8px;
     }
@@ -777,6 +781,10 @@ button.status-menu-btn:hover {
 
     .App {
         padding: 0 3rem;
+    }
+
+    .app-container {
+        justify-content: flex-start;
     }
 
     .font-xs {
