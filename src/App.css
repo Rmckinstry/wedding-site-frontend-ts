@@ -23,6 +23,7 @@ body {
     background: linear-gradient(180deg, rgba(247, 172, 125, 1) 0%, #f38b4e 100%);
     font-family: var(--font-main);
     font-weight: var(--weight-regular);
+    min-height: 100vh;
 }
 
 /* replace this secondary text */
