@@ -23,22 +23,24 @@ html {
     background: linear-gradient(180deg, rgba(247, 172, 125, 1) 0%, #f38b4e 100%);
     background-color: var(--base-background);
     background-repeat: no-repeat;
-    background-attachment: fixed;
 }
 
 body {
     min-height: 100vh;
     /* keep screen fill when content is short */
-    background: inherit;
-    background-color: inherit;
-    background-repeat: inherit;
-    background-attachment: inherit;
+    background: transparent;
+    background-color: transparent;
     overscroll-behavior-x: none;
     /* keep horizontal from bouncing through white */
     overscroll-behavior-y: contain;
     /* preserve vertical overscroll bounce but keep background color */
     font-family: var(--font-main);
     font-weight: var(--weight-regular);
+}
+
+#root,
+#page-container {
+    background: transparent !important;
 }
 
 /* replace this secondary text */
