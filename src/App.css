@@ -3,41 +3,6 @@
 
 /* Variables */
 :root {
-    --base-background: #f7ac7d;
-    --base-background-transparent: #f7ac7d98;
-    --gradient-end: #F38B4E;
-    --secondary-background: #FFF3E0;
-
-    --default-text: #783C1C;
-    --default-text-transparent: #783C1C42;
-
-    /* Dark Slate Grey */
-    /* --secondary-text: #1B4D4B; */
-    /* Dark Spruce */
-    /* --secondary-text: #2D3D1A; */
-    /* Deep Forest */
-    --secondary-text: #004225;
-
-    /* this probably clashes */
-    --accent: #D1FF2A;
-
-    /* needs to be tested */
-    --btn-disabled: #E5D1B8;
-
-
-
-    /* Font Variables */
-    --font-main: 'Jost', sans-serif;
-
-    /* Weight Variables */
-    --weight-extralight: 200;
-    --weight-light: 300;
-    --weight-regular: 400;
-    --weight-medium: 500;
-    --weight-semibold: 600;
-}
-
-[data-theme="alternative"] {
     --base-background: #F38B4E;
     --base-background-transparent: #F38B4E98;
     --gradient-end: #FF7518;
@@ -47,20 +12,14 @@
     --default-text: #FFF3E0;
     --default-text-transparent: #FFF3E042;
 
-    /* Dark Slate Grey */
-    /* --secondary-text: #1B4D4B; */
-    /* Dark Spruce */
-    /* --secondary-text: #2D3D1A; */
-    /* Deep Forest */
+    /* Chartreuse */
     --secondary-text: #D1FF2A;
 
-    /* this probably clashes */
+    /* this needs to be updated now that theme has changed */
     --accent: #B1F24E;
 
-    /* needs to be tested */
+    /* needs to be updated */
     --btn-disabled: #E5D1B8;
-
-
 
     /* Font Variables */
     --font-main: 'Bricolage Grotesque';

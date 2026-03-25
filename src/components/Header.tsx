@@ -1,45 +1,26 @@
 import React from "react";
-import HeaderImage from "../assets/header-desktop-2880.png";
 import HeaderImageVivid from "../assets/header-desktop-vivid.png";
-import { useTheme } from "../context/ThemeContext";
 
 function Header() {
-  const { theme } = useTheme();
   return (
     <>
       <div className="header-container">
         <div className="img-box-a">
           <div className="img-box-b">
             <div className="img-box-c">
-              {theme === "alternative" ? (
-                <img
-                  id="header-img"
-                  src={HeaderImageVivid}
-                  alt={"Our Day Groovy Image"}
-                  style={{
-                    position: "absolute",
-                    left: "0",
-                    top: "0",
-                    right: "0",
-                    bottom: "0",
-                    color: "transparent",
-                  }}
-                />
-              ) : (
-                <img
-                  id="header-img"
-                  src={HeaderImage}
-                  alt={"Our Day Groovy Image"}
-                  style={{
-                    position: "absolute",
-                    left: "0",
-                    top: "0",
-                    right: "0",
-                    bottom: "0",
-                    color: "transparent",
-                  }}
-                />
-              )}
+              <img
+                id="header-img"
+                src={HeaderImageVivid}
+                alt={"Our Day Groovy Image"}
+                style={{
+                  position: "absolute",
+                  left: "0",
+                  top: "0",
+                  right: "0",
+                  bottom: "0",
+                  color: "transparent",
+                }}
+              />
             </div>
           </div>
         </div>

@@ -2,20 +2,12 @@ import React from "react";
 import HomeImage from "../assets/horiz-home-img-1 169.jpeg";
 import { useNavigation } from "../context/NavigationContext.tsx";
 import HomeImageVert from "../assets/vert-home-img-warm-1 4 5.jpeg";
-import { useTheme } from "../context/ThemeContext.tsx";
 
 function HomePage() {
   const { navigateTo } = useNavigation();
-  const { toggleTheme } = useTheme();
 
   return (
-    <div
-      id="home-page-container"
-      className="flex-col"
-      onClick={() => {
-        toggleTheme();
-      }}
-    >
+    <div id="home-page-container" className="flex-col">
       <img src={HomeImage} alt={"Tyler & Shelby"} id="home-page-image" />
       <img src={HomeImageVert} alt={"Tyler & Shelby"} id="home-page-image-vert" />
 

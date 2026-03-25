@@ -15,8 +15,6 @@ import AdminLogin from './components/admin/AdminLogin.tsx';
 import AdminDashboard from './components/admin/AdminDashboard.tsx';
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import DayOf from './components/DayOf.tsx';
-import { ThemeProvider as CustomThemeProvider } from './context/ThemeContext.tsx';
-
 
 function UserLayout() {
 
@@ -53,7 +51,6 @@ const PrivateAdminRoute = () => {
 
 function App() {
   return (
-    <CustomThemeProvider>
       <NavigationProvider>
         <Router>
           <Routes>
@@ -71,7 +68,6 @@ function App() {
           </Routes>
         </Router>
       </NavigationProvider>
-    </CustomThemeProvider>
   );
 }
 
