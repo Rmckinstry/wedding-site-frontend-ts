@@ -5,6 +5,7 @@
     --base-background: #f7ac7d;
     --default-text: #783C1C;
     --base-background-transparent: #f7ac7d98;
+    --gradient-end: #f38b4e;
 
     --secondary-text: #606060;
     --default-text-transparent: #64644042;
@@ -20,7 +21,7 @@
 
 body {
     /* background-color: var(--base-background); */
-    background: linear-gradient(180deg, rgba(247, 172, 125, 1) 0%, #f38b4e 100%);
+    background: linear-gradient(180deg, rgba(247, 172, 125, 1) 0%, var(--gradient-end) 100%);
     font-family: var(--font-main);
     font-weight: var(--weight-regular);
     height: 100dvh;
@@ -35,6 +36,7 @@ body {
 /* elements */
 html {
     font-size: 16px;
+    background-color: var(--gradient-end)
 }
 
 h1,
