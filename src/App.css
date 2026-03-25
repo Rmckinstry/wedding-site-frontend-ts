@@ -18,13 +18,24 @@
     --weight-semibold: 600;
 }
 
+html {
+    min-height: 100%;
+    background-color: var(--base-background);
+}
+
 body {
-    /* background-color: var(--base-background); */
+    min-height: 100vh;
+    /* keep screen fill when content is short */
     background: linear-gradient(180deg, rgba(247, 172, 125, 1) 0%, #f38b4e 100%);
+    background-color: var(--base-background);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overscroll-behavior-x: none;
+    /* keep horizontal from bouncing through white */
+    overscroll-behavior-y: contain;
+    /* preserve vertical overscroll bounce but keep background color */
     font-family: var(--font-main);
     font-weight: var(--weight-regular);
-    min-height: 100vh;
-    /* overscroll-behavior: none; */
 }
 
 /* replace this secondary text */
@@ -36,7 +47,7 @@ body {
 html {
     font-size: 16px;
     background-color: var(--base-background);
-    background: linear-gradient(180deg, rgba(247, 172, 125, 1) 0%, #f38b4e 100%);
+    /* background: linear-gradient(180deg, rgba(247, 172, 125, 1) 0%, #f38b4e 100%); */
 
 }
 
@@ -116,13 +127,13 @@ button:hover {
     padding-bottom: 1rem;
 }
 
-#nav-container {
-    /* position: sticky;
+/* #nav-container {
+    position: sticky;
     top: 0;
     z-index: 2; */
-    /* background-color: var(--base-background); */
-    /* padding-bottom: 3rem; */
-}
+/* background-color: var(--base-background); */
+/* padding-bottom: 3rem;
+} */
 
 #nav-mobile-container {
     display: none;
