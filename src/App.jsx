@@ -15,6 +15,7 @@ import AdminLogin from './components/admin/AdminLogin.tsx';
 import AdminDashboard from './components/admin/AdminDashboard.tsx';
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import DayOf from './components/DayOf.tsx';
+import { ThemeProvider as CustomThemeProvider } from './context/ThemeContext.tsx';
 
 
 function UserLayout() {
@@ -52,23 +53,25 @@ const PrivateAdminRoute = () => {
 
 function App() {
   return (
-    <NavigationProvider>
-      <Router>
-        <Routes>
-          {/* Public Routes */}
-          <Route path="/" element={<UserLayout />} />
-          <Route path="/admin-login" element={<AdminLogin />} />
+    <CustomThemeProvider>
+      <NavigationProvider>
+        <Router>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<UserLayout />} />
+            <Route path="/admin-login" element={<AdminLogin />} />
 
-          {/* Private Admin Routes */}
-          <Route element={<PrivateAdminRoute />}>
-            <Route path="/admin" element={<AdminDashboard />} />
-          </Route>
+            {/* Private Admin Routes */}
+            <Route element={<PrivateAdminRoute />}>
+              <Route path="/admin" element={<AdminDashboard />} />
+            </Route>
 
-          {/* Fallback for unmatched routes - optional */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Router>
-    </NavigationProvider>
+            {/* Fallback for unmatched routes - optional */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Router>
+      </NavigationProvider>
+    </CustomThemeProvider>
   );
 }
 
