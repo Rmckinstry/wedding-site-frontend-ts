@@ -8,7 +8,6 @@ function HomePage() {
   return (
     <div id="home-page-container" className="flex-col">
       <img src={HomeImage} alt={"Tyler & Shelby"} id="home-page-image" />
-      {/* change this to the vertical image after testing */}
       <img src={HomeImageVert} alt={"Tyler & Shelby"} id="home-page-image-vert" />
 
       {/* uncomment for day of */}
