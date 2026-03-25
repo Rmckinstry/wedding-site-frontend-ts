@@ -35,7 +35,7 @@ body {
 
 html {
     font-size: 16px;
-    /* overscroll-behavior: none; */
+    background-color: var(--base-background);
     background: linear-gradient(180deg, rgba(247, 172, 125, 1) 0%, #f38b4e 100%);
 
 }
