@@ -767,9 +767,6 @@ button.status-menu-btn:hover {
 
 /* Small devices (phones, 600px and below) */
 @media (max-width: 600px) {
-    body {
-        background: linear-gradient(180deg, rgb(247, 172, 125) 20%, #f38b4e 100%);
-    }
 
     html {
         font-size: 8px;
