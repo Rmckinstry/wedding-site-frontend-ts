@@ -1,7 +1,7 @@
 import React from "react";
 import HomeImage from "../assets/horiz-home-img-1 169.jpeg";
 import { useNavigation } from "../context/NavigationContext.tsx";
-import HomeImageVert from "../assets/vert-home-img-1 4 5.jpeg";
+import HomeImageVert from "../assets/vert-home-img-warm-1 4 5.jpeg";
 function HomePage() {
   const { navigateTo } = useNavigation();
 
@@ -9,7 +9,7 @@ function HomePage() {
     <div id="home-page-container" className="flex-col">
       <img src={HomeImage} alt={"Tyler & Shelby"} id="home-page-image" />
       {/* change this to the vertical image after testing */}
-      <img src={HomeImage} alt={"Tyler & Shelby"} id="home-page-image-vert" />
+      <img src={HomeImageVert} alt={"Tyler & Shelby"} id="home-page-image-vert" />
 
       {/* uncomment for day of */}
       {/* <div className="btn-container" style={{ paddingBottom: "0" }}>
