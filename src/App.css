@@ -32,9 +32,9 @@ body {
     src: url(./fonts/CormorantUpright-Regular.ttf) format('truetype');
 }
 
-/* elements */
 html {
     font-size: 16px;
+    overscroll-behavior: none;
 }
 
 h1,
