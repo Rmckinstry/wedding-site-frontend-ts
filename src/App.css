@@ -1055,7 +1055,7 @@ button.status-menu-btn:hover {
     }
 
     body {
-        background: linear-gradient(180deg, rgba(247, 172, 125, 1) 0%, rgba(247, 172, 125, 1) 30%, var(--gradient-end) 100%);
+        background: linear-gradient(180deg, var(--base-background) 30%, var(--gradient-end) 100%);
     }
 
     #faq-data-desktop-container {
