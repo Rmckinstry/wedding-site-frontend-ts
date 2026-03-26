@@ -81,7 +81,7 @@ const SongEditForm = ({
         title: false,
         artist: false,
         message: "",
-      })
+      }),
     );
   }, [guest, rsvp]);
 
@@ -179,7 +179,7 @@ const SongEditForm = ({
   //#region song mutation
   const songSubmitMutation = useMutation<CustomResponseType, ErrorType, string>({
     mutationFn: async (songString) => {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/rsvps/songs/${rsvp.rsvp_id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/rsvps/songs/${rsvp.rsvp_id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -355,7 +355,7 @@ const EmailForm = ({ guest, rsvp, handleDataRefresh }: { guest: Guest; rsvp: RSV
 
   const emailSubmitMutation = useMutation<CustomResponseType, ErrorType, { email: string | null; guestId: number }>({
     mutationFn: async ({ email, guestId }) => {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/guests/email/${guestId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/guests/email/${guestId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -542,7 +542,7 @@ function RSVPStatusMenu({
     plusOneName: string | string[],
     guestId: number,
     groupId: number,
-    additionalType: "plus_one" | "dependent"
+    additionalType: "plus_one" | "dependent",
   ) => {
     const postData: AdditionalGuestBodyType = {
       groupId: groupId,
@@ -565,7 +565,7 @@ function RSVPStatusMenu({
     { postData: AdditionalGuestBodyType; type: "plus_one" | "dependent" }
   >({
     mutationFn: async ({ postData, type }) => {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/rsvps/additional`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/rsvps/additional`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -665,7 +665,7 @@ function RSVPStatusMenu({
                               plusOneNames[guest.guest_id],
                               guest.guest_id,
                               guest.group_id,
-                              "plus_one"
+                              "plus_one",
                             );
                           }}
                           className="btn-rsvp"
@@ -799,7 +799,7 @@ function RSVPStatusMenu({
                           childrenNames,
                           validParent?.guest_id !== undefined ? validParent.guest_id : 0,
                           validParent?.group_id !== undefined ? validParent.group_id : groupData.guests[0].group_id,
-                          "dependent"
+                          "dependent",
                         );
                       }}
                       className="btn-rsvp-sm"

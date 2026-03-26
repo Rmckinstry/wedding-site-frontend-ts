@@ -16,17 +16,17 @@ function MobileSelectNav({ tabValue = 0, handleChange }) {
             sx={{
               color: "var(--default-text)",
               fontSize: "2rem",
-              fontFamily: "Cormorant Garamond",
+              fontFamily: "Jost",
               fontWeight: 600,
             }}
             IconComponent={() => <ArrowDropDownIcon sx={{ fontSize: 32 }} />}
           >
             <option value={0}>Home</option>
-            <option value={1}>Day of Info</option>
-            <option value={2}>Travel</option>
-            {/* <option value={2}>RSVP</option> */}
-            <option value={3}>Registry</option>
-            <option value={4}>FAQ</option>
+            <option value={1}>Travel</option>
+            <option value={2}>FAQ</option>
+            {/* <option value={1}>Day of Info</option>
+            <option value={3}>RSVP</option>
+            <option value={4}>Registry</option> */}
           </NativeSelect>
         </FormControl>
       </div>

@@ -13,7 +13,7 @@ function Registry() {
             className="btn-link"
             rel="noreferrer"
           >
-            Enter Bailey & Ryan's WithJoy Registry
+            Enter Shelby & Tyler's WithJoy Registry
           </a>
         </div>
         <p className="registry-text font-sm-med" style={{ padding: "1rem 5%", textAlign: "center" }}>

@@ -1,23 +1,23 @@
 const faqData = [
     {
-        question: "When does the wedding start?",
-        answer: "Gates open at 3:00 PM and the ceremony will start promptly at 3:30 PM. Please prepare to arrive at 3 as there is only one entrance and the venue is off of a local 2 lane road."
+        question: "How do I RSVP?",
+        answer: "RSVP's will be sent out in May with a QR code leading to the RSVP page. You will be able to RSVP through this site then."
     },
     {
-        question: "Is there parking at the venue?",
-        answer: "Yes, there is parking on site and the venue has parking lot attendants. If you don't feel like driving and are staying at the Courtyard Marriott, Ubers are pretty regular around that area."
+        question: "Is there seating at the beach venue?",
+        answer: "There is limited seating at the beach venue, but we encourage you to bring your own beach chairs or blankets to ensure you have a comfortable spot to enjoy the ceremony."
     },
     {
         question: "Are kids allowed at the wedding?",
-        answer: "Yes, children are certainly welcome to help us celebrate our special day! For the ceremony, we kindly ask that infants and toddlers, accompanied by an adult, be in one of the other convenient areas around the property. This will allow for full focus on the bride and groom during this special moment. Areas include the shaded porch and the covered reception barn porch full on couches and porch swings - both 1 - 2 min walking distance from the ceremony area."
+        answer: "Unless specified on your invitation, children are not allowed. Alcohol will be served at the reception and we want to ensure a safe environment for all guests."
     },
-    // {
-    //     question: "How do I RSVP?",
-    //     answer: "RSVP's are now live! You can access you/your groups RSVP Portal by selecting the 'RSVP' tab above. RSVP deadline is October 1st!"
-    // },
+    {
+        question: "Are plus ones allowed at the wedding?",
+        answer: "Unless specified on your invitation, plus ones are not allowed."
+    },
     {
         question: "Is there a dress code?",
-        answer: "Formal. Please no jeans, shorts, or tennis shoes. (Tennis shoes or your best dancing shoes allowed during the reception!)"
+        answer: "Wedding appropriate beach casual."
     },
     // {
     //     question: "Are there any hotel discounts available?",
@@ -29,12 +29,12 @@ const faqData = [
     // },
     {
         question: "How do I access the wedding registry?",
-        answer: "Our wedding registry is on WithJoy and now live. You can access it via the 'Registry' tab above or directly: https://withjoy.com/bailey-and-ryan-nov-15"
+        answer: "TBA"
     },
     {
-        question: "What to see in Memphis?",
-        answer: "Memphis Zoo, Beale Street, Memphis Rock 'n' Soul Museum, Graceland, Botanic Gardens, Memphis Children’s Museum, and Pink Palace are great. Civil Rights Museum is amazing. Several music museums/tours (Stax, Sun Studios). Eat at Commissary BBQ, BBQ Shop, Memphis Pizza Cafe. Several famous breweries: Crosstown is good (also the whole Crosstown Concourse is great), and Wiseacre."
-    },
+        question: "What kind of ceremony is this?",
+        answer: "This will be an non-traditional elopement-style ceremony followed by a reception so everyone can celebrate together."
+    }
 ]
 
 export default faqData;

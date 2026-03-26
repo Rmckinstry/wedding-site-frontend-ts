@@ -20,7 +20,7 @@ function RSVPConfirmation({
       queries: anneMarieData.map((g) => ({
         queryKey: ["anneMarieGroup", g.group_id],
         queryFn: async () => {
-          const response = await fetch(`${process.env.REACT_APP_API_URL}/guests/group/${g.group_id}`);
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/guests/group/${g.group_id}`);
 
           if (!response.ok) {
             const errorData: ErrorType = await response.json();
@@ -130,7 +130,7 @@ function RSVPConfirmation({
   const { isPending, isFetching, isError, data, error, refetch } = useQuery<GroupData, ErrorType>({
     queryKey: ["groupData"],
     queryFn: async () => {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/guests/group/${guest["group_id"]}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/guests/group/${guest["group_id"]}`);
 
       if (!response.ok) {
         const errorData: ErrorType = await response.json();

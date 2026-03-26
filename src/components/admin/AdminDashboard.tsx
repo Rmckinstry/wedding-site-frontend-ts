@@ -20,7 +20,7 @@ function AdminDashboard() {
   const allGuestsQuery = useQuery<Guest[], ErrorType>({
     queryKey: ["allGuestsAdmin"],
     queryFn: async () => {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/guests`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/guests`);
 
       if (!response.ok) {
         const errorData: ErrorType = await response.json();
@@ -34,7 +34,7 @@ function AdminDashboard() {
   const allRsvpsQuery = useQuery<RSVP[], ErrorType>({
     queryKey: ["allRsvpsAdmin"],
     queryFn: async () => {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/rsvps`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/rsvps`);
 
       if (!response.ok) {
         const errorData: ErrorType = await response.json();
@@ -48,7 +48,7 @@ function AdminDashboard() {
   const allGroupsQuery = useQuery<Group[], ErrorType>({
     queryKey: ["allGroupsAdmin"],
     queryFn: async () => {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/groups`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/groups`);
 
       if (!response.ok) {
         const errorData: ErrorType = await response.json();
