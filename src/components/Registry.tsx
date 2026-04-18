@@ -1,10 +1,11 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
+import Loading from "./utility/Loading";
 
 function Registry() {
-  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  const [iframeLoading, setIframeLoading] = useState(true);
 
   const handleIframeLoad = () => {
-    iframeRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    setIframeLoading(false);
   };
 
   return (
@@ -12,15 +13,31 @@ function Registry() {
       <div id="registry-page-container" className="flex-col">
         <div id="registry-info-container" className="flex-col"></div>
         <div id="registry-btn-container" className="btn-container contain-text-center">
-          <iframe
-            ref={iframeRef}
-            title="Registry Preview"
-            src="https://withjoy.com/tyler-and-shelby-sep-26/registry"
-            onLoad={handleIframeLoad}
-            // onClick={() => window.open("https://withjoy.com/tyler-and-shelby-sep-26/registry", "_blank")}
-            className="registry-frame"
-            id="registry-iframe"
-          ></iframe>
+          <div id="registry-iframe-container" style={{ position: "relative", width: "100%", minHeight: "500px" }}>
+            {iframeLoading && (
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  // backgroundColor: "rgba(0, 0, 0, 0.08)",
+                  zIndex: 1,
+                }}
+              >
+                <Loading loadingText="Loading Registry Preview ..." />
+              </div>
+            )}
+            <iframe
+              title="Registry Preview"
+              src="https://withjoy.com/tyler-and-shelby-sep-26/registry"
+              onLoad={handleIframeLoad}
+              className="registry-frame"
+              style={{ visibility: iframeLoading ? "hidden" : "visible" }}
+              id="registry-iframe"
+            ></iframe>
+          </div>
           <a
             href="https://withjoy.com/tyler-and-shelby-sep-26/registry"
             target="_blank"
