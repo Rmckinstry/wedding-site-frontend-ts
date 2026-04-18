@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 function Registry() {
+  useEffect(() => {
+    const element = document.getElementById("registry-iframe");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, []);
+
   return (
     <>
       <div id="registry-page-container" className="flex-col">
@@ -11,6 +18,7 @@ function Registry() {
             src="https://withjoy.com/tyler-and-shelby-sep-26/registry"
             // onClick={() => window.open("https://withjoy.com/tyler-and-shelby-sep-26/registry", "_blank")}
             className="registry-frame"
+            id="registry-iframe"
           ></iframe>
           <a
             href="https://withjoy.com/tyler-and-shelby-sep-26/registry"
