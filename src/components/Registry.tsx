@@ -7,7 +7,7 @@ function Registry() {
         <div id="registry-info-container" className="flex-col"></div>
         <div id="registry-btn-container" className="btn-container contain-text-center">
           <iframe
-            title="registry-iframe"
+            title="Registry Preview"
             src="https://withjoy.com/tyler-and-shelby-sep-26/registry"
             // onClick={() => window.open("https://withjoy.com/tyler-and-shelby-sep-26/registry", "_blank")}
             className="registry-frame"
