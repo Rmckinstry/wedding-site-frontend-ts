@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useRef } from "react";
 
 function Registry() {
-  useEffect(() => {
-    const element = document.getElementById("registry-iframe");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }, []);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+
+  const handleIframeLoad = () => {
+    iframeRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
 
   return (
     <>
@@ -14,8 +13,10 @@ function Registry() {
         <div id="registry-info-container" className="flex-col"></div>
         <div id="registry-btn-container" className="btn-container contain-text-center">
           <iframe
+            ref={iframeRef}
             title="Registry Preview"
             src="https://withjoy.com/tyler-and-shelby-sep-26/registry"
+            onLoad={handleIframeLoad}
             // onClick={() => window.open("https://withjoy.com/tyler-and-shelby-sep-26/registry", "_blank")}
             className="registry-frame"
             id="registry-iframe"
