@@ -7,7 +7,7 @@ function Registry() {
         <div id="registry-info-container" className="flex-col"></div>
         <div id="registry-btn-container" className="btn-container contain-text-center">
           <a
-            href="https://withjoy.com/bailey-and-ryan-nov-15"
+            href="https://withjoy.com/tyler-and-shelby-sep-26/registry"
             target="_blank"
             id="registry-btn"
             className="btn-link"
@@ -28,7 +28,7 @@ function Registry() {
         </p>
 
         <p className="registry-text font-sm contain-text-center">
-          We deeply appreciate any gifts purchased or cash funds donated to. Your generosity means the world to us —
+          We deeply appreciate any gifts purchased or cash funds donated to. Your generosity means the world to us,
           thank you for being part of our celebration!
         </p>
       </div>

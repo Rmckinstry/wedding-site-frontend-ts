@@ -30,11 +30,12 @@ function UserLayout() {
         <div id='page-container'>
           {tabValue === 0 && <HomePage />}
           {tabValue === 1 && <TravelPage />}
-          {tabValue === 2 && <FAQPage />}
-          {tabValue === 3 && <AdminDashboard />}
+          {tabValue === 2 && <Registry />}
+          {tabValue === 3 && <FAQPage />}
+          {tabValue === 4 && <AdminDashboard />}
           {/* {tabValue === 1 && <DayOf />} */}
-          {/* {tabValue === 3 && <RSVPPage />} */}
-          {/* {tabValue === 4 && <Registry />} */}
+          {/* {tabValue === 2 && <RSVPPage />} */}
+
         </div>
         <Footer showText={tabValue > 0} />
       </div>
