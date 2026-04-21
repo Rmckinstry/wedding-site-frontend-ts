@@ -7,7 +7,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 function FAQDesktop({ faq }) {
   return (
     <>
-      <Accordion className="faq-desktop-container">
+      <Accordion className="faq-desktop-container" expanded>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <p className="faq-title-desktop font-sm-med">{faq.question}</p>
         </AccordionSummary>
