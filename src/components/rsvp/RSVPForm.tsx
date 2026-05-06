@@ -69,10 +69,11 @@ function RSVPForm({
   //used for navigation context
   const { navigateTo } = useNavigation();
   //steps for stepper component
-  const steps = ["RSVPs", "Plus One", "Children", "Song Requests", "Confirmation"];
+  const steps = ["RSVPs", "Plus One", "Children", "Song Requests", "Dietary Restrictions", "Confirmation"];
 
   //Tab checks
   const isSongRequestTabDisabled = allGuestsAttendingFalse;
+  const isDietTabDisabled = allGuestsAttendingFalse;
 
   const isPlusOneTabEnabled = groupData.guests.some((guest) => {
     const rsvp = rsvps.find((rsvp) => rsvp.guestId === guest.guest_id);
@@ -160,6 +161,11 @@ function RSVPForm({
       newActiveStep = newActiveStep + 1;
     }
 
+    // If the next step would be "Dietray Restrictions" AND it's disabled, skip it
+    if (newActiveStep === 4 && isDietTabDisabled) {
+      newActiveStep = newActiveStep + 1;
+    }
+
     setActiveStep(newActiveStep);
 
     handleScroll();
@@ -168,6 +174,12 @@ function RSVPForm({
   const handleBack = () => {
     // default behavior: move one step back
     let newActiveStep = activeStep - 1;
+
+    // If we are currently on 'Song Requests' (index 3) or beyond,
+    // and 'Song Requests' was disabled, then when moving back, skip it again.
+    if (activeStep >= 4 && isDietTabDisabled && newActiveStep === 4) {
+      newActiveStep--;
+    }
 
     // If we are currently on 'Song Requests' (index 3) or beyond,
     // and 'Song Requests' was disabled, then when moving back, skip it again.
@@ -295,11 +307,11 @@ function RSVPForm({
       prev.map((rsvp) =>
         rsvp.guestId === guestId
           ? {
-              ...rsvp,
-              attendance: attendance,
-              spotify: !attendance ? Array(rsvp.spotify.length).fill("") : rsvp.spotify,
-              additionalGuests: [],
-            }
+            ...rsvp,
+            attendance: attendance,
+            spotify: !attendance ? Array(rsvp.spotify.length).fill("") : rsvp.spotify,
+            additionalGuests: [],
+          }
           : rsvp,
       ),
     );
@@ -674,7 +686,7 @@ function RSVPForm({
                   const attendanceToggleValue =
                     rsvp.attendance === true ? "accept" : rsvp.attendance === false ? "decline" : null;
 
-                  const handleToggleChange = (event, newToggleValue) => {
+                  const handleToggleChange = (event: any, newToggleValue: string | null) => {
                     if (newToggleValue !== null) {
                       handleAttendanceChange(rsvp.guestId, newToggleValue === "accept" ? true : false);
                     }
@@ -867,7 +879,7 @@ function RSVPForm({
               </div>
             )}
             {/* Song Request Card */}
-            {/* {activeStep === 3 && (
+            {activeStep === 3 && (
               <div id="song-request-card-container" className="rsvp-card">
                 <div id="song-request-header" className="flex-col">
                   <p className="font-sm-med strong-text" style={{ marginBottom: "1rem" }}>
@@ -977,9 +989,9 @@ function RSVPForm({
                   </button>
                 </div>
               </div>
-            )} */}
+            )}
             {/* Song Request Card - DISABLED */}
-            {activeStep === 3 && (
+            {/* {activeStep === 3 && (
               <div id="song-request-card-container" className="rsvp-card">
                 <div id="song-request-header" className="flex-col">
                   <p className="font-sm-med strong-text" style={{ marginBottom: "1rem" }}>
@@ -1004,9 +1016,37 @@ function RSVPForm({
                   </button>
                 </div>
               </div>
-            )}
+            )} */}
             {/* Confirmation Card */}
-            {activeStep === 4 && (
+            {activeStep === 4 && (<div id="diet-card-container" className="rsvp-card">
+              <div id="dietary-restriction-header" className="flex-col">
+                <p className="font-sm-med strong-text" style={{ marginBottom: "1rem" }}>
+                  Dietary Restrictions
+                </p>
+                <p className="font-sm contain-text-center secondary-text">
+                  Add any dietary restrictions for consideration.
+                </p>
+              </div>
+              <div className="flex-col">
+                <TextField fullWidth multiline rows={3} maxRows={3} label="Dietary Restrictions"/>
+              </div>
+              <div className="btn-container" style={{ gap: "2rem" }}>
+                <button
+                  className="btn-rsvp-sm"
+                  style={{ padding: ".5rem 10%", flexGrow: 1 }}
+                  onClick={handleBack}>
+                  Back
+                </button>
+                <button
+                  className="btn-rsvp-sm"
+                  style={{ padding: ".5rem 10%", flexGrow: 1 }}
+                  onClick={handleNext}
+                >
+                  Next
+                </button>
+              </div>
+            </div>)}
+            {activeStep === 5 && (
               <div id="confirmation-card-container" className="rsvp-card">
                 <div className="flex-col">
                   <p className="font-sm-med strong-text">RSVP Submit & Confirmation</p>
@@ -1044,12 +1084,11 @@ function RSVPForm({
                             ))}
                         </div>
                       )}
-                      {/* DISABLING SINCE WEDDING IS CLOSE */}
-                      {/* {rsvp.attendance && !hasSongs && (
+                      {rsvp.attendance && !hasSongs && (
                         <p className="font-sm secondary-text">
                           No songs requested yet! This can be done after you submit your RSVP via the RSVP Portal.
                         </p>
-                      )} */}
+                      )}
                       {rsvp.attendance && guest?.plus_one_allowed && rsvp.additionalGuests.length > 0 && (
                         <div className="flex-row-gap">
                           <p className="strong-text font-sm confirmation-header">Plus One: </p>
@@ -1098,19 +1137,19 @@ function RSVPForm({
                         rsvp.attendance === true &&
                         groupData.guests.find((guest) => guest.guest_id === rsvp.guestId)?.has_dependents,
                     ) && (
-                      <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-                        <p className="font-sm secondary-text">
-                          One or more guests in this group are able to add child RSVPs. These can be added
-                          <span className="confirmation-header"> after</span> your RSVP is submitted via the RSVP
-                          Portal.
-                        </p>
-                        <p className="font-sm secondary-text">
-                          <strong>Note: </strong>It is <strong>required</strong> to add these RSVPs prior to the
-                          deadline for your children/dependents to be{" "}
-                          <span style={{ textDecoration: "underline" }}>counted</span>
-                        </p>
-                      </div>
-                    )}
+                        <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                          <p className="font-sm secondary-text">
+                            One or more guests in this group are able to add child RSVPs. These can be added
+                            <span className="confirmation-header"> after</span> your RSVP is submitted via the RSVP
+                            Portal.
+                          </p>
+                          <p className="font-sm secondary-text">
+                            <strong>Note: </strong>It is <strong>required</strong> to add these RSVPs prior to the
+                            deadline for your children/dependents to be{" "}
+                            <span style={{ textDecoration: "underline" }}>counted</span>
+                          </p>
+                        </div>
+                      )}
                   </div>
                 )}
                 <div id="rsvp-form-submit-container" className="btn-container" style={{ gap: "2rem" }}>
