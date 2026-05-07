@@ -13,7 +13,7 @@ const theme = createTheme({
     MuiTabs: {
       styleOverrides: {
         indicator: {
-          backgroundColor: "var(--default-text)",
+          backgroundColor: "var(--accent)",
         },
       },
     },

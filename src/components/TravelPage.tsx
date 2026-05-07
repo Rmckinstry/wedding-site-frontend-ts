@@ -76,19 +76,6 @@ function TravelPage() {
               <p className="primary-text font-med-lg">Northwest Florida Beaches International Airport (ECP)</p>
               <p className="secondary-text font-med">(Note: 30 miles East of beach)</p>
             </div>
-            {/* <div className="info-container contain-text-center">
-              <p className="primary-text font-med-lg">Memphis Airport Rental Cars</p>
-              <div className="btn-container">
-                <a
-                  href="https://flymemphis.com/ground-transportation/"
-                  target="_blank"
-                  className="btn-link"
-                  rel="noreferrer"
-                >
-                  Rental Cars
-                </a>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
