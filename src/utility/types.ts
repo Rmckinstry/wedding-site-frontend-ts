@@ -25,6 +25,7 @@ export type RSVP = {
   guest_id: number;
   attendance: boolean;
   spotify: string;
+  dietary_restrictions: string;
   created_at: string;
   updated_at: string | null;
 };
