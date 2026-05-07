@@ -24,12 +24,14 @@ type RSVPFormObject = {
   attendance: boolean | "";
   spotify: string[];
   additionalGuests: AdditionalGuest[];
+  dietaryRestrictions: string;
 };
 
 type RSVPPostObject = {
   guestId: number;
   attendance: boolean | "";
   spotify: string;
+  dietaryRestriction: string;
 };
 
 type RSVPPostBody = {
@@ -116,6 +118,7 @@ function RSVPForm({
         attendance: "",
         spotify: [],
         additionalGuests: [],
+        dietaryRestrictions: "",
       }));
       setRsvps(newRsvps);
 
@@ -243,6 +246,7 @@ function RSVPForm({
         attendance: attendance,
         guestId: guest!.guest_id,
         spotify: songString,
+        dietaryRestriction: rsvp.dietaryRestrictions,
       });
 
       if (rsvp.guestId === designatedDependentGuest?.guest_id && filteredChildren.length > 0) {
@@ -307,11 +311,11 @@ function RSVPForm({
       prev.map((rsvp) =>
         rsvp.guestId === guestId
           ? {
-            ...rsvp,
-            attendance: attendance,
-            spotify: !attendance ? Array(rsvp.spotify.length).fill("") : rsvp.spotify,
-            additionalGuests: [],
-          }
+              ...rsvp,
+              attendance: attendance,
+              spotify: !attendance ? Array(rsvp.spotify.length).fill("") : rsvp.spotify,
+              additionalGuests: [],
+            }
           : rsvp,
       ),
     );
@@ -346,7 +350,12 @@ function RSVPForm({
             }
           } else {
             // need to create new plus one in additional guests
-            const newPlusOne: AdditionalGuest = { name: value, type: "plus_one", guestId: guestId };
+            const newPlusOne: AdditionalGuest = {
+              name: value,
+              type: "plus_one",
+              guestId: guestId,
+              dietaryRestriction: "",
+            };
 
             updatedAdditionalGuests = [...rsvp.additionalGuests, newPlusOne];
           }
@@ -374,6 +383,7 @@ function RSVPForm({
       name: "",
       type: "dependent",
       guestId: guestId,
+      dietaryRestriction: "",
     };
     setChildrenRsvps((prev) => {
       return [...prev, newChildRsvp];
@@ -534,6 +544,44 @@ function RSVPForm({
       ...prev,
       [guestId]: currentInputs + -1,
     }));
+  };
+
+  const handleDietaryRestrictionsChange = (
+    value: string,
+    type: "guest" | "additional" | "child",
+    guestId?: number,
+    name?: string,
+  ) => {
+    if (type === "guest") {
+      setRsvps((prev) =>
+        prev.map((rsvp) => {
+          if (rsvp.guestId !== guestId) return rsvp;
+          return { ...rsvp, dietaryRestrictions: value };
+        }),
+      );
+    } else if (type === "additional") {
+      setRsvps((prev) =>
+        prev.map((rsvp) => {
+          if (rsvp.guestId !== guestId) return rsvp;
+          return {
+            ...rsvp,
+            additionalGuests: rsvp.additionalGuests.map((ag) =>
+              ag.name === name ? { ...ag, dietaryRestriction: value } : ag,
+            ),
+          };
+        }),
+      );
+    } else if (type === "child") {
+      setChildrenRsvps((prev) =>
+        prev.map((rsvp) => {
+          if (rsvp.name !== name) return rsvp;
+          return {
+            ...rsvp,
+            dietaryRestriction: value,
+          };
+        }),
+      );
+    }
   };
 
   //#region confirmation dialog
@@ -1017,35 +1065,102 @@ function RSVPForm({
                 </div>
               </div>
             )} */}
+
+            {/* Dietary Restrictions Card */}
+            {activeStep === 4 && (
+              <div id="diet-card-container" className="rsvp-card">
+                <div id="dietary-restriction-header" className="flex-col">
+                  <p className="font-sm-med strong-text" style={{ marginBottom: "1rem" }}>
+                    Dietary Restrictions
+                  </p>
+                  <p className="font-sm contain-text-center secondary-text">
+                    Add any dietary restrictions for consideration.
+                  </p>
+                </div>
+
+                {rsvps
+                  .filter((rsvp) => rsvp.attendance === true)
+                  .map((rsvp) => {
+                    const guest = groupData.guests.find((guest) => guest.guest_id === rsvp.guestId);
+                    console.log("Guest", guest);
+                    console.log("RSVP", rsvp);
+
+                    if (guest)
+                      return (
+                        <>
+                          <FormControl key={`rsvp-guest-${rsvp.guestId}`}>
+                            <div className="guest-song-container">
+                              <FormLabel>{guest?.name}</FormLabel>
+                              <div className="flex-col-start">
+                                <TextField
+                                  fullWidth
+                                  multiline
+                                  rows={1}
+                                  label="Dietary Restrictions"
+                                  onChange={(e) =>
+                                    handleDietaryRestrictionsChange(e.target.value, "guest", rsvp.guestId)
+                                  }
+                                />
+                              </div>
+                            </div>
+                          </FormControl>
+                          {rsvp.additionalGuests.map((ag) => (
+                            <FormControl key={`rsvp-guest-${ag.name}`}>
+                              <div className="guest-song-container">
+                                <FormLabel>{ag.name}</FormLabel>
+
+                                <div className="flex-col-start">
+                                  <TextField
+                                    fullWidth
+                                    multiline
+                                    rows={1}
+                                    label="Dietary Restrictions"
+                                    onChange={(e) =>
+                                      handleDietaryRestrictionsChange(
+                                        e.target.value,
+                                        "additional",
+                                        guest.guest_id,
+                                        ag.name,
+                                      )
+                                    }
+                                  />
+                                </div>
+                              </div>
+                            </FormControl>
+                          ))}
+                          {guest.guest_id === designatedDependentGuest?.guest_id &&
+                            childrenRsvps.map((child) => (
+                              <FormControl key={`rsvp-guest-${child.name}`}>
+                                <div className="guest-song-container">
+                                  <FormLabel>{child.name}</FormLabel>
+                                  <div className="flex-col-start">
+                                    <TextField
+                                      fullWidth
+                                      multiline
+                                      rows={1}
+                                      label="Dietary Restrictions"
+                                      onChange={(e) =>
+                                        handleDietaryRestrictionsChange(e.target.value, "child", undefined, child.name)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+                              </FormControl>
+                            ))}
+                        </>
+                      );
+                  })}
+                <div className="btn-container" style={{ gap: "2rem" }}>
+                  <button className="btn-rsvp-sm" style={{ padding: ".5rem 10%", flexGrow: 1 }} onClick={handleBack}>
+                    Back
+                  </button>
+                  <button className="btn-rsvp-sm" style={{ padding: ".5rem 10%", flexGrow: 1 }} onClick={handleNext}>
+                    Next
+                  </button>
+                </div>
+              </div>
+            )}
             {/* Confirmation Card */}
-            {activeStep === 4 && (<div id="diet-card-container" className="rsvp-card">
-              <div id="dietary-restriction-header" className="flex-col">
-                <p className="font-sm-med strong-text" style={{ marginBottom: "1rem" }}>
-                  Dietary Restrictions
-                </p>
-                <p className="font-sm contain-text-center secondary-text">
-                  Add any dietary restrictions for consideration.
-                </p>
-              </div>
-              <div className="flex-col">
-                <TextField fullWidth multiline rows={3} maxRows={3} label="Dietary Restrictions"/>
-              </div>
-              <div className="btn-container" style={{ gap: "2rem" }}>
-                <button
-                  className="btn-rsvp-sm"
-                  style={{ padding: ".5rem 10%", flexGrow: 1 }}
-                  onClick={handleBack}>
-                  Back
-                </button>
-                <button
-                  className="btn-rsvp-sm"
-                  style={{ padding: ".5rem 10%", flexGrow: 1 }}
-                  onClick={handleNext}
-                >
-                  Next
-                </button>
-              </div>
-            </div>)}
             {activeStep === 5 && (
               <div id="confirmation-card-container" className="rsvp-card">
                 <div className="flex-col">
@@ -1090,16 +1205,30 @@ function RSVPForm({
                         </p>
                       )}
                       {rsvp.attendance && guest?.plus_one_allowed && rsvp.additionalGuests.length > 0 && (
-                        <div className="flex-row-gap">
-                          <p className="strong-text font-sm confirmation-header">Plus One: </p>
-                          <p className="font-sm">{rsvp.additionalGuests[0].name}</p>
-                        </div>
+                        <>
+                          <div className="flex-row-gap">
+                            <p className="strong-text font-sm confirmation-header">Plus One: </p>
+                            <p className="font-sm">{rsvp.additionalGuests[0].name}</p>
+                          </div>
+                          {rsvp.additionalGuests[0].dietaryRestriction && (
+                            <div className="flex-row-gap">
+                              <p className="strong-text font-sm confirmation-header">Dietary Restriction: </p>
+                              <p className="font-sm">{rsvp.additionalGuests[0].dietaryRestriction}</p>
+                            </div>
+                          )}
+                        </>
                       )}
                       {rsvp.attendance && guest?.plus_one_allowed && rsvp.additionalGuests.length === 0 && (
                         <p className="font-sm secondary-text">
                           Plus one <strong>available</strong> for {guest.name}! You can add the extra RSVP{" "}
                           <span className="confirmation-header">after</span> submitting this one via the RSVP Portal.
                         </p>
+                      )}
+                      {rsvp.attendance && rsvp.dietaryRestrictions && (
+                        <div className="flex-row-gap">
+                          <p className="strong-text font-sm confirmation-header">Diet Restriction: </p>
+                          <p className="font-sm">{rsvp.dietaryRestrictions}</p>
+                        </div>
                       )}
                     </div>
                   );
@@ -1119,6 +1248,12 @@ function RSVPForm({
                             <p className="strong-text font-sm confirmation-header">Attending: </p>
                             <p className="font-sm">Yes</p>
                           </div>
+                          {children.dietaryRestriction && (
+                            <div className="flex-row-gap">
+                              <p className="strong-text font-sm confirmation-header">Dietary Restriction: </p>
+                              <p className="font-sm">{children.dietaryRestriction}</p>
+                            </div>
+                          )}
                         </div>
                       );
                     })}
@@ -1137,19 +1272,19 @@ function RSVPForm({
                         rsvp.attendance === true &&
                         groupData.guests.find((guest) => guest.guest_id === rsvp.guestId)?.has_dependents,
                     ) && (
-                        <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-                          <p className="font-sm secondary-text">
-                            One or more guests in this group are able to add child RSVPs. These can be added
-                            <span className="confirmation-header"> after</span> your RSVP is submitted via the RSVP
-                            Portal.
-                          </p>
-                          <p className="font-sm secondary-text">
-                            <strong>Note: </strong>It is <strong>required</strong> to add these RSVPs prior to the
-                            deadline for your children/dependents to be{" "}
-                            <span style={{ textDecoration: "underline" }}>counted</span>
-                          </p>
-                        </div>
-                      )}
+                      <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                        <p className="font-sm secondary-text">
+                          One or more guests in this group are able to add child RSVPs. These can be added
+                          <span className="confirmation-header"> after</span> your RSVP is submitted via the RSVP
+                          Portal.
+                        </p>
+                        <p className="font-sm secondary-text">
+                          <strong>Note: </strong>It is <strong>required</strong> to add these RSVPs prior to the
+                          deadline for your children/dependents to be{" "}
+                          <span style={{ textDecoration: "underline" }}>counted</span>
+                        </p>
+                      </div>
+                    )}
                   </div>
                 )}
                 <div id="rsvp-form-submit-container" className="btn-container" style={{ gap: "2rem" }}>

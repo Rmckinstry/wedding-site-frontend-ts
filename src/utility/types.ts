@@ -67,6 +67,7 @@ export type AdditionalGuest = {
   name: string;
   type: AdditionalGuestType;
   guestId: number;
+  dietaryRestriction: string;
 };
 
 export type AdditionalGuestBodyType = {
