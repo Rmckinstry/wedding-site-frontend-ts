@@ -57,7 +57,7 @@ function RSVPPortal({ groupId, groupName }: { groupId: number; groupName: string
 
   // possible location for the flashing bug
   if (groupRSVPs.isPending || groupData.isPending) {
-    return <Loading loadingText={`Loading {groupName}'s Portal Information...`} />;
+    return <Loading loadingText={`Loading ${groupName}'s Portal Information...`} />;
   }
 
   // idk if i want / need this
