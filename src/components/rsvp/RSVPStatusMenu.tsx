@@ -15,21 +15,22 @@ import Error from "../utility/Error.tsx";
 import Loading from "../utility/Loading.tsx";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import ChildFriendlyIcon from "@mui/icons-material/ChildFriendly";
-import EmailIcon from "@mui/icons-material/Email";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import ChecklistIcon from "@mui/icons-material/Checklist";
 import Success from "../utility/Success.tsx";
 import { isValidInput, isValidName } from "../../utility/util.ts";
 
 //#region grid option
+type MenuKey = "main" | "plusOne" | "dependent" | "song" | "overview";
+
 const GridOption = ({
   optionName,
   menuKey,
   handleMenuClick,
 }: {
   optionName: string;
-  menuKey: string | any;
-  handleMenuClick: ({ key }) => void;
+  menuKey: MenuKey;
+  handleMenuClick: (key: MenuKey) => void;
 }) => {
   return (
     <div className="status-menu-btn-container flex-col">
@@ -42,7 +43,6 @@ const GridOption = ({
         {optionName === "Add Plus One" && <GroupAddIcon sx={{ fontSize: "10rem" }} className="status-menu-icon" />}
         {optionName === "Add Child" && <ChildFriendlyIcon sx={{ fontSize: "10rem" }} className="status-menu-icon" />}
         {optionName === "Song Requests" && <LibraryMusicIcon sx={{ fontSize: "10rem" }} className="status-menu-icon" />}
-        {optionName === "Add/Edit Email" && <EmailIcon sx={{ fontSize: "10rem" }} className="status-menu-icon" />}
         {optionName === "RSVP Confirmation" && (
           <ChecklistIcon sx={{ fontSize: "10rem" }} className="status-menu-icon" />
         )}
@@ -51,6 +51,7 @@ const GridOption = ({
     </div>
   );
 };
+
 //#region song form
 const SongEditForm = ({
   guest,
@@ -245,198 +246,56 @@ const SongEditForm = ({
               )}
             </div>
           ) : (
-            /* DISABLING SINCE WEDDING IS CLOSE */
-            // <div className="flex-col-start">
-            //   {emptySongs.map((song, index) => {
-            //     const [title, artist] = song ? song.split(" - ") : ["", ""];
-            //     const errors = songValidationErrors[index] || {
-            //       title: false,
-            //       artist: false,
-            //       message: "",
-            //     };
-            //     return (
-            //       <div
-            //         style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem" }}
-            //         key={index}
-            //       >
-            //         <TextField
-            //           onChange={(e) => handleSongRequestChange(index, "title", e.target.value)}
-            //           value={title || ""}
-            //           id="song-request-title"
-            //           label="Song Title"
-            //           error={errors.title}
-            //           helperText={errors.title ? errors.message : ""}
-            //           variant="standard"
-            //           sx={{ width: "17rem" }}
-            //         />
-            //         <TextField
-            //           onChange={(e) => handleSongRequestChange(index, "artist", e.target.value)}
-            //           value={artist || ""}
-            //           id="song-request-artist"
-            //           label="Song Artist"
-            //           error={errors.artist}
-            //           helperText={errors.artist ? errors.message : ""}
-            //           variant="standard"
-            //           sx={{ width: "17rem" }}
-            //         />
-            //       </div>
-            //     );
-            //   })}
-            //   <div className="btn-container">
-            //     <button className="btn-rsvp-sm" disabled={isSongMenuInvalid} onClick={handleSongSubmit}>
-            //       Submit Song Requests For {guest.name}
-            //     </button>
-            //   </div>
-            // </div>
-            <p className="font-sm-med contain-text-center secondary-text">
-              Song Requests are closed, if you have any must have's the DJ is your guy to see at the wedding! See you
-              there!
-            </p>
+            <div className="flex-col-start">
+              {emptySongs.map((song, index) => {
+                const [title, artist] = song ? song.split(" - ") : ["", ""];
+                const errors = songValidationErrors[index] || {
+                  title: false,
+                  artist: false,
+                  message: "",
+                };
+                return (
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem" }}
+                    key={index}
+                  >
+                    <TextField
+                      onChange={(e) => handleSongRequestChange(index, "title", e.target.value)}
+                      value={title || ""}
+                      id="song-request-title"
+                      label="Song Title"
+                      error={errors.title}
+                      helperText={errors.title ? errors.message : ""}
+                      variant="standard"
+                      sx={{ width: "17rem" }}
+                    />
+                    <TextField
+                      onChange={(e) => handleSongRequestChange(index, "artist", e.target.value)}
+                      value={artist || ""}
+                      id="song-request-artist"
+                      label="Song Artist"
+                      error={errors.artist}
+                      helperText={errors.artist ? errors.message : ""}
+                      variant="standard"
+                      sx={{ width: "17rem" }}
+                    />
+                  </div>
+                );
+              })}
+              <div className="btn-container">
+                <button className="btn-rsvp-sm" disabled={isSongMenuInvalid} onClick={handleSongSubmit}>
+                  Submit Song Requests For {guest.name}
+                </button>
+              </div>
+            </div>
+            // <p className="font-sm-med contain-text-center secondary-text">
+            //   Song Requests are closed, if you have any must have's the DJ is your guy to see at the wedding! See you
+            //   there!
+            // </p>
           )}
         </>
       )}
     </div>
-  );
-};
-//#region email component
-const EmailForm = ({ guest, rsvp, handleDataRefresh }: { guest: Guest; rsvp: RSVP; handleDataRefresh: () => void }) => {
-  const [emails, setEmails] = useState<{ [key: number]: string | null }>({});
-  const [emailErrors, setEmailErrors] = useState<{ [key: number]: string | null }>({});
-
-  const hasError = !!emailErrors[guest.guest_id];
-
-  useEffect(() => {
-    handleEmailChange(guest.guest_id, guest.email);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [guest, rsvp]);
-
-  //#region email logic
-  const validateEmail = (email: string | null): string | null => {
-    // If the email is explicitly null, it's considered valid (optional and not provided)
-    if (email === null) {
-      return null;
-    }
-
-    // If  email is an empty string or contains only whitespace after trimming, it's an error
-    const trimmedEmail = email.trim();
-    if (trimmedEmail === "") {
-      return "Email address cannot be empty.";
-    }
-
-    //valid email check
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(trimmedEmail)) {
-      return "Please enter a valid email address.";
-    }
-
-    return null;
-  };
-
-  const handleEmailChange = (guestId: number, email: string) => {
-    setEmails((prevEmails) => ({
-      ...prevEmails,
-      [guestId]: email,
-    }));
-    // Validate on change to provide immediate feedback
-    setEmailErrors((prevErrors) => ({
-      ...prevErrors,
-      [guestId]: validateEmail(email),
-    }));
-  };
-
-  const isButtonDisabled = (guestId: number) => {
-    const currentEmail = emails[guestId] || "";
-    return !!validateEmail(currentEmail);
-  };
-
-  const handleEmailSubmit = async (email: string | null, guestId: number) => {
-    emailSubmitMutation.mutate({ email: email, guestId: guestId });
-  };
-
-  const emailSubmitMutation = useMutation<CustomResponseType, ErrorType, { email: string | null; guestId: number }>({
-    mutationFn: async ({ email, guestId }) => {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/guests/email/${guestId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email: email }),
-      });
-
-      if (!response.ok) {
-        const errorBody: ErrorType = await response.json();
-        throw errorBody;
-      }
-
-      return response.json() as Promise<CustomResponseType>;
-    },
-    onSuccess: (data) => {
-      console.log("Response from server:", data);
-      // handleDataRefresh();
-    },
-    onError: (error: ErrorType) => {
-      console.log(error);
-      console.error("Error creating plus one rsvp:", error.message);
-    },
-  });
-  //#endregion
-
-  // #region email template
-  return (
-    <>
-      {emailSubmitMutation.isPending || emailSubmitMutation.isError || emailSubmitMutation.isSuccess ? (
-        <div className="state-container">
-          {emailSubmitMutation.isPending && <Loading loadingText={"Saving email. Please Wait..."} />}
-          {emailSubmitMutation.isError && (
-            <Error errorInfo={emailSubmitMutation.error} tryEnabled={true} handleRetry={emailSubmitMutation.reset} />
-          )}
-          {emailSubmitMutation.isSuccess && (
-            <Success
-              message={"Your email was successfully updated!"}
-              btnMessage={"Okay"}
-              handleAction={() => {
-                handleDataRefresh();
-                emailSubmitMutation.reset();
-              }}
-            />
-          )}
-        </div>
-      ) : (
-        <div key={rsvp.rsvp_id} className="email-form-container flex-col-start" style={{ gap: "1rem" }}>
-          <div className="flex-col-start">
-            <p className="font-sm">{guest.name}'s Email</p>
-            <TextField
-              value={emails[guest.guest_id] || ""}
-              onChange={(e) => handleEmailChange(guest.guest_id, e.target.value)}
-              label="Email Address"
-              error={hasError}
-              helperText={hasError ? emailErrors[guest.guest_id] : ""}
-              variant="standard"
-              sx={{ width: "15rem" }}
-            />
-            <div className="btn-container">
-              <button
-                onClick={() => {
-                  handleEmailSubmit(null, guest.guest_id);
-                }}
-                className="btn-rsvp-sm btn-alt"
-              >
-                Remove Email
-              </button>
-              <button
-                onClick={() => {
-                  handleEmailSubmit(emails[guest.guest_id], guest.guest_id);
-                }}
-                disabled={isButtonDisabled(guest.guest_id)}
-                className="btn-rsvp-sm"
-              >
-                Submit Email
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
   );
 };
 
@@ -455,7 +314,7 @@ function RSVPStatusMenu({
 }) {
   const [plusOneEnabled, setPlusOneEnabled] = useState<boolean>(false);
   const [dependentsEnabled, setDependentsEnabled] = useState<boolean>(false);
-  const [menuState, setMenuState] = useState<"main" | "plusOne" | "dependent" | "song" | "email" | "overview">("main");
+  const [menuState, setMenuState] = useState<"main" | "plusOne" | "dependent" | "song" | "overview">("main");
 
   const [plusOneNames, setPlusOneNames] = useState<{ [key: number]: string }>({});
 
@@ -482,7 +341,6 @@ function RSVPStatusMenu({
         if (guest?.has_dependents) {
           setDependentsEnabled(true);
         }
-        // handleEmailChange(guest.guest_id, guest.email);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -491,14 +349,12 @@ function RSVPStatusMenu({
   // clears mutations when tab is changed - allows specific menus to reset
   useEffect(() => {
     additionalGuestMutation.reset();
-    // emailSubmitMutation.reset();
     refreshData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [menuState]);
 
-  const handleMenuClick = (key) => {
+  const handleMenuClick = (key: "main" | "plusOne" | "dependent" | "song" | "overview") => {
     if (key === "dependent") handleChildReset();
-    // if (key === "email") handleEmailReset();
     setMenuState(key);
 
     if (key === "main") {
@@ -523,7 +379,7 @@ function RSVPStatusMenu({
     setCurrentChild("");
   };
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: { key: string }) => {
     if (event.key === "Enter") {
       if (currentChild !== "" && !isDuplicate()) {
         handleChildAdd();
@@ -551,10 +407,10 @@ function RSVPStatusMenu({
 
     if (typeof plusOneName === "object") {
       plusOneName.forEach((name) => {
-        postData.additional.push({ name: name, type: additionalType, guestId: guestId });
+        postData.additional.push({ name: name, type: additionalType, guestId: guestId, dietaryRestriction: "" });
       });
     } else {
-      postData.additional.push({ name: plusOneName, type: additionalType, guestId: guestId });
+      postData.additional.push({ name: plusOneName, type: additionalType, guestId: guestId, dietaryRestriction: "" });
     }
     additionalGuestMutation.mutate({ postData: postData, type: additionalType });
   };
@@ -612,9 +468,6 @@ function RSVPStatusMenu({
             )}
             {!everyAttendanceNo && (
               <GridOption optionName={"Song Requests"} menuKey={"song"} handleMenuClick={handleMenuClick} />
-            )}
-            {!everyAttendanceNo && (
-              <GridOption optionName={"Add/Edit Email"} menuKey={"email"} handleMenuClick={handleMenuClick} />
             )}
             <GridOption optionName={"RSVP Confirmation"} menuKey={"overview"} handleMenuClick={handleMenuClick} />
           </div>
@@ -768,16 +621,6 @@ function RSVPStatusMenu({
                 )}
                 {isChildrenInvalid && <p style={{ color: "darkred" }}>Must be first and last name.</p>}
 
-                {childrenNames.length !== 0 && (
-                  <p className="font-sm">
-                    <strong style={{ textDecoration: "underline" }}>Please Note:</strong> While kids are allowed to help
-                    celebrate our special day we kindly ask all infants/toddlers to{" "}
-                    <span style={{ textDecoration: "underline" }}>not be</span> present at the ceremony. There are
-                    several areas around the property for one of your guests to accompany them. They are of course
-                    welcome afterwards for the cocktail hour and reception. For more information visit the 'FAQ' tab.
-                  </p>
-                )}
-
                 <div className="btn-container">
                   <Tooltip enterDelay={500} title="Reset all 'Pending' child RSVPs">
                     <button
@@ -828,30 +671,6 @@ function RSVPStatusMenu({
             </div>
           </div>
         )}
-        {menuState === "email" && (
-          <div id="email-status-container" className="status-menu-card">
-            <p className="font-sm-med contain-text-center" style={{ textDecoration: "underline" }}>
-              Email Menu
-            </p>
-            <p className="secondary-text font-xs contain-text-center">
-              Emails will only be used for important wedding updates, confirmations, and photos! Emails aren't required
-              and are completely optional.
-            </p>
-            <div id="email-edit-form-container" className="flex-col-start">
-              {groupRSVPs.map((rsvp) => {
-                const guest = groupData.guests.find((guest) => guest.guest_id === rsvp.guest_id);
-                if (
-                  rsvp.attendance &&
-                  guest &&
-                  guest.additional_guest_type !== "plus_one" &&
-                  guest.additional_guest_type !== "dependent"
-                ) {
-                  return <EmailForm guest={guest} rsvp={rsvp} handleDataRefresh={refreshData} />;
-                }
-              })}
-            </div>
-          </div>
-        )}
         {menuState === "overview" && (
           <div
             id="overview-status-container"
@@ -887,14 +706,6 @@ function RSVPStatusMenu({
                           {rsvp.attendance && <p className="font-sm">Yes!</p>}
                           {!rsvp.attendance && <p className="font-sm">No.</p>}
                         </div>
-                        {guest.email && (
-                          <div className="guest-email flex-row-start flex-row-gap">
-                            <p className="font-sm strong-text" style={{ textDecoration: "underline" }}>
-                              Email:
-                            </p>
-                            <p className="font-sm">{guest.email}</p>
-                          </div>
-                        )}
                       </div>
                       {rsvp.spotify && rsvp.spotify.split(separator).length > 0 && (
                         <div className="overview-guest-song">
@@ -946,28 +757,6 @@ function RSVPStatusMenu({
                     </p>
                   </div>
                 )}
-              {/* has dependents message - yes children added */}
-              {!everyAttendanceNo && groupData.guests.some((guest) => guest.additional_guest_type === "dependent") && (
-                <div>
-                  <p className="font-sm">
-                    <strong style={{ textDecoration: "underline" }}>Please Note:</strong> While kids are allowed to help
-                    celebrate our special day we kindly ask all infants/toddlers to{" "}
-                    <span style={{ textDecoration: "underline" }}>not be</span> present at the ceremony. There are
-                    several areas around the property for one of your guests to accompany them. They are of course
-                    welcome afterwards for the cocktail hour and reception. For more information visit the 'FAQ' tab.
-                  </p>
-                </div>
-              )}
-              {/* no email message */}
-              {!everyAttendanceNo && groupData.guests.some((guest) => !guest.email && !guest.additional_guest_type) && (
-                <div className="font-sm">
-                  <p>
-                    At least one attending guest in your group does not have an email associated with their RSVP. While
-                    this is completely optional - it is recommended to keep up to date with the event and to get first
-                    access to any picture put out.
-                  </p>
-                </div>
-              )}
             </div>
           </div>
         )}
