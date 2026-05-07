@@ -587,7 +587,7 @@ function RSVPStatusMenu({
         )}
         {menuState === "plusOne" && (
           <div id="plus-one-status-container" className="status-menu-card">
-            <p className="font-sm-med contain-text-center" style={{ textDecoration: "underline" }}>
+            <p className="font-sm-med contain-text-center underline" >
               Plus One Menu
             </p>
             {additionalGuestMutation.isPending ||
@@ -648,11 +648,11 @@ function RSVPStatusMenu({
         )}
         {menuState === "dependent" && (
           <div id="dependent-status-container" className="status-menu-card">
-            <p className="font-sm-med contain-text-center" style={{ textDecoration: "underline" }}>
+            <p className="font-sm-med contain-text-center underline" >
               Child RSVP Menu
             </p>
             <p className="font-xs contain-text-center">
-              Child RSVPs are meant for kids <strong style={{ textDecoration: "underline" }}>15 years</strong> and
+              Child RSVPs are meant for kids <strong className="underline" >15 years</strong> and
               younger.
             </p>
             {additionalGuestMutation.isPending ||
@@ -770,7 +770,7 @@ function RSVPStatusMenu({
         )}
         {menuState === "song" && (
           <div id="song-status-container" className="status-menu-card">
-            <p className="font-sm-med contain-text-center" style={{ textDecoration: "underline" }}>
+            <p className="font-sm-med contain-text-center underline" >
               Song Request Menu
             </p>
             <div id="song-edit-form-container" className="flex-col-start">
@@ -786,7 +786,7 @@ function RSVPStatusMenu({
         )}
         {menuState === "diet" && (
           <div id="diet-status-container" className="status-menu-card">
-            <p className="font-sm-med contain-text-center" style={{ textDecoration: "underline" }}>
+            <p className="font-sm-med contain-text-center underline" >
               Dietary Restrictions Menu
             </p>
 
@@ -807,7 +807,7 @@ function RSVPStatusMenu({
             className="status-menu-card"
             style={{ width: "80%", padding: "2rem 3rem" }}
           >
-            <p className="font-sm-med contain-text-center" style={{ textDecoration: "underline" }}>
+            <p className="font-sm-med contain-text-center underline" >
               Confirmation Menu
             </p>
             <div id="overview-content-container" className="flex-col-start">
@@ -822,7 +822,7 @@ function RSVPStatusMenu({
                     >
                       <div className="overview-guest-info flex-col-start" style={{ gap: "1rem" }}>
                         <div className="guest-name flex-row-start flex-row-gap">
-                          <p className="font-sm strong-text" style={{ textDecoration: "underline" }}>
+                          <p className="font-sm strong-text underline" >
                             Guest:
                           </p>
                           <p className="font-sm">{guest.name}</p>
@@ -830,7 +830,7 @@ function RSVPStatusMenu({
                           {guest.additional_guest_type === "dependent" && <p className="font-sm">(Child RSVP)</p>}
                         </div>
                         <div className="guest-attending flex-row-start flex-row-gap">
-                          <p className="font-sm strong-text" style={{ textDecoration: "underline" }}>
+                          <p className="font-sm strong-text underline" >
                             Attending:{" "}
                           </p>
                           {rsvp.attendance && <p className="font-sm">Yes!</p>}
@@ -839,7 +839,7 @@ function RSVPStatusMenu({
 
                         {rsvp.dietary_restrictions && (
                           <div className="guest-attending flex-row-start flex-row-gap">
-                            <p className="font-sm strong-text" style={{ textDecoration: "underline" }}>
+                            <p className="font-sm strong-text underline" >
                               Dietary Restrictions:{" "}
                             </p>
                             <p className="font-sm">{rsvp.dietary_restrictions}</p>
@@ -848,7 +848,7 @@ function RSVPStatusMenu({
                       </div>
                       {rsvp.spotify && rsvp.spotify.split(separator).length > 0 && (
                         <div className="overview-guest-song">
-                          <p className="font-sm strong-text" style={{ textDecoration: "underline" }}>
+                          <p className="font-sm strong-text underline" >
                             Requested Songs
                           </p>
                           {/* filtering out empty song slots */}
@@ -890,8 +890,8 @@ function RSVPStatusMenu({
                     </p>
                     <p style={{ marginTop: "1rem" }}>
                       <strong>Note:</strong> It is <strong>required</strong> to add these RSVPs for your children to be{" "}
-                      <span style={{ textDecoration: "underline" }}>counted</span>. If you do not see their name on this
-                      confirmation screen it means they <span style={{ textDecoration: "underline" }}>haven't</span>{" "}
+                      <span className="underline" >counted</span>. If you do not see their name on this
+                      confirmation screen it means they <span className="underline" >haven't</span>{" "}
                       been added and counted.
                     </p>
                   </div>

@@ -11,7 +11,7 @@ function Error({ errorInfo, tryEnabled = false, handleRetry }: ErrorProps) {
   return (
     <>
       <div className="error-container flex-col">
-        <p className="font-med strong-text" style={{ textDecoration: "underline" }}>
+        <p className="font-med strong-text underline">
           Error
         </p>
         <p className="font-sm-med">

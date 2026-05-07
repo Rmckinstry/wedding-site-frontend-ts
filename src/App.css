@@ -499,6 +499,8 @@ button:hover {
 
 .underline {
     text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 4px;
 }
 
 .info-container {
@@ -710,6 +712,7 @@ button:hover {
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 2px;
+    text-decoration-color: var(--accent);
 }
 
 .status-menu-btn-container {
