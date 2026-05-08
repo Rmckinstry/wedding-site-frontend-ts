@@ -229,7 +229,7 @@ function RSVPConfirmation({
 }
 
 //#region rsvp lookup
-function RSVPLookup({ data, handleGroupSelect }: { data: Guest[]; handleGroupSelect: ({ id, name }) => void }) {
+function RSVPLookup({ data, handleGroupSelect }: { data: Guest[]; handleGroupSelect: ({ id, name }: { id: number; name: string }) => void }) {
   const [inputValue, setInputValue] = useState("");
   const [selectedGuest, setSelectedGuest] = useState(null);
   const [showConfirmation, setShowConfirmation] = useState(false);

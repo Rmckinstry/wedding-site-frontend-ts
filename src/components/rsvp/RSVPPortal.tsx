@@ -20,7 +20,7 @@ function RSVPPortal({ groupId, groupName }: { groupId: number; groupName: string
         const errorData: ErrorType = await response.json();
         throw errorData;
       }
-      const results = await response.json();
+      const results: RSVP[] = await response.json();
       return results.sort((a, b) => {
         const idA = a.guest_id;
         const idB = b.guest_id;
