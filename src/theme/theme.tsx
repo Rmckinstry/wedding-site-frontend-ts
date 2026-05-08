@@ -123,6 +123,9 @@ const theme = createTheme({
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
             borderColor: "var(--default-text)",
           },
+          "&:hover": {
+            color: "var(--default-text)",
+          },
         },
         notchedOutline: {
           borderColor: "var(--default-text)",
@@ -213,7 +216,9 @@ const theme = createTheme({
     MuiInputBase: {
       styleOverrides: {
         input: {
-          fontSize: "16px",
+          fontFamily: "var(--font-main)",
+          fontSize: "1rem",
+          color: "var(--default-text)",
         },
       },
     },
