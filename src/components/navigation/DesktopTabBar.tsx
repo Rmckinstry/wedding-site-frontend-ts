@@ -1,7 +1,15 @@
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
-function DesktopTabBar({ tabValue = 0, handleChange }) {
+function DesktopTabBar({
+  tabValue = 0,
+  handleChange,
+  isAdmin = false,
+}: {
+  tabValue: number;
+  handleChange: any;
+  isAdmin: boolean;
+}) {
   return (
     <>
       <div className="flex-row">
@@ -18,6 +26,7 @@ function DesktopTabBar({ tabValue = 0, handleChange }) {
           <Tab label="Travel" className="custom-tab" />
           <Tab label="Registry" className="custom-tab" />
           <Tab label="FAQ" className="custom-tab" />
+          {isAdmin && <Tab label="Admin" className="custom-tab" />}
 
           {/* <Tab label="Day of Info" className="custom-tab" /> */}
         </Tabs>

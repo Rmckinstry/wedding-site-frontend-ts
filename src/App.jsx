@@ -33,7 +33,6 @@ function UserLayout() {
           {tabValue === 2 && <TravelPage />}
           {tabValue === 3 && <Registry />}
           {tabValue === 4 && <FAQPage />}
-          {tabValue === 5 && <AdminDashboard />}
           {/* {tabValue === 1 && <DayOf />} */}
 
         </div>
@@ -45,9 +44,9 @@ function UserLayout() {
 
 // A wrapper for the Admin routes that checks for authentication
 const PrivateAdminRoute = () => {
-  const isAdmin = sessionStorage.getItem('isAdmin'); // Check if isAdmin is true
+  const isAdmin = sessionStorage.getItem('isAdmin');
 
-  return isAdmin === 'true' ? <Outlet /> : <Navigate to="/admin-login" replace />;
+  return isAdmin ? <Outlet /> : <Navigate to="/admin-login" replace />;
 };
 
 function App() {
