@@ -78,6 +78,14 @@ const theme = createTheme({
           fontSize: "1.25rem",
           fontFamily: "var(--font-main)",
         },
+        select: {
+          paddingTop: '4px',
+          paddingBottom: '4px',
+          height: 'auto',      // Allows the box to grow with the font
+          minHeight: '1.5em', // Ensures height relative to font size
+          display: 'flex',
+          alignItems: 'center',
+        },
       },
     },
     MuiStepLabel: {
