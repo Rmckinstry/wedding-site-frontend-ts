@@ -103,7 +103,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontFamily: "var(--font-main)",
-          // fontWeight: "var(--weight-semibold)",
+          fontWeight: "var(--weight-semibold)",
           "&.Mui-focused": {
             color: "var(--default-text)",
           },
