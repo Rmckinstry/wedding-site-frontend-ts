@@ -1,8 +1,9 @@
 import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import { FAQ } from "../../utility/types";
 
-function FAQMobile({ faq }) {
+function FAQMobile({ faq }: { faq: FAQ }) {
   return (
     <>
       <Card className="faq-mobile-container">

@@ -8,12 +8,12 @@ function FAQPage() {
     <>
       <div id="faq-data-desktop-container">
         {faqData.map((faq, index) => (
-          <FAQDesktop faq={faq} />
+          <FAQDesktop faq={faq} key={index} />
         ))}
       </div>
       <div id="faq-data-mobile-container">
         {faqData.map((faq, index) => (
-          <FAQMobile faq={faq} />
+          <FAQMobile faq={faq} key={index} />
         ))}
       </div>
     </>

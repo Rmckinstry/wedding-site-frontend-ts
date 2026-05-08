@@ -75,3 +75,8 @@ export type AdditionalGuestBodyType = {
   groupId: number;
   additional: AdditionalGuest[];
 };
+
+export type FAQ = {
+  question: string;
+  answer: string;
+};
