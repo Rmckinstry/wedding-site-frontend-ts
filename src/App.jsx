@@ -51,6 +51,7 @@ const PrivateAdminRoute = () => {
 
 function App() {
   return (
+    <ThemeProvider theme={theme}>
       <NavigationProvider>
         <Router>
           <Routes>
@@ -68,6 +69,8 @@ function App() {
           </Routes>
         </Router>
       </NavigationProvider>
+    </ThemeProvider>
+
   );
 }
 

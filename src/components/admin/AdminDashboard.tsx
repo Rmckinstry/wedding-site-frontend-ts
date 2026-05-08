@@ -6,6 +6,7 @@ import Error from "../utility/Error.tsx";
 import { useNavigate } from "react-router-dom";
 import AdminGroupEditor from "./AdminGroupEditor.tsx";
 import AdminRSVPViewer from "./AdminRSVPViewer.tsx";
+import AdminGuestEditor from "./AdminGuestEditor.tsx";
 
 function AdminDashboard() {
   const navigate = useNavigate();
@@ -105,18 +106,18 @@ function AdminDashboard() {
           <p className="font-sm">{allGuestsQuery.data?.length}</p>
         </div>
         <div className="quickview-item">
-          <p className="font-sm-med strong-text underline">Accepted</p>
-          <p className="font-sm">{acceptedRsvpsCount}</p>
+          <p className="font-sm-med strong-text underline">Not Responded</p>
+          <p className="font-sm">
+            {allGuestsQuery.data ? allGuestsQuery.data.length - (acceptedRsvpsCount + declinedRsvpsCount) : 0}
+          </p>
         </div>
         <div className="quickview-item">
           <p className="font-sm-med strong-text underline">Declined</p>
           <p className="font-sm">{declinedRsvpsCount}</p>
         </div>
         <div className="quickview-item">
-          <p className="font-sm-med strong-text underline">Not Responded</p>
-          <p className="font-sm">
-            {allGuestsQuery.data ? allGuestsQuery.data.length - (acceptedRsvpsCount + declinedRsvpsCount) : 0}
-          </p>
+          <p className="font-sm-med strong-text underline">Accepted</p>
+          <p className="font-sm">{acceptedRsvpsCount}</p>
         </div>
         <div className="quickview-item">
           <p className="font-sm strong-text">Plus One : {plusOneCount}</p>
@@ -127,7 +128,6 @@ function AdminDashboard() {
         {adminState === "group" && (
           <AdminGroupEditor
             groupData={allGroupsQuery.data!}
-            guestData={allGuestsQuery.data!}
             handleDataRefresh={refreshData}
             handleMenuClick={() => {
               setAdminState("menu");
@@ -143,18 +143,20 @@ function AdminDashboard() {
             }}
           />
         )}
+        {adminState === "guest" && (
+          <AdminGuestEditor
+            groupData={allGroupsQuery.data!}
+            guestData={allGuestsQuery.data!}
+            handleDataRefresh={refreshData}
+            handleMenuClick={() => {
+              setAdminState("menu");
+            }}
+          />
+        )}
         {adminState === "menu" && (
           <div id="admin-action-selector-container" className="flex-col flex-col-lg">
             <p className="font-sm-med underline">Select Admin Menu</p>
             <div className="flex-row-gap">
-              <button
-                className="btn-rsvp"
-                onClick={() => {
-                  setAdminState("rsvp-viewer");
-                }}
-              >
-                RSVP Viewer
-              </button>
               <button
                 className="btn-rsvp"
                 onClick={() => {
@@ -163,9 +165,30 @@ function AdminDashboard() {
               >
                 Group Editor
               </button>
-              {/* unimplemented */}
-              {/* <button>Guest Editor</button> */}
-              {/* <button>RSVP Editor</button> */}
+              <button
+                className="btn-rsvp"
+                onClick={() => {
+                  setAdminState("guest");
+                }}
+              >
+                Guest Editor
+              </button>
+              <button
+                className="btn-rsvp"
+                onClick={() => {
+                  setAdminState("rsvp-edit");
+                }}
+              >
+                RSVP Editor
+              </button>
+              <button
+                className="btn-rsvp"
+                onClick={() => {
+                  setAdminState("rsvp-viewer");
+                }}
+              >
+                RSVP Overview
+              </button>
             </div>
           </div>
         )}
