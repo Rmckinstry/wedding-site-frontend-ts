@@ -12,14 +12,8 @@
     --default-text: #FFF3E0;
     --default-text-transparent: #FFF3E042;
 
-    /* Chartreuse - update this to be less jarring */
     --secondary-text: #1B434D;
-
-    /* this needs to be updated to go well with the other colors, don't know what I would use accent for */
     --accent: #D4FF35;
-
-    /* needs to be updated? */
-    /* normal btns have background as default-text and font is base-background */
     --btn-disabled: #D1B8A0;
 
     /* Font Variables */
@@ -534,7 +528,7 @@ button:hover {
     font-weight: var(--weight-semibold);
 }
 
-.btn-link:hover{
+.btn-link:hover {
     color: var(--secondary-text) !important;
 }
 
@@ -588,7 +582,7 @@ button:hover {
 }
 
 .btn-alt {
-    background-color: lightgray;
+    background-color: var(--secondary-text);
     color: var(--default-text);
 }
 

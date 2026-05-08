@@ -103,7 +103,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontFamily: "var(--font-main)",
-          fontWeight: "var(--weight-semibold)",
+          // fontWeight: "var(--weight-semibold)",
           "&.Mui-focused": {
             color: "var(--default-text)",
           },
@@ -124,7 +124,7 @@ const theme = createTheme({
             borderColor: "var(--default-text)",
           },
           "&:hover": {
-            color: "var(--default-text)",
+            borderColor: "var(--default-text)",
           },
         },
         notchedOutline: {
@@ -227,9 +227,19 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           position: "unset",
+          backgroundColor: "transparent",
         },
         progress: {
           width: "100%",
+          backgroundColor: "var(--secondary-background)",
+        },
+      },
+    },
+
+    MuiLinearProgress: {
+      styleOverrides: {
+        barColorPrimary: {
+          backgroundColor: "var(--accent)",
         },
       },
     },

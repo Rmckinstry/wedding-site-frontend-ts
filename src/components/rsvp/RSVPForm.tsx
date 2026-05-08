@@ -1120,6 +1120,12 @@ function RSVPForm({
                         <p className="strong-text font-sm confirmation-header">Attending: </p>
                         <p className="font-sm">{rsvp.attendance ? "Yes!" : "No"}</p>
                       </div>
+                      {rsvp.attendance && rsvp.dietaryRestrictions && (
+                        <div className="flex-row-gap">
+                          <p className="strong-text font-sm confirmation-header">Diet Restriction: </p>
+                          <p className="font-sm">{rsvp.dietaryRestrictions}</p>
+                        </div>
+                      )}
                       {rsvp.attendance && hasSongs && (
                         <div>
                           <p className="strong-text font-sm confirmation-header">Requested Songs:</p>
@@ -1160,12 +1166,6 @@ function RSVPForm({
                           Plus one <strong>available</strong> for {guest.name}! You can add the extra RSVP{" "}
                           <span className="confirmation-header">after</span> submitting this one via the RSVP Portal.
                         </p>
-                      )}
-                      {rsvp.attendance && rsvp.dietaryRestrictions && (
-                        <div className="flex-row-gap">
-                          <p className="strong-text font-sm confirmation-header">Diet Restriction: </p>
-                          <p className="font-sm">{rsvp.dietaryRestrictions}</p>
-                        </div>
                       )}
                     </div>
                   );
@@ -1210,8 +1210,7 @@ function RSVPForm({
                         </p>
                         <p className="font-sm secondary-text">
                           <strong>Note: </strong>It is <strong>required</strong> to add these RSVPs prior to the
-                          deadline for your children/dependents to be{" "}
-                          <span className="underline">counted</span>
+                          deadline for your children/dependents to be <span className="underline">counted</span>
                         </p>
                       </div>
                     )}
