@@ -734,7 +734,7 @@ function RSVPForm({
                   </p>
                   <p className="font-sm contain-text-center secondary-text">
                     <strong>
-                      <span style={{ textDecoration: "underline" }}>Undecided? </span>
+                      <span className="underline">Undecided? </span>
                     </strong>
                     You can always add your plus one later after submitting your RSVP via the{" "}
                     <strong>RSVP Portal</strong>!
@@ -798,7 +798,7 @@ function RSVPForm({
                   </p>
                   <p className="font-sm contain-text-center secondary-text">
                     <strong>
-                      <span style={{ textDecoration: "underline" }}>Undecided?</span>
+                      <span className="underline">Undecided?</span>
                     </strong>{" "}
                     You can always add your child RSVPs later after submitting your RSVP via the{" "}
                     <strong>RSVP Portal</strong>!
@@ -872,7 +872,7 @@ function RSVPForm({
                   </p>
                   <p className="font-sm contain-text-center secondary-text">
                     <strong>
-                      <span style={{ textDecoration: "underline" }}>Undecided?</span>{" "}
+                      <span className="underline">Undecided?</span>{" "}
                     </strong>
                     {""}You can always add songs later after submitting your RSVP via the <strong>RSVP Portal</strong>!
                   </p>
@@ -1102,7 +1102,7 @@ function RSVPForm({
               <div id="confirmation-card-container" className="rsvp-card">
                 <div className="flex-col">
                   <p className="font-sm-med strong-text">RSVP Submit & Confirmation</p>
-                  <p className="font-sm strong-text contain-text-center" style={{ textDecoration: "underline" }}>
+                  <p className="font-sm strong-text contain-text-center underline">
                     Please confirm that all information shown below is correct and submit.
                   </p>
                 </div>
@@ -1211,7 +1211,7 @@ function RSVPForm({
                         <p className="font-sm secondary-text">
                           <strong>Note: </strong>It is <strong>required</strong> to add these RSVPs prior to the
                           deadline for your children/dependents to be{" "}
-                          <span style={{ textDecoration: "underline" }}>counted</span>
+                          <span className="underline">counted</span>
                         </p>
                       </div>
                     )}

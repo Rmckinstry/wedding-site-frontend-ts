@@ -75,7 +75,7 @@ function RSVPConfirmation({
                 <div className="flex-col" key={group?.group_name}>
                   <p className="font-sm-med strong-text contain-text-center">Group: {group?.group_name}</p>
                   <div>
-                    <p className="font-sm-med contain-text-center" style={{ textDecoration: "underline" }}>
+                    <p className="font-sm-med contain-text-center underline">
                       Guests:
                     </p>
                     {group?.guests.map((guest) => {
@@ -164,7 +164,7 @@ function RSVPConfirmation({
           <p className="font-sm-med strong-text">Group Name: {data["group_name"]}</p>
           <div className="flex-row" style={{ alignItems: "start", gap: "3rem" }}>
             <div id="rsvp-confirm-guest-container" className="flex-col">
-              <p className="font-sm-med" style={{ textDecoration: "underline" }}>
+              <p className="font-sm-med underline">
                 Guests:
               </p>
               {data["guests"].map((guest) => {
@@ -182,7 +182,7 @@ function RSVPConfirmation({
             {/* Check if there are any additional guests before rendering the div */}
             {data["guests"].some((guest) => guest.additional_guest_type) && (
               <div id="rsvp-confirm-addit-container" className="flex-col">
-                <p className="font-sm-med" style={{ textDecoration: "underline" }}>
+                <p className="font-sm-med underline">
                   Additional Guests:
                 </p>
                 {data["guests"].map((guest) => {

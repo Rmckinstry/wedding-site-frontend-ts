@@ -12,14 +12,15 @@
     --default-text: #FFF3E0;
     --default-text-transparent: #FFF3E042;
 
-    /* Chartreuse */
-    --secondary-text: #D1FF2A;
+    /* Chartreuse - update this to be less jarring */
+    --secondary-text: #1B434D;
 
-    /* this needs to be updated now that theme has changed */
-    --accent: #B1F24E;
+    /* this needs to be updated to go well with the other colors, don't know what I would use accent for */
+    --accent: #D4FF35;
 
-    /* needs to be updated */
-    --btn-disabled: #E5D1B8;
+    /* needs to be updated? */
+    /* normal btns have background as default-text and font is base-background */
+    --btn-disabled: #D1B8A0;
 
     /* Font Variables */
     --font-main: 'Bricolage Grotesque';
@@ -74,6 +75,7 @@ a {
 
 a:hover {
     transform: scale(1.05);
+    color: var(--accent);
 }
 
 p {
@@ -470,7 +472,8 @@ button:hover {
 
 .title {
     text-decoration: underline;
-    text-decoration-color: var(--default-text);
+    /* text-decoration-color: var(--default-text); */
+    text-decoration-color: var(--accent);
     text-decoration-thickness: 3px;
     text-underline-offset: 1rem;
     padding-bottom: 1rem;
@@ -496,6 +499,8 @@ button:hover {
 
 .underline {
     text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 4px;
 }
 
 .info-container {
@@ -527,6 +532,10 @@ button:hover {
 .btn-rsvp:hover,
 .btn-rsvp-sm:hover {
     font-weight: var(--weight-semibold);
+}
+
+.btn-link:hover{
+    color: var(--secondary-text) !important;
 }
 
 .btn-link {
@@ -703,6 +712,7 @@ button:hover {
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 2px;
+    text-decoration-color: var(--accent);
 }
 
 .status-menu-btn-container {
