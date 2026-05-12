@@ -5,7 +5,6 @@ import { useMutation } from "@tanstack/react-query";
 import Loading from "../../utility/Loading";
 import Success from "../../utility/Success";
 import Error from "../../utility/Error";
-import SimpleDialog from "../../utility/SimpleDialog";
 
 const AfterPartyForm = ({
   guest,

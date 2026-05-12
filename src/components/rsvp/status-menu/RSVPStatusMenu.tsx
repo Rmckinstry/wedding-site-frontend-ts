@@ -335,6 +335,8 @@ function RSVPStatusMenu({
   const [partyDialogOpen, setPartyDialogOpen] = useState<boolean>(false);
   const afterPartyContent =
     "After the reception, an after party with select guests, will be taking place on a chartered boat from 10pm - 1am. On the boat, there will be an open bar, music, and time to celebrate with us. Please reach out to Tyler if there are any questions.";
+  const afterPartyCutoff = new Date(2026, 7, 1);
+  const isAfterPartyEditable = new Date() < afterPartyCutoff;
 
   // song seperator code
   const separator = "\u00A7";
@@ -717,15 +719,23 @@ function RSVPStatusMenu({
               </a>{" "}
               for more details.
             </p>
-            <div id="after-party-edit-form-container" className="flex-col-start">
-              {/* eslint-disable-next-line array-callback-return */}
-              {groupRSVPs.map((rsvp) => {
-                const guest = groupData.guests.find((guest) => guest.guest_id === rsvp.guest_id);
-                if (rsvp.attendance && guest?.after_party) {
-                  return <AfterPartyForm guest={guest} rsvp={rsvp} handleDataRefresh={refreshData} />;
-                }
-              })}
-            </div>
+
+            {isAfterPartyEditable ? (
+              <div id="after-party-edit-form-container" className="flex-col-start">
+                {/* eslint-disable-next-line array-callback-return */}
+                {groupRSVPs.map((rsvp) => {
+                  const guest = groupData.guests.find((guest) => guest.guest_id === rsvp.guest_id);
+                  if (rsvp.attendance && guest?.after_party) {
+                    return <AfterPartyForm guest={guest} rsvp={rsvp} handleDataRefresh={refreshData} />;
+                  }
+                })}
+              </div>
+            ) : (
+              <p id="after-party-deadline" className="font-sm-med contain-text-center">
+                The deadline to change your After Party Attendance has passed. Please contact Tyler with any questions
+                or concerns.
+              </p>
+            )}
             <SimpleDialog
               open={partyDialogOpen}
               onClose={handlePartyDialogClose}
