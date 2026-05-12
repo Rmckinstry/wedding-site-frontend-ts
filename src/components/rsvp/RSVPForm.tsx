@@ -7,8 +7,6 @@ import {
   ToggleButton,
   Tooltip,
   MobileStepper,
-  Dialog,
-  DialogTitle,
 } from "@mui/material";
 import { AdditionalGuest, ErrorType, GroupData, RSVPResponseType, SongRequestError } from "../../utility/types";
 import { useMutation } from "@tanstack/react-query";
@@ -18,6 +16,7 @@ import EventIcon from "@mui/icons-material/Event";
 import { useNavigation } from "../../context/NavigationContext.tsx";
 import { isValidInput, isValidName } from "../../utility/util.ts";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import SimpleDialog from "../utility/SimpleDialog.tsx";
 
 type RSVPFormObject = {
   guestId: number;
@@ -117,12 +116,20 @@ function RSVPForm({
 
   const isChildrenInvalid = childrenRsvps.some((rsvp) => !isValidName(rsvp.name));
 
+  const [partyDialogOpen, setPartyDialogOpen] = useState<boolean>(false);
+  const afterPartyContent =
+    "After the reception, an after party with select guests, will be taking place on a chartered boat from 10pm - 1am. On the boat, there will be an open bar, music, and time to celebrate with us. Please reach out to Tyler if there are any questions.";
+
   const separator = "\u00A7";
 
   const designatedDependentGuest = groupData.guests.find(
     (guest) =>
       guest.has_dependents && rsvps.some((rsvp) => rsvp.guestId === guest.guest_id && rsvp.attendance === true),
   );
+
+  const handlePartyDialogClose = () => {
+    setPartyDialogOpen(false);
+  };
 
   const isAddNewChildDisabled = () => {
     if (childrenRsvps.length === 0) return false;
@@ -1135,7 +1142,6 @@ function RSVPForm({
               </div>
             )}
             {/* After Party Card */}
-
             {activeStep === 5 && (
               <div id="rsvp-form-card-container" className="rsvp-card">
                 <div id="after-party-header" className="flex-col">
@@ -1143,7 +1149,16 @@ function RSVPForm({
                     After Party
                   </p>
                   <p className="font-sm contain-text-center secondary-text">
-                    RSVP to the After Party. Click here for more details.
+                    RSVP to the After Party. Click{" "}
+                    <a
+                      className="underline"
+                      onClick={() => {
+                        setPartyDialogOpen(true);
+                      }}
+                    >
+                      here
+                    </a>{" "}
+                    for more details.
                   </p>
                 </div>
 
@@ -1209,6 +1224,13 @@ function RSVPForm({
                     Next
                   </button>
                 </div>
+                <SimpleDialog
+                  open={partyDialogOpen}
+                  onClose={handlePartyDialogClose}
+                  title={"After Party Details"}
+                  content={afterPartyContent}
+                  confirmText="Okay"
+                />
               </div>
             )}
             {/* Confirmation Card */}

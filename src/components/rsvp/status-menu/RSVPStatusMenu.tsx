@@ -8,21 +8,24 @@ import {
   Guest,
   RSVP,
   SongRequestError,
-} from "../../utility/types";
+} from "../../../utility/types.ts";
 import React, { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import Error from "../utility/Error.tsx";
-import Loading from "../utility/Loading.tsx";
+import Error from "../../utility/Error.tsx";
+import Loading from "../../utility/Loading.tsx";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import ChildFriendlyIcon from "@mui/icons-material/ChildFriendly";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import ChecklistIcon from "@mui/icons-material/Checklist";
-import Success from "../utility/Success.tsx";
-import { isValidInput, isValidName } from "../../utility/util.ts";
-import { NoFood } from "@mui/icons-material";
+import Success from "../../utility/Success.tsx";
+import { isValidInput, isValidName } from "../../../utility/util.ts";
+import { NoFood, Sailing } from "@mui/icons-material";
+import DietForm from "./DietForm.tsx";
+import AfterPartyForm from "./AfterPartyForm.tsx";
+import SimpleDialog from "../../utility/SimpleDialog.tsx";
 
 //#region grid option
-type MenuKey = "main" | "plusOne" | "dependent" | "song" | "overview" | "diet";
+type MenuKey = "main" | "plusOne" | "dependent" | "song" | "overview" | "diet" | "afterParty";
 
 const GridOption = ({
   optionName,
@@ -45,6 +48,7 @@ const GridOption = ({
         {optionName === "Add Child" && <ChildFriendlyIcon sx={{ fontSize: "10rem" }} className="status-menu-icon" />}
         {optionName === "Song Requests" && <LibraryMusicIcon sx={{ fontSize: "10rem" }} className="status-menu-icon" />}
         {optionName === "Dietary Restrictions" && <NoFood sx={{ fontSize: "10rem" }} className="status-menu-icon" />}
+        {optionName === "After Party" && <Sailing sx={{ fontSize: "10rem" }} className="status-menu-icon" />}
         {optionName === "RSVP Confirmation" && (
           <ChecklistIcon sx={{ fontSize: "10rem" }} className="status-menu-icon" />
         )}
@@ -302,114 +306,6 @@ const SongEditForm = ({
 };
 //#endregion
 
-//#region DietForm Component
-const DietForm = ({ guest, rsvp, handleDataRefresh }: { guest: Guest; rsvp: RSVP; handleDataRefresh: () => void }) => {
-  const [restrictions, setRestrictions] = useState<{ [key: number]: string | null }>({});
-
-  useEffect(() => {
-    handleDietChange(guest.guest_id, rsvp.dietary_restrictions);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [guest, rsvp]);
-
-  const handleDietChange = (guestId: number, restriction: string) => {
-    setRestrictions((prevRestrictions) => ({
-      ...prevRestrictions,
-      [guestId]: restriction,
-    }));
-  };
-
-  const handleRestrictionSubmit = async (restriction: string | null) => {
-    dietSubmitMutation.mutate({ restriction: restriction, rsvpId: rsvp.rsvp_id });
-  };
-
-  const dietSubmitMutation = useMutation<CustomResponseType, ErrorType, { restriction: string | null; rsvpId: number }>(
-    {
-      mutationFn: async ({ restriction, rsvpId }) => {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/rsvps/diet/${rsvpId}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ dietaryRestriction: restriction }),
-        });
-
-        if (!response.ok) {
-          const errorBody: ErrorType = await response.json();
-          throw errorBody;
-        }
-
-        return response.json() as Promise<CustomResponseType>;
-      },
-      onSuccess: (data) => {
-        console.log("Response from server:", data);
-        // handleDataRefresh();
-      },
-      onError: (error: ErrorType) => {
-        console.log(error);
-        console.error("Error editing diet restriction:", error.message);
-      },
-    },
-  );
-  //#endregion
-
-  // #region diet template
-  return (
-    <>
-      {dietSubmitMutation.isPending || dietSubmitMutation.isError || dietSubmitMutation.isSuccess ? (
-        <div className="state-container">
-          {dietSubmitMutation.isPending && <Loading loadingText={"Saving diet restriction. Please Wait..."} />}
-          {dietSubmitMutation.isError && (
-            <Error errorInfo={dietSubmitMutation.error} tryEnabled={true} handleRetry={dietSubmitMutation.reset} />
-          )}
-          {dietSubmitMutation.isSuccess && (
-            <Success
-              message={"Your diet restriction was successfully updated!"}
-              btnMessage={"Okay"}
-              handleAction={() => {
-                handleDataRefresh();
-                dietSubmitMutation.reset();
-              }}
-            />
-          )}
-        </div>
-      ) : (
-        <div key={rsvp.rsvp_id} className="guest-status-container flex-col flex-col-lg">
-          <div className="flex-col-start">
-            <p className="font-sm">{guest.name}'s Dietary Restrictions</p>
-            <TextField
-              value={restrictions[guest.guest_id] || ""}
-              onChange={(e) => handleDietChange(guest.guest_id, e.target.value)}
-              label="Dietary Restriction"
-              variant="standard"
-              fullWidth
-            />
-            <div className="btn-container">
-              <button
-                onClick={() => {
-                  handleRestrictionSubmit("");
-                }}
-                className="btn-rsvp-sm btn-alt"
-              >
-                Remove Restriction
-              </button>
-              <button
-                onClick={() => {
-                  handleRestrictionSubmit(restrictions[guest.guest_id]);
-                }}
-                disabled={dietSubmitMutation.isPending}
-                className="btn-rsvp-sm"
-              >
-                Submit Restriction
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-  );
-};
-//#endregion
-
 //#region RSVPStatusMenu
 function RSVPStatusMenu({
   groupData,
@@ -424,6 +320,7 @@ function RSVPStatusMenu({
 }) {
   const [plusOneEnabled, setPlusOneEnabled] = useState<boolean>(false);
   const [dependentsEnabled, setDependentsEnabled] = useState<boolean>(false);
+  const [afterPartyEnabled, setAfterPartyEnabled] = useState<boolean>(false);
   const [menuState, setMenuState] = useState<MenuKey>("main");
 
   const [plusOneNames, setPlusOneNames] = useState<{ [key: number]: string }>({});
@@ -434,6 +331,10 @@ function RSVPStatusMenu({
   const isChildrenInvalid = !isValidName(currentChild);
 
   const everyAttendanceNo = groupRSVPs.every((rsvp) => rsvp.attendance === false);
+
+  const [partyDialogOpen, setPartyDialogOpen] = useState<boolean>(false);
+  const afterPartyContent =
+    "After the reception, an after party with select guests, will be taking place on a chartered boat from 10pm - 1am. On the boat, there will be an open bar, music, and time to celebrate with us. Please reach out to Tyler if there are any questions.";
 
   // song seperator code
   const separator = "\u00A7";
@@ -450,6 +351,9 @@ function RSVPStatusMenu({
         }
         if (guest?.has_dependents) {
           setDependentsEnabled(true);
+        }
+        if (guest?.after_party) {
+          setAfterPartyEnabled(true);
         }
       }
     }
@@ -470,6 +374,10 @@ function RSVPStatusMenu({
     if (key === "main") {
       handleScroll();
     }
+  };
+
+  const handlePartyDialogClose = () => {
+    setPartyDialogOpen(false);
   };
 
   //#region additional guest logic
@@ -581,6 +489,9 @@ function RSVPStatusMenu({
             )}
             {!everyAttendanceNo && (
               <GridOption optionName={"Dietary Restrictions"} menuKey={"diet"} handleMenuClick={handleMenuClick} />
+            )}
+            {afterPartyEnabled && (
+              <GridOption optionName={"After Party"} menuKey={"afterParty"} handleMenuClick={handleMenuClick} />
             )}
             <GridOption optionName={"RSVP Confirmation"} menuKey={"overview"} handleMenuClick={handleMenuClick} />
           </div>
@@ -780,7 +691,6 @@ function RSVPStatusMenu({
         {menuState === "diet" && (
           <div id="diet-status-container" className="status-menu-card">
             <p className="font-sm-med contain-text-center underline">Dietary Restrictions Menu</p>
-
             <div id="diet-edit-form-container" className="flex-col-start">
               {/* eslint-disable-next-line array-callback-return */}
               {groupRSVPs.map((rsvp) => {
@@ -790,6 +700,39 @@ function RSVPStatusMenu({
                 }
               })}
             </div>
+          </div>
+        )}
+        {menuState === "afterParty" && (
+          <div id="party-status-container" className="status-menu-card">
+            <p className="font-sm-med contain-text-center underline">After Party Menu</p>
+            <p className="font-sm contain-text-center secondary-text">
+              RSVP to the After Party. Click{" "}
+              <a
+                className="underline"
+                onClick={() => {
+                  setPartyDialogOpen(true);
+                }}
+              >
+                here
+              </a>{" "}
+              for more details.
+            </p>
+            <div id="after-party-edit-form-container" className="flex-col-start">
+              {/* eslint-disable-next-line array-callback-return */}
+              {groupRSVPs.map((rsvp) => {
+                const guest = groupData.guests.find((guest) => guest.guest_id === rsvp.guest_id);
+                if (rsvp.attendance && guest?.after_party) {
+                  return <AfterPartyForm guest={guest} rsvp={rsvp} handleDataRefresh={refreshData} />;
+                }
+              })}
+            </div>
+            <SimpleDialog
+              open={partyDialogOpen}
+              onClose={handlePartyDialogClose}
+              title={"After Party Details"}
+              content={afterPartyContent}
+              confirmText="Okay"
+            />
           </div>
         )}
         {menuState === "overview" && (
@@ -826,6 +769,13 @@ function RSVPStatusMenu({
                           <div className="guest-attending flex-row-start flex-row-gap">
                             <p className="font-sm strong-text underline">Dietary Restrictions: </p>
                             <p className="font-sm">{rsvp.dietary_restrictions}</p>
+                          </div>
+                        )}
+                        {guest.after_party && (
+                          <div className="guest-attending flex-row-start flex-row-gap">
+                            <p className="font-sm strong-text underline">After Party Attending: </p>
+                            {rsvp.after_party_attending && <p className="font-sm">Yes!</p>}
+                            {!rsvp.after_party_attending && <p className="font-sm">No.</p>}
                           </div>
                         )}
                       </div>

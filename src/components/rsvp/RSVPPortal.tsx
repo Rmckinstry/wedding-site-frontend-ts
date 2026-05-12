@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import RSVPForm from "./RSVPForm.tsx";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import RSVPStatusMenu from "./RSVPStatusMenu.tsx";
+import RSVPStatusMenu from "./status-menu/RSVPStatusMenu.tsx";
 import { ErrorType, GroupData, RSVP } from "../../utility/types.ts";
 import Error from "../utility/Error.tsx";
 import Loading from "../utility/Loading.tsx";
