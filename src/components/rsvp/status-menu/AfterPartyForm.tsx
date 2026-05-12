@@ -84,7 +84,7 @@ const AfterPartyForm = ({
           )}
         </div>
       ) : (
-        <div className="guest-status-container flex-col flex-col-lg">
+        <div className="flex-col flex-col-lg">
           <FormControl component="fieldset" fullWidth>
             <div className="rsvp-form-action-container" style={{ gap: "1rem" }}>
               <FormLabel component="legend">{guest.name}:</FormLabel>
