@@ -25,6 +25,7 @@ type RSVPFormObject = {
   spotify: string[];
   additionalGuests: AdditionalGuest[];
   dietaryRestrictions: string;
+  afterParty: boolean | "";
 };
 
 type RSVPPostObject = {
@@ -32,6 +33,7 @@ type RSVPPostObject = {
   attendance: boolean | "";
   spotify: string;
   dietaryRestriction: string;
+  afterParty: boolean | "";
 };
 
 type RSVPPostBody = {
@@ -60,22 +62,40 @@ function RSVPForm({
   const [directToRegistry, setDirectToRegistry] = useState<boolean>(false);
   const [anyAdditionalSubbmited, setAnyAdditionalSubbmited] = useState<boolean>(false);
 
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const featureEnabled = true;
-
   // tracking if every guest has responded to rsvp form step 1
   const isRSVPStepValid = rsvps.every((rsvp) => rsvp.attendance !== "");
-
   const allGuestsAttendingFalse = rsvps.every((rsvp) => rsvp.attendance === false);
+
+  const isAfterPartyStepValid = rsvps.every((rsvp) => {
+    const guest = groupData.guests.find((g) => g.guest_id === rsvp.guestId);
+    if (guest?.after_party && rsvp.attendance === true) {
+      return rsvp.afterParty !== "";
+    }
+    return true;
+  });
 
   //used for navigation context
   const { navigateTo } = useNavigation();
   //steps for stepper component
-  const steps = ["RSVPs", "Plus One", "Children", "Song Requests", "Dietary Restrictions", "Confirmation"];
+  const steps = [
+    "RSVPs",
+    "Plus One",
+    "Children",
+    "Song Requests",
+    "Dietary Restrictions",
+    "After Party",
+    "Confirmation",
+  ];
 
   //Tab checks
   const isSongRequestTabDisabled = allGuestsAttendingFalse;
   const isDietTabDisabled = allGuestsAttendingFalse;
+  const isAfterPartyDisabled = groupData.guests
+    .filter((guest) => guest.after_party)
+    .every((guest) => {
+      const rsvp = rsvps.find((rsvp) => rsvp.guestId === guest.guest_id);
+      return rsvp?.attendance === false;
+    });
 
   const isPlusOneTabEnabled = groupData.guests.some((guest) => {
     const rsvp = rsvps.find((rsvp) => rsvp.guestId === guest.guest_id);
@@ -119,6 +139,7 @@ function RSVPForm({
         spotify: [],
         additionalGuests: [],
         dietaryRestrictions: "",
+        afterParty: "",
       }));
       setRsvps(newRsvps);
 
@@ -169,6 +190,11 @@ function RSVPForm({
       newActiveStep = newActiveStep + 1;
     }
 
+    // If the next step would be "After Party" AND it's disabled, skip it
+    if ((newActiveStep === 5 && isAfterPartyDisabled) || allGuestsAttendingFalse) {
+      newActiveStep = newActiveStep + 1;
+    }
+
     setActiveStep(newActiveStep);
 
     handleScroll();
@@ -178,8 +204,14 @@ function RSVPForm({
     // default behavior: move one step back
     let newActiveStep = activeStep - 1;
 
-    // If we are currently on 'Song Requests' (index 3) or beyond,
-    // and 'Song Requests' was disabled, then when moving back, skip it again.
+    // If we are currently on 'After Party' (index 5) or beyond,
+    // and 'After Party' was disabled, then when moving back, skip it again.
+    if ((activeStep >= 5 && isAfterPartyDisabled) || (allGuestsAttendingFalse && newActiveStep === 5)) {
+      newActiveStep--;
+    }
+
+    // If we are currently on 'Dietary Restrictions' (index 4) or beyond,
+    // and 'Dietary Restrictions' was disabled, then when moving back, skip it again.
     if (activeStep >= 4 && isDietTabDisabled && newActiveStep === 4) {
       newActiveStep--;
     }
@@ -247,6 +279,7 @@ function RSVPForm({
         guestId: guest!.guest_id,
         spotify: songString,
         dietaryRestriction: rsvp.dietaryRestrictions,
+        afterParty: rsvp.afterParty,
       });
 
       if (rsvp.guestId === designatedDependentGuest?.guest_id && filteredChildren.length > 0) {
@@ -584,11 +617,18 @@ function RSVPForm({
     }
   };
 
-  //for debugging
-  // useEffect(() => {
-  //   console.log("RSVP useEffect debugger");
-  //   console.log(rsvps);
-  // }, [rsvps]);
+  const handlePartyAttendanceChange = (guestId: number, attendance: boolean) => {
+    setRsvps((prev) =>
+      prev.map((rsvp) =>
+        rsvp.guestId === guestId
+          ? {
+              ...rsvp,
+              afterParty: attendance,
+            }
+          : rsvp,
+      ),
+    );
+  };
 
   //#region template
   return (
@@ -671,7 +711,7 @@ function RSVPForm({
                 <p className="font-sm-med">Wedding Day</p>
                 <div id="event-icon-container" className="flex-row-gap">
                   <EventIcon />
-                  <p className="font-sm">Saturday, November 15, 2025</p>
+                  <p className="font-sm">Saturday, September 19, 2026</p>
                 </div>
                 {rsvps.map((rsvp) => {
                   const guest = groupData.guests.find((g) => g.guest_id === rsvp.guestId);
@@ -1019,9 +1059,6 @@ function RSVPForm({
                   .filter((rsvp) => rsvp.attendance === true)
                   .map((rsvp) => {
                     const guest = groupData.guests.find((guest) => guest.guest_id === rsvp.guestId);
-                    console.log("Guest", guest);
-                    console.log("RSVP", rsvp);
-
                     if (guest)
                       return (
                         <>
@@ -1097,8 +1134,85 @@ function RSVPForm({
                 </div>
               </div>
             )}
-            {/* Confirmation Card */}
+            {/* After Party Card */}
+
             {activeStep === 5 && (
+              <div id="rsvp-form-card-container" className="rsvp-card">
+                <div id="after-party-header" className="flex-col">
+                  <p className="font-sm-med strong-text" style={{ marginBottom: "1rem" }}>
+                    After Party
+                  </p>
+                  <p className="font-sm contain-text-center secondary-text">
+                    RSVP to the After Party. Click here for more details.
+                  </p>
+                </div>
+
+                {rsvps
+                  .filter((rsvp) => rsvp.attendance === true)
+                  .map((rsvp) => {
+                    const guest = groupData.guests.find((guest) => guest.guest_id === rsvp.guestId);
+                    const partyAttendanceToggleValue =
+                      rsvp.afterParty === true ? "accept" : rsvp.afterParty === false ? "decline" : null;
+
+                    const handleToggleChange = (event: any, newToggleValue: string | null) => {
+                      if (newToggleValue !== null) {
+                        handlePartyAttendanceChange(rsvp.guestId, newToggleValue === "accept" ? true : false);
+                      }
+                    };
+                    if (guest)
+                      return (
+                        <div key={`after-party-guest-${rsvp.guestId}`}>
+                          <FormControl component="fieldset" fullWidth>
+                            <div className="rsvp-form-action-container">
+                              <FormLabel component="legend">{guest.name}</FormLabel>
+                              <ToggleButtonGroup
+                                sx={{
+                                  display: "flex",
+                                  gap: "2rem",
+                                }}
+                                value={partyAttendanceToggleValue}
+                                exclusive
+                                onChange={handleToggleChange}
+                                aria-label={`RSVP for after party for ${guest?.name}`}
+                                color="primary"
+                              >
+                                <ToggleButton
+                                  sx={{ width: "10rem", height: "2.5rem" }}
+                                  value="accept"
+                                  aria-label="Accept Invitation"
+                                >
+                                  {rsvp.afterParty === true ? "Accepted" : "Accept"}
+                                </ToggleButton>
+                                <ToggleButton
+                                  sx={{ width: "10rem", height: "2.5rem" }}
+                                  value="decline"
+                                  aria-label="Decline Invitation"
+                                >
+                                  {rsvp.afterParty === false ? "Declined" : "Decline"}
+                                </ToggleButton>
+                              </ToggleButtonGroup>
+                            </div>
+                          </FormControl>
+                        </div>
+                      );
+                  })}
+                <div className="btn-container" style={{ gap: "2rem" }}>
+                  <button className="btn-rsvp-sm" style={{ padding: ".5rem 10%", flexGrow: 1 }} onClick={handleBack}>
+                    Back
+                  </button>
+                  <button
+                    className="btn-rsvp-sm"
+                    style={{ padding: ".5rem 10%", flexGrow: 1 }}
+                    onClick={handleNext}
+                    disabled={!isAfterPartyStepValid}
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+            )}
+            {/* Confirmation Card */}
+            {activeStep === 6 && (
               <div id="confirmation-card-container" className="rsvp-card">
                 <div className="flex-col">
                   <p className="font-sm-med strong-text">RSVP Submit & Confirmation</p>
@@ -1124,6 +1238,12 @@ function RSVPForm({
                         <div className="flex-row-gap">
                           <p className="strong-text font-sm confirmation-header">Diet Restriction: </p>
                           <p className="font-sm">{rsvp.dietaryRestrictions}</p>
+                        </div>
+                      )}
+                      {rsvp.attendance && guest?.after_party && (
+                        <div className="flex-row-gap">
+                          <p className="strong-text font-sm confirmation-header">After Party Attendance: </p>
+                          <p className="font-sm">{rsvp.afterParty ? "Yes!" : "No"}</p>
                         </div>
                       )}
                       {rsvp.attendance && hasSongs && (
@@ -1210,7 +1330,7 @@ function RSVPForm({
                         </p>
                         <p className="font-sm secondary-text">
                           <strong>Note: </strong>It is <strong>required</strong> to add these RSVPs prior to the
-                          deadline for your children/dependents to be <span className="underline">counted</span>
+                          deadline for your children/dependents to be <span className="underline">counted</span>.
                         </p>
                       </div>
                     )}
