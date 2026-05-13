@@ -99,7 +99,7 @@ function AdminDashboard() {
       <h3 className="contain-text-center">Admin Dashboard</h3>
       <AdminQuickview guests={allGuestsQuery.data} rsvps={allRsvpsQuery.data} />
 
-      <Box sx={{ width: "100%" }}>
+      <Box id="admin-content-container">
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs value={value} onChange={handleChange} aria-label="admin dashboard tabs">
             <Tab className="Tab-admin" label="Groups" {...a11yProps(0)} />
@@ -109,26 +109,17 @@ function AdminDashboard() {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <AdminGroupEditor
-            groupData={allGroupsQuery.data ?? []}
-            handleDataRefresh={refreshData}
-            handleMenuClick={() => setValue(0)}
-          />
+          <AdminGroupEditor groupData={allGroupsQuery.data ?? []} handleDataRefresh={refreshData} />
         </TabPanel>
         <TabPanel value={value} index={1}>
           <AdminGuestEditor
             groupData={allGroupsQuery.data ?? []}
             guestData={allGuestsQuery.data ?? []}
             handleDataRefresh={refreshData}
-            handleMenuClick={() => setValue(0)}
           />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <AdminRSVPViewer
-            guestData={allGuestsQuery.data ?? []}
-            rsvpData={allRsvpsQuery.data ?? []}
-            handleMenuClick={() => setValue(0)}
-          />
+          <AdminRSVPViewer guestData={allGuestsQuery.data ?? []} rsvpData={allRsvpsQuery.data ?? []} />
         </TabPanel>
         <TabPanel value={value} index={3}>
           <p className="font-med strong underline contain-text-center">After Party content is coming soon.</p>

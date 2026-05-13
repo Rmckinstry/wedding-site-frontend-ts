@@ -26,12 +26,10 @@ function AdminGuestEditor({
   groupData,
   guestData,
   handleDataRefresh,
-  handleMenuClick,
 }: {
   groupData: Group[];
   guestData: Guest[];
   handleDataRefresh: () => void;
-  handleMenuClick: () => void;
 }) {
   const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
 
@@ -210,11 +208,6 @@ function AdminGuestEditor({
       ) : (
         <p className="contain-text-center strong font-sm">Select Group Name to edit group</p>
       )}
-      <div className="btn-container">
-        <button className="btn-rsvp" onClick={handleMenuClick}>
-          Admin Menu
-        </button>{" "}
-      </div>
     </div>
   );
 }

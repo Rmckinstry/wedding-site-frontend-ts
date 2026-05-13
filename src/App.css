@@ -328,12 +328,19 @@ button:hover {
     display: none;
 }
 
+#admin-content-container {
+    background-color: var(--secondary-background);
+    border-radius: 1rem;
+    padding: 1rem;
+    width: 100%;
+}
+
 #admin-group-editor-container {
     width: 100%;
     display: flex;
-
     align-items: baseline;
     justify-content: space-between;
+    gap: 3rem;
 }
 
 #rsvp-viewer-container {
@@ -386,6 +393,13 @@ button:hover {
     position: relative;
 }
 
+
+.box {
+    border-radius: 1rem;
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    padding: 1rem;
+}
+
 .contain-text-center {
     text-align: center;
 }
@@ -407,6 +421,13 @@ button:hover {
     flex-direction: column;
     align-items: start;
     gap: 2rem;
+}
+
+.flex-col-start-sm {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
 }
 
 .flex-row {
@@ -1150,6 +1171,10 @@ button.status-menu-btn:hover {
     #header-event-info-mobile,
     #header-event-time-mobile {
         display: none;
+    }
+
+    #admin-container {
+        padding: 1rem 15rem;
     }
 
 }

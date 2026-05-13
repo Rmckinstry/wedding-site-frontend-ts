@@ -7,15 +7,7 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import { Typography } from "@mui/material";
 
-function AdminRSVPViewer({
-  guestData,
-  rsvpData,
-  handleMenuClick,
-}: {
-  guestData: Guest[];
-  rsvpData: RSVP[];
-  handleMenuClick: () => void;
-}) {
+function AdminRSVPViewer({ guestData, rsvpData }: { guestData: Guest[]; rsvpData: RSVP[] }) {
   const separator = "\u00A7";
   return (
     <div id="admin-rsvp-viewer">
@@ -144,11 +136,6 @@ function AdminRSVPViewer({
             </AccordionDetails>
           </Accordion>
         </div>
-      </div>
-      <div className="btn-container">
-        <button className="btn-rsvp" onClick={handleMenuClick} style={{ marginTop: "1rem" }}>
-          Admin Menu
-        </button>{" "}
       </div>
     </div>
   );

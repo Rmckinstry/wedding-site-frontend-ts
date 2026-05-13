@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { CustomResponseType, ErrorType, Group, Guest } from "../../utility/types";
 import { useMutation } from "@tanstack/react-query";
@@ -14,15 +14,7 @@ export type NewGuest = {
   songRequests: number;
 };
 
-function AdminGroupEditor({
-  groupData,
-  handleDataRefresh,
-  handleMenuClick,
-}: {
-  groupData: Group[];
-  handleDataRefresh: () => void;
-  handleMenuClick: () => void;
-}) {
+function AdminGroupEditor({ groupData, handleDataRefresh }: { groupData: Group[]; handleDataRefresh: () => void }) {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [groupToDelete, setGroupToDelete] = useState<Group | null>(null);
   const [newGroupName, setNewGroupName] = useState<string | null>(null);
@@ -102,15 +94,14 @@ function AdminGroupEditor({
     },
   });
   return (
-    <div id="admin-group-editor" className="flex-col flex-col-lg">
-      <p className="font-sm-med strong underline">Group Editor</p>
-      <div id="admin-group-editor-container">
-        <div id="admin-group-list" className="admin-group-editor-item">
-          <p className="font-med strong underline contain-text-center">Groups:</p>
+    <div id="admin-group-editor-container">
+      <div className="box flex-col-start-sm" style={{ flexGrow: 1 }}>
+        <p className="secondary-text font-sm-med">Groups</p>
+        <div className="flex-col-start-sm">
           {groupData.map((group) => {
             return (
-              <div key={group.id} className="flex-row">
-                <p>{group.group_name}</p>
+              <div key={group.id} className="flex-row flex-row-gap" style={{ padding: "0rem 2rem" }}>
+                <p className="font-sm">{group.group_name}</p>
                 <button
                   className="btn-stripped"
                   onClick={() => {
@@ -123,30 +114,27 @@ function AdminGroupEditor({
             );
           })}
         </div>
-        <div id="admin-group-editor-guest-add" className="flex-col-start admin-group-editor-item">
-          <p className="font-med strong underline contain-text-center">Add Group</p>
-          <div>
-            <p className="font-sm">New Group Name</p>
-            <TextField
-              value={newGroupName}
-              onChange={(e) => handleGroupNameChange(e.target.value)}
-              label="Enter Group Name"
-              variant="standard"
-              fullWidth
-            />
-          </div>
-          <div className="btn-container">
-            <button disabled={addGroupMutation.isPending || !newGroupName} onClick={handleGroupAdd}>
-              Add Group
-            </button>
-          </div>
+      </div>
+      <div className="box flex-col-start-sm" style={{ flexGrow: 1 }}>
+        <p className="secondary-text font-sm-med">Create Group</p>
+        <TextField
+          value={newGroupName}
+          onChange={(e) => handleGroupNameChange(e.target.value)}
+          label="Group Name"
+          variant="outlined"
+          fullWidth
+        />
+        <div className="btn-container">
+          <button
+            className="btn-rsvp-sm"
+            disabled={addGroupMutation.isPending || !newGroupName}
+            onClick={handleGroupAdd}
+          >
+            Add Group
+          </button>
         </div>
       </div>
-      <div className="btn-container">
-        <button className="btn-rsvp" onClick={handleMenuClick}>
-          Admin Menu
-        </button>{" "}
-      </div>
+
       <AlertDialog
         open={deleteDialogOpen}
         onClose={handleDeleteDialogClose}
