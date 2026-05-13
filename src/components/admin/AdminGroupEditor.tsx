@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { CustomResponseType, ErrorType, Group, Guest } from "../../utility/types";
 import { useMutation } from "@tanstack/react-query";
 import { Delete } from "@mui/icons-material";
-import AdminDialogConfirmation from "./AdminDialogConfirmation";
+import AlertDialog from "../utility/AlertDialog";
 
 export type NewGuest = {
   name: string;
@@ -147,7 +147,7 @@ function AdminGroupEditor({
           Admin Menu
         </button>{" "}
       </div>
-      <AdminDialogConfirmation
+      <AlertDialog
         open={deleteDialogOpen}
         onClose={handleDeleteDialogClose}
         title={`Delete ${groupToDelete?.group_name}'s Group?`}

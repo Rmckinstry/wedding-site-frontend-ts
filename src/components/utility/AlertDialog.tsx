@@ -1,13 +1,13 @@
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 
-export interface AdminDialogProps {
+export interface AlertDialogProps {
   open: boolean;
   onClose: (value: string) => void;
   title: string;
   content: string;
   confirmText: string;
 }
-const AdminDialogConfirmation = (props: AdminDialogProps) => {
+const AlertDialog = (props: AlertDialogProps) => {
   const { onClose, open, title, content, confirmText } = props;
   return (
     <Dialog
@@ -31,4 +31,4 @@ const AdminDialogConfirmation = (props: AdminDialogProps) => {
   );
 };
 
-export default AdminDialogConfirmation;
+export default AlertDialog;
