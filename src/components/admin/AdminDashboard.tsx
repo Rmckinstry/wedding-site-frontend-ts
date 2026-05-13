@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ErrorType, Group, Guest, RSVP } from "../../utility/types";
 import Loading from "../utility/Loading.tsx";
 import Error from "../utility/Error.tsx";
@@ -7,16 +7,28 @@ import { useNavigate } from "react-router-dom";
 import AdminGroupEditor from "./AdminGroupEditor.tsx";
 import AdminRSVPViewer from "./AdminRSVPViewer.tsx";
 import AdminGuestEditor from "./AdminGuestEditor.tsx";
+import AdminQuickview from "./AdminQuickview.tsx";
+import { Box, Tab, Tabs } from "@mui/material";
 
 function AdminDashboard() {
   const navigate = useNavigate();
 
-  const [acceptedRsvpsCount, setAcceptedRsvpsCount] = useState<number>(0);
-  const [declinedRsvpsCount, setDeclinedRsvpsCount] = useState<number>(0);
-  const [plusOneCount, setPlusOneCount] = useState<number>(0);
-  const [dependentCount, setDependentCount] = useState<number>(0);
+  const [value, setValue] = useState(0);
 
-  const [adminState, setAdminState] = useState<string>("menu");
+  const a11yProps = (index: number) => ({
+    id: `admin-tab-${index}`,
+    "aria-controls": `admin-tabpanel-${index}`,
+  });
+
+  const TabPanel = ({ children, value, index }: { children?: React.ReactNode; value: number; index: number }) => (
+    <div role="tabpanel" hidden={value !== index} id={`admin-tabpanel-${index}`} aria-labelledby={`admin-tab-${index}`}>
+      {value === index && <Box sx={{ p: 2 }}>{children}</Box>}
+    </div>
+  );
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
 
   const allGuestsQuery = useQuery<Guest[], ErrorType>({
     queryKey: ["allGuestsAdmin"],
@@ -60,25 +72,6 @@ function AdminDashboard() {
     },
   });
 
-  // quick view data update effect
-  useEffect(() => {
-    if (allGuestsQuery.data) {
-      const plusOneCount = allGuestsQuery.data.filter((guest) => guest.additional_guest_type === "plus_one").length;
-      const dependentCount = allGuestsQuery.data.filter((guest) => guest.additional_guest_type === "dependent").length;
-
-      setPlusOneCount(plusOneCount);
-      setDependentCount(dependentCount);
-    }
-
-    if (allRsvpsQuery.data) {
-      const acceptedCount = allRsvpsQuery.data.filter((rsvp) => rsvp.attendance === true).length;
-      const declinedCount = allRsvpsQuery.data.filter((rsvp) => rsvp.attendance === false).length;
-
-      setAcceptedRsvpsCount(acceptedCount);
-      setDeclinedRsvpsCount(declinedCount);
-    }
-  }, [allGuestsQuery.data, allRsvpsQuery.data]);
-
   // TODO probably needs to be split out
   const refreshData = () => {
     allGuestsQuery.refetch();
@@ -87,7 +80,7 @@ function AdminDashboard() {
   };
 
   //#region quickview loading
-  if (allGuestsQuery.isLoading || allRsvpsQuery.isLoading) {
+  if (allGuestsQuery.isLoading || allRsvpsQuery.isLoading || allGroupsQuery.isLoading) {
     return <Loading loadingText={"Loading Quickview Data..."} />;
   }
   if (allGuestsQuery.isError) {
@@ -97,102 +90,51 @@ function AdminDashboard() {
   if (allRsvpsQuery.isError) {
     return <Error errorInfo={allRsvpsQuery.error} />;
   }
+
+  if (allGroupsQuery.isError) {
+    return <Error errorInfo={allGroupsQuery.error} />;
+  }
   return (
     <div id="admin-container" className="flex-col flex-col-lg">
       <h3 className="contain-text-center">Admin Dashboard</h3>
-      <div id="admin-quickview-container" className="flex-row">
-        <div className="quickview-item">
-          <p className="font-sm-med strong-text underline">Total Guests</p>
-          <p className="font-sm">{allGuestsQuery.data?.length}</p>
-        </div>
-        <div className="quickview-item">
-          <p className="font-sm-med strong-text underline">Not Responded</p>
-          <p className="font-sm">
-            {allGuestsQuery.data ? allGuestsQuery.data.length - (acceptedRsvpsCount + declinedRsvpsCount) : 0}
-          </p>
-        </div>
-        <div className="quickview-item">
-          <p className="font-sm-med strong-text underline">Declined</p>
-          <p className="font-sm">{declinedRsvpsCount}</p>
-        </div>
-        <div className="quickview-item">
-          <p className="font-sm-med strong-text underline">Accepted</p>
-          <p className="font-sm">{acceptedRsvpsCount}</p>
-        </div>
-        <div className="quickview-item">
-          <p className="font-sm strong-text">Plus One : {plusOneCount}</p>
-          <p className="font-sm strong-text">Children : {dependentCount}</p>
-        </div>
-      </div>
-      <div id="admin-content-container" style={{ width: "100%" }}>
-        {adminState === "group" && (
+      <AdminQuickview guests={allGuestsQuery.data} rsvps={allRsvpsQuery.data} />
+
+      <Box sx={{ width: "100%" }}>
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <Tabs value={value} onChange={handleChange} aria-label="admin dashboard tabs">
+            <Tab className="Tab-admin" label="Groups" {...a11yProps(0)} />
+            <Tab className="Tab-admin" label="Guests" {...a11yProps(1)} />
+            <Tab className="Tab-admin" label="RSVPs" {...a11yProps(2)} />
+            <Tab className="Tab-admin" label="After Party" {...a11yProps(3)} />
+          </Tabs>
+        </Box>
+        <TabPanel value={value} index={0}>
           <AdminGroupEditor
-            groupData={allGroupsQuery.data!}
+            groupData={allGroupsQuery.data ?? []}
             handleDataRefresh={refreshData}
-            handleMenuClick={() => {
-              setAdminState("menu");
-            }}
+            handleMenuClick={() => setValue(0)}
           />
-        )}
-        {adminState === "rsvp-viewer" && (
-          <AdminRSVPViewer
-            guestData={allGuestsQuery.data!}
-            rsvpData={allRsvpsQuery.data!}
-            handleMenuClick={() => {
-              setAdminState("menu");
-            }}
-          />
-        )}
-        {adminState === "guest" && (
+        </TabPanel>
+        <TabPanel value={value} index={1}>
           <AdminGuestEditor
-            groupData={allGroupsQuery.data!}
-            guestData={allGuestsQuery.data!}
+            groupData={allGroupsQuery.data ?? []}
+            guestData={allGuestsQuery.data ?? []}
             handleDataRefresh={refreshData}
-            handleMenuClick={() => {
-              setAdminState("menu");
-            }}
+            handleMenuClick={() => setValue(0)}
           />
-        )}
-        {adminState === "menu" && (
-          <div id="admin-action-selector-container" className="flex-col flex-col-lg">
-            <p className="font-sm-med underline">Select Admin Menu</p>
-            <div className="flex-row-gap">
-              <button
-                className="btn-rsvp"
-                onClick={() => {
-                  setAdminState("group");
-                }}
-              >
-                Group Editor
-              </button>
-              <button
-                className="btn-rsvp"
-                onClick={() => {
-                  setAdminState("guest");
-                }}
-              >
-                Guest Editor
-              </button>
-              <button
-                className="btn-rsvp"
-                onClick={() => {
-                  setAdminState("rsvp-edit");
-                }}
-              >
-                RSVP Editor
-              </button>
-              <button
-                className="btn-rsvp"
-                onClick={() => {
-                  setAdminState("rsvp-viewer");
-                }}
-              >
-                RSVP Overview
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <AdminRSVPViewer
+            guestData={allGuestsQuery.data ?? []}
+            rsvpData={allRsvpsQuery.data ?? []}
+            handleMenuClick={() => setValue(0)}
+          />
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <p className="font-med strong underline contain-text-center">After Party content is coming soon.</p>
+        </TabPanel>
+      </Box>
+
       <div className="btn-container">
         <button
           className="btn-rsvp btn-alt"

@@ -310,18 +310,22 @@ button:hover {
     padding: 1rem 10rem;
 }
 
-#admin-quickview-container {
+#admin-quickview-container-desktop {
     width: 100%;
     box-sizing: border-box;
 
     outline-style: solid;
     outline-width: 3px;
     outline-color: var(--default-text-transparent);
-    border-radius: 1rem;
+    border-radius: .5rem;
 
     align-items: start;
     justify-content: space-between;
-    padding: 2rem;
+    padding: 1.5rem;
+}
+
+#admin-quickview-container-mobile {
+    display: none;
 }
 
 #admin-group-editor-container {
@@ -774,6 +778,7 @@ button.status-menu-btn:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: .5rem;
 }
 
 .admin-group-editor-item {
@@ -937,7 +942,26 @@ button.status-menu-btn:hover {
 
     /* admin */
     #admin-container {
-        padding: 1rem 0rem;
+        padding: 2rem;
+    }
+
+    #admin-quickview-container-desktop {
+        display: none;
+    }
+
+    #admin-quickview-container-mobile {
+        display: flex;
+        background-color: var(--secondary-background);
+        width: 100%;
+        padding: 1rem;
+        border-radius: 1rem;
+        gap: 2rem
+    }
+
+    .mobile-quick-row {
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
     }
 
     #rsvp-viewer-container {
@@ -946,6 +970,11 @@ button.status-menu-btn:hover {
         align-items: center;
         margin-top: 2rem;
         gap: 2rem;
+    }
+
+    .quickview-content {
+        /* width: 100%; */
+        gap: 5rem;
     }
 
     .viewer-item {

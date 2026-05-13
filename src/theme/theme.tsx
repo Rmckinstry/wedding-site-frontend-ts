@@ -26,11 +26,14 @@ const theme = createTheme({
           marginLeft: "1rem",
           fontFamily: "var(--font-main)",
           "&.Mui-selected": {
-            color: "var(--default-text)",
+            color: "var(--secondary-text)",
           },
           "&:hover": {
             color: "var(--default-text)",
             fontWeight: "600",
+          },
+          "&.Tab-admin": {
+            fontSize: "1.25rem",
           },
         },
       },
