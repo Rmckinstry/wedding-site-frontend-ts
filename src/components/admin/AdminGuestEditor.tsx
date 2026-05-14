@@ -7,11 +7,18 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   TextField,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { CustomResponseType, ErrorType, Group, Guest } from "../../utility/types";
 import { useMutation } from "@tanstack/react-query";
+import GuestRow from "./GuestRow";
 
 export type NewGuest = {
   name: string;
@@ -32,6 +39,17 @@ function AdminGuestEditor({
   handleDataRefresh: () => void;
 }) {
   const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
+  const [selectedGuests, setSelectedGuests] = useState<Guest[] | null>(null);
+
+  useEffect(() => {
+    // This runs only once when the component mounts
+    console.log("AdminGuestEditor mounted");
+
+    return () => {
+      // This runs only once when the component unmounts
+      console.log("AdminGuestEditor unmounted");
+    };
+  }, []);
 
   const initialNewGuestState: NewGuest = {
     name: "",
@@ -45,14 +63,25 @@ function AdminGuestEditor({
 
   useEffect(() => {
     setNewGuestData(initialNewGuestState);
+
+    if (selectedGroup) {
+      const newGuests = guestData.filter((guest) => {
+        return guest.group_id === selectedGroup.id;
+      });
+
+      if (newGuests) setSelectedGuests(newGuests);
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedGroup]);
+  }, [selectedGroup, guestData, groupData]);
+
   const handleGroupChange = (event: any) => {
     // Find the selected group object from the fetched data
     const selectedGroupByName = groupData.find((group) => group.group_name === event.target.value);
-    setSelectedGroup(selectedGroupByName!);
+    if (selectedGroupByName) setSelectedGroup(selectedGroupByName);
   };
 
+  // #region New Guest
   // Generic handler for all form fields
   const handleNewGuestInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = event.target;
@@ -112,18 +141,20 @@ function AdminGuestEditor({
       console.error("Error adding Guest:", error.message);
     },
   });
+  //#endregion
+
   return (
     <div id="admin-group-editor" className="flex-col flex-col-lg">
-      <p className="font-sm-med strong underline">Guest Editor</p>
-      <div id="admin-groups-select-container" className="flex-col" style={{ padding: "1rem" }}>
-        <FormControl sx={{ minWidth: "20rem" }}>
-          <InputLabel id="group-select-label">Groups</InputLabel>
+      <div id="admin-groups-select-container" className="box border-box-100" style={{ padding: "1rem 2rem" }}>
+        <FormControl className="border-box-100">
+          <InputLabel id="group-select-label">Select Group</InputLabel>
           <Select
             labelId="group-select-label"
             id="group-select"
             value={selectedGroup?.group_name || ""}
             label="Groups"
             onChange={handleGroupChange}
+            fullWidth
           >
             {/* Map over the fetched groups to create MenuItem components */}
             {groupData.map((group) => (
@@ -135,76 +166,87 @@ function AdminGuestEditor({
         </FormControl>
       </div>
       {selectedGroup !== null ? (
-        <div id="admin-group-editor-container">
-          <div id="admin-group-editor-guest-list" className=" admin-group-editor-item">
-            <p className="font-med strong underline contain-text-center">Guests:</p>
-            {guestData
-              .filter((guest) => {
-                return guest.group_id === selectedGroup.id;
-              })
-              .map((guest) => {
-                return (
-                  <p className="font-sm-med" key={guest.guest_id} style={{ marginBottom: "1rem" }}>
-                    - {guest.name}
-                  </p>
-                );
-              })}
+        <>
+          <div className="box border-box-100">
+            <p className="secondary-text font-sm-med">Enter Guests in Group</p>
+            <TableContainer>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell align="right">Dependents Allowed</TableCell>
+                    <TableCell align="right">Plus One Allowed</TableCell>
+                    <TableCell align="right">Song Requests</TableCell>
+                    <TableCell align="right">Afterparty</TableCell>
+                    <TableCell align="right">Actions</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {selectedGuests &&
+                    selectedGuests.map((guest) => <GuestRow guest={guest} handleDataRefresh={handleDataRefresh} />)}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </div>
-          <div id="admin-group-editor-guest-add" className="flex-col-start admin-group-editor-item">
-            <p className="font-med strong underline contain-text-center">Add New Guest to {selectedGroup.group_name}</p>
-            <FormGroup>
-              <TextField
-                label="Guest Name"
-                variant="outlined"
-                name="name" // Important for generic handler
-                value={newGuestData.name}
-                onChange={handleNewGuestInputChange}
-                size="small"
-                fullWidth
-                margin="dense"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={newGuestData.hasDependents}
-                    onChange={handleNewGuestInputChange}
-                    name="hasDependents" // Important for generic handler
-                  />
-                }
-                label="Has Dependents"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={newGuestData.plusOneAllowed}
-                    onChange={handleNewGuestInputChange}
-                    name="plusOneAllowed" // Important for generic handler
-                  />
-                }
-                label="Plus One Allowed"
-              />
-              <TextField
-                label="Song Requests"
-                variant="outlined"
-                name="songRequests" // Important for generic handler
-                value={newGuestData.songRequests}
-                onChange={handleNumberInputChange} // Use specific handler for numbers
-                type="number" // Only allow number input
-                size="small"
-                fullWidth
-                margin="dense"
-              />
-            </FormGroup>
-            <Button
-              disabled={addGuestsMutation.isPending || newGuestData.name === ""}
-              variant="contained"
-              onClick={handleGuestAdd}
-              sx={{ marginTop: 2 }}
-            >
-              Add Guest
-            </Button>
+          <div id="admin-group-editor-container">
+            <div id="admin-group-editor-guest-add" className="flex-col-start admin-group-editor-item">
+              <p className="font-med strong underline contain-text-center">
+                Add New Guest to {selectedGroup.group_name}
+              </p>
+              <FormGroup>
+                <TextField
+                  label="Guest Name"
+                  variant="outlined"
+                  name="name" // Important for generic handler
+                  value={newGuestData.name}
+                  onChange={handleNewGuestInputChange}
+                  size="small"
+                  fullWidth
+                  margin="dense"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={newGuestData.hasDependents}
+                      onChange={handleNewGuestInputChange}
+                      name="hasDependents" // Important for generic handler
+                    />
+                  }
+                  label="Has Dependents"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={newGuestData.plusOneAllowed}
+                      onChange={handleNewGuestInputChange}
+                      name="plusOneAllowed" // Important for generic handler
+                    />
+                  }
+                  label="Plus One Allowed"
+                />
+                <TextField
+                  label="Song Requests"
+                  variant="outlined"
+                  name="songRequests" // Important for generic handler
+                  value={newGuestData.songRequests}
+                  onChange={handleNumberInputChange} // Use specific handler for numbers
+                  type="number" // Only allow number input
+                  size="small"
+                  fullWidth
+                  margin="dense"
+                />
+              </FormGroup>
+              <Button
+                disabled={addGuestsMutation.isPending || newGuestData.name === ""}
+                variant="contained"
+                onClick={handleGuestAdd}
+                sx={{ marginTop: 2 }}
+              >
+                Add Guest
+              </Button>
+            </div>
           </div>
-        </div>
+        </>
       ) : (
         <p className="contain-text-center strong font-sm">Select Group Name to edit group</p>
       )}

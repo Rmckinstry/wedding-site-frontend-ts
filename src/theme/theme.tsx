@@ -293,6 +293,25 @@ const theme = createTheme({
         },
       },
     },
+
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontFamily: "var(--font-main)",
+          color: "var(--default-text)",
+        },
+      },
+    },
+
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          "&.Mui-disabled": {
+            cursor: "not-allowed",
+          },
+        },
+      },
+    },
   },
   breakpoints: {
     values: {

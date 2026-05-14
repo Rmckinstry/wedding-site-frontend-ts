@@ -10,6 +10,12 @@ import AdminGuestEditor from "./AdminGuestEditor.tsx";
 import AdminQuickview from "./AdminQuickview.tsx";
 import { Box, Tab, Tabs } from "@mui/material";
 
+const TabPanel = ({ children, value, index }: { children?: React.ReactNode; value: number; index: number }) => (
+  <div role="tabpanel" hidden={value !== index} id={`admin-tabpanel-${index}`} aria-labelledby={`admin-tab-${index}`}>
+    {value === index && <Box sx={{ p: 2 }}>{children}</Box>}
+  </div>
+);
+
 function AdminDashboard() {
   const navigate = useNavigate();
 
@@ -19,12 +25,6 @@ function AdminDashboard() {
     id: `admin-tab-${index}`,
     "aria-controls": `admin-tabpanel-${index}`,
   });
-
-  const TabPanel = ({ children, value, index }: { children?: React.ReactNode; value: number; index: number }) => (
-    <div role="tabpanel" hidden={value !== index} id={`admin-tabpanel-${index}`} aria-labelledby={`admin-tab-${index}`}>
-      {value === index && <Box sx={{ p: 2 }}>{children}</Box>}
-    </div>
-  );
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
