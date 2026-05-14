@@ -354,6 +354,10 @@ button:hover {
     margin: 3rem;
 }
 
+#admin-guest-cards-mobile {
+    display: none;
+}
+
 /* classes */
 .App {
     padding: 0 7rem;
@@ -1037,6 +1041,15 @@ button.status-menu-btn:hover {
 
     .admin-group-item {
         padding: .5rem 2rem;
+    }
+
+    #admin-guest-table {
+        display: none;
+    }
+
+    #admin-guest-cards-mobile {
+        display: flex;
+        padding: 1rem;
     }
 
 }

@@ -19,6 +19,7 @@ import React, { useEffect, useState } from "react";
 import { CustomResponseType, ErrorType, Group, Guest } from "../../utility/types";
 import { useMutation } from "@tanstack/react-query";
 import GuestRow from "./GuestRow";
+import AdminGuestCard from "./AdminGuestCard";
 
 export type NewGuest = {
   name: string;
@@ -171,7 +172,7 @@ function AdminGuestEditor({
         <>
           <div className="box border-box-100">
             <p className="secondary-text font-sm-med">Edit Guests in Group</p>
-            <TableContainer>
+            <TableContainer id="admin-guest-table">
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
@@ -189,6 +190,10 @@ function AdminGuestEditor({
                 </TableBody>
               </Table>
             </TableContainer>
+            <div id="admin-guest-cards-mobile" className="flex-col-start">
+              {selectedGuests &&
+                selectedGuests.map((guest) => <AdminGuestCard guest={guest} handleDataRefresh={handleDataRefresh} />)}
+            </div>
           </div>
           <div className="box border-box-100">
             <p className="secondary-text font-sm-med">Add Guest to Group</p>
