@@ -27,6 +27,7 @@ export type NewGuest = {
   hasDependents: boolean;
   groupId: number;
   songRequests: number;
+  afterParty: boolean;
 };
 
 function AdminGuestEditor({
@@ -57,7 +58,8 @@ function AdminGuestEditor({
     plusOneAllowed: false,
     hasDependents: false,
     groupId: selectedGroup?.id || 0,
-    songRequests: 2,
+    songRequests: 1,
+    afterParty: false,
   };
   const [newGuestData, setNewGuestData] = useState<NewGuest>(initialNewGuestState);
 
@@ -168,7 +170,7 @@ function AdminGuestEditor({
       {selectedGroup !== null ? (
         <>
           <div className="box border-box-100">
-            <p className="secondary-text font-sm-med">Enter Guests in Group</p>
+            <p className="secondary-text font-sm-med">Edit Guests in Group</p>
             <TableContainer>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
@@ -188,63 +190,69 @@ function AdminGuestEditor({
               </Table>
             </TableContainer>
           </div>
-          <div id="admin-group-editor-container">
-            <div id="admin-group-editor-guest-add" className="flex-col-start admin-group-editor-item">
-              <p className="font-med strong underline contain-text-center">
-                Add New Guest to {selectedGroup.group_name}
-              </p>
-              <FormGroup>
-                <TextField
-                  label="Guest Name"
-                  variant="outlined"
-                  name="name" // Important for generic handler
-                  value={newGuestData.name}
-                  onChange={handleNewGuestInputChange}
-                  size="small"
-                  fullWidth
-                  margin="dense"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={newGuestData.hasDependents}
-                      onChange={handleNewGuestInputChange}
-                      name="hasDependents" // Important for generic handler
-                    />
-                  }
-                  label="Has Dependents"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={newGuestData.plusOneAllowed}
-                      onChange={handleNewGuestInputChange}
-                      name="plusOneAllowed" // Important for generic handler
-                    />
-                  }
-                  label="Plus One Allowed"
-                />
-                <TextField
-                  label="Song Requests"
-                  variant="outlined"
-                  name="songRequests" // Important for generic handler
-                  value={newGuestData.songRequests}
-                  onChange={handleNumberInputChange} // Use specific handler for numbers
-                  type="number" // Only allow number input
-                  size="small"
-                  fullWidth
-                  margin="dense"
-                />
-              </FormGroup>
-              <Button
-                disabled={addGuestsMutation.isPending || newGuestData.name === ""}
-                variant="contained"
-                onClick={handleGuestAdd}
-                sx={{ marginTop: 2 }}
-              >
-                Add Guest
-              </Button>
-            </div>
+          <div className="box border-box-100">
+            <p className="secondary-text font-sm-med">Add Guest to Group</p>
+            <FormGroup>
+              <TextField
+                label="Guest Name"
+                variant="outlined"
+                name="name" // Important for generic handler
+                value={newGuestData.name}
+                onChange={handleNewGuestInputChange}
+                size="small"
+                fullWidth
+                margin="dense"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={newGuestData.hasDependents}
+                    onChange={handleNewGuestInputChange}
+                    name="hasDependents" // Important for generic handler
+                  />
+                }
+                label="Has Dependents"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={newGuestData.plusOneAllowed}
+                    onChange={handleNewGuestInputChange}
+                    name="plusOneAllowed" // Important for generic handler
+                  />
+                }
+                label="Plus One Allowed"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={newGuestData.afterParty}
+                    onChange={handleNewGuestInputChange}
+                    name="afterParty" // Important for generic handler
+                  />
+                }
+                label="After Party"
+              />
+              <TextField
+                label="Song Requests"
+                variant="outlined"
+                name="songRequests" // Important for generic handler
+                value={newGuestData.songRequests}
+                onChange={handleNumberInputChange} // Use specific handler for numbers
+                type="number" // Only allow number input
+                size="small"
+                margin="dense"
+                sx={{ width: "10rem" }}
+              />
+            </FormGroup>
+            <Button
+              disabled={addGuestsMutation.isPending || newGuestData.name === ""}
+              variant="contained"
+              onClick={handleGuestAdd}
+              sx={{ marginTop: 2 }}
+            >
+              Add Guest
+            </Button>
           </div>
         </>
       ) : (

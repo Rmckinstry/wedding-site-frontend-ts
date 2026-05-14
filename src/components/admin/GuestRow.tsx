@@ -23,10 +23,10 @@ const GuestRow = (props: GuestRowProps) => {
   const [editable, setEditable] = useState<boolean>(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [tempGuest, setTempGuest] = useState<NewGuest>({
-    plusOneAllowed: guest.plus_one_allowed,
-    hasDependents: guest.has_dependents,
-    songRequests: guest.song_requests,
-    afterParty: guest.after_party,
+    plusOneAllowed: guest.plus_one_allowed || false,
+    hasDependents: guest.has_dependents || false,
+    songRequests: guest.song_requests || 0,
+    afterParty: guest.after_party || false,
   });
 
   useEffect(() => {
