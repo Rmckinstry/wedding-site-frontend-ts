@@ -186,6 +186,9 @@ const theme = createTheme({
           "&.Mui-active": {
             color: "var(--default-text)",
           },
+          "&:hover": {
+            color: "var(--secondary-text)",
+          },
         },
       },
     },

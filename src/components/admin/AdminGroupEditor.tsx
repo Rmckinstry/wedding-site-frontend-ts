@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import React, { useState } from "react";
 import { CustomResponseType, ErrorType, Group, Guest } from "../../utility/types";
 import { useMutation } from "@tanstack/react-query";
@@ -95,15 +95,15 @@ function AdminGroupEditor({ groupData, handleDataRefresh }: { groupData: Group[]
   });
   return (
     <div id="admin-group-editor-container">
-      <div className="box flex-col-start-sm" style={{ flexGrow: 1 }}>
+      <div className="box flex-col-start-sm border-box-100 admin-group-form-container">
         <p className="secondary-text font-sm-med">Groups</p>
-        <div className="flex-col-start-sm">
+        <div className="flex-col-start-sm border-box-100">
           {groupData.map((group) => {
             return (
-              <div key={group.id} className="flex-row flex-row-gap" style={{ padding: "0rem 2rem" }}>
+              <div key={group.id} className="flex-row flex-row-gap border-box-100 admin-group-item">
                 <p className="font-sm">{group.group_name}</p>
                 <button
-                  className="btn-stripped"
+                  className="btn-stripped icon"
                   onClick={() => {
                     handleGroupDelete(group);
                   }}
@@ -115,7 +115,7 @@ function AdminGroupEditor({ groupData, handleDataRefresh }: { groupData: Group[]
           })}
         </div>
       </div>
-      <div className="box flex-col-start-sm" style={{ flexGrow: 1 }}>
+      <div className="box flex-col-start-sm border-box-100 admin-group-form-container">
         <p className="secondary-text font-sm-med">Create Group</p>
         <TextField
           value={newGroupName}
