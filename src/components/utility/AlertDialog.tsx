@@ -22,10 +22,12 @@ const AlertDialog = (props: AlertDialogProps) => {
         <DialogContentText id="alert-dialog-description">{content}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <button onClick={() => onClose("cancel")} autoFocus>
+        <button onClick={() => onClose("cancel")} autoFocus className="btn-rsvp-sm btn-alt">
           Cancel
         </button>
-        <button onClick={() => onClose("confirm")}>{confirmText}</button>
+        <button onClick={() => onClose("confirm")} className="btn-rsvp-sm">
+          {confirmText}
+        </button>
       </DialogActions>
     </Dialog>
   );

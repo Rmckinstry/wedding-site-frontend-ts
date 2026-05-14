@@ -269,6 +269,30 @@ const theme = createTheme({
         }),
       },
     },
+
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "var(--base-background)",
+        },
+      },
+    },
+
+    MuiDialogContentText: {
+      styleOverrides: {
+        root: {
+          fontSize: "1.25rem",
+        },
+      },
+    },
+
+    MuiDialogTitle: {
+      styleOverrides: {
+        root: {
+          fontSize: "1.5rem",
+        },
+      },
+    },
   },
   breakpoints: {
     values: {
