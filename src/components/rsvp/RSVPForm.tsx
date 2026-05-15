@@ -711,7 +711,7 @@ function RSVPForm({
             )}
           </div>
         ) : (
-          <div id="rsvp-card-container">
+          <div id="rsvp-card-container" className="box">
             {/* RSVP Card */}
             {activeStep === 0 && (
               <div id="rsvp-form-card-container" className="rsvp-card">
@@ -934,7 +934,7 @@ function RSVPForm({
                     return (
                       <FormControl key={`rsvp-guest-${rsvp.guestId}`}>
                         <div className="guest-song-container">
-                          <FormLabel>
+                          <FormLabel style={{ paddingBottom: "1rem" }}>
                             {guest?.name} - {requestsLeft} song requests left
                           </FormLabel>
 
@@ -1238,7 +1238,7 @@ function RSVPForm({
               <div id="confirmation-card-container" className="rsvp-card">
                 <div className="flex-col">
                   <p className="font-sm-med strong-text">RSVP Submit & Confirmation</p>
-                  <p className="font-sm strong-text contain-text-center underline">
+                  <p className="font-sm strong-text contain-text-center underline secondary-text">
                     Please confirm that all information shown below is correct and submit.
                   </p>
                 </div>

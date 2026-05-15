@@ -679,7 +679,7 @@ function RSVPStatusMenu({
         {menuState === "song" && (
           <div id="song-status-container" className="status-menu-card">
             <p className="font-sm-med contain-text-center underline">Song Request Menu</p>
-            <div id="song-edit-form-container" className="flex-col-start">
+            <div style={{ paddingBottom: "1rem" }} id="song-edit-form-container" className="flex-col-start">
               {/* eslint-disable-next-line array-callback-return */}
               {groupRSVPs.map((rsvp) => {
                 const guest = groupData.guests.find((guest) => guest.guest_id === rsvp.guest_id);
@@ -764,26 +764,26 @@ function RSVPStatusMenu({
                     >
                       <div className="overview-guest-info flex-col-start" style={{ gap: "1rem" }}>
                         <div className="guest-name flex-row-start flex-row-gap">
-                          <p className="font-sm strong-text underline">Guest:</p>
+                          <p className="font-sm secondary-text strong-text underline ">Guest:</p>
                           <p className="font-sm">{guest.name}</p>
                           {guest.additional_guest_type === "plus_one" && <p className="font-sm">(Plus One)</p>}
                           {guest.additional_guest_type === "dependent" && <p className="font-sm">(Child RSVP)</p>}
                         </div>
                         <div className="guest-attending flex-row-start flex-row-gap">
-                          <p className="font-sm strong-text underline">Attending: </p>
+                          <p className="font-sm strong-text underline secondary-text">Attending: </p>
                           {rsvp.attendance && <p className="font-sm">Yes!</p>}
                           {!rsvp.attendance && <p className="font-sm">No.</p>}
                         </div>
 
                         {rsvp.dietary_restrictions && (
                           <div className="guest-attending flex-row-start flex-row-gap">
-                            <p className="font-sm strong-text underline">Dietary Restrictions: </p>
+                            <p className="font-sm strong-text underline secondary-text">Dietary Restrictions: </p>
                             <p className="font-sm">{rsvp.dietary_restrictions}</p>
                           </div>
                         )}
                         {guest.after_party && (
                           <div className="guest-attending flex-row-start flex-row-gap">
-                            <p className="font-sm strong-text underline">After Party Attending: </p>
+                            <p className="font-sm strong-text underline secondary-text">After Party Attending: </p>
                             {rsvp.after_party_attending && <p className="font-sm">Yes!</p>}
                             {!rsvp.after_party_attending && <p className="font-sm">No.</p>}
                           </div>
@@ -791,7 +791,7 @@ function RSVPStatusMenu({
                       </div>
                       {rsvp.spotify && rsvp.spotify.split(separator).length > 0 && (
                         <div className="overview-guest-song">
-                          <p className="font-sm strong-text underline">Requested Songs</p>
+                          <p className="font-sm strong-text underline secondary-text">Requested Songs</p>
                           {/* filtering out empty song slots */}
                           {rsvp.spotify
                             .split(separator)
