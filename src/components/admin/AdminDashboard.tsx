@@ -100,7 +100,7 @@ function AdminDashboard() {
       <AdminQuickview guests={allGuestsQuery.data} rsvps={allRsvpsQuery.data} />
 
       <Box id="admin-content-container">
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Box sx={{ borderBottom: 1, borderColor: "divider", marginBottom: "1rem" }}>
           <Tabs value={value} onChange={handleChange} aria-label="admin dashboard tabs">
             <Tab className="Tab-admin" label="Groups" {...a11yProps(0)} />
             <Tab className="Tab-admin" label="Guests" {...a11yProps(1)} />

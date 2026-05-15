@@ -7,12 +7,14 @@
     --base-background-transparent: #F38B4E98;
     --gradient-end: #FF7518;
 
-    --secondary-background: #f7ac7d;
+    /* --secondary-background: #f7ac7d; */
+    --secondary-background: #FEF0E4;
 
     --default-text: #FFF3E0;
     --default-text-transparent: #FFF3E042;
 
     --secondary-text: #1B434D;
+    --secondary-text-transparent: #1b434d6c;
     --accent: #D4FF35;
     --btn-disabled: #D1B8A0;
 
@@ -670,11 +672,13 @@ button:hover {
 
 .faq-title-desktop,
 .faq-title-mobile {
+    color: var(--secondary-text);
     font-weight: var(--weight-semibold);
 }
 
 .faq-answer-desktop,
 .faq-answer-mobile {
+    color: var(--secondary-text);
     font-weight: var(--weight-medium);
 }
 
@@ -840,9 +844,18 @@ button.status-menu-btn:hover {
     justify-content: space-between;
 }
 
+.admin-group-item p {
+    color: var(--secondary-text);
+}
+
 .border-box-100 {
     box-sizing: border-box;
     width: 100%;
+}
+
+.admin-header {
+    color: var(--secondary-text);
+    padding-bottom: 1rem;
 }
 
 /* Media Queries */
@@ -1008,7 +1021,7 @@ button.status-menu-btn:hover {
 
     #admin-quickview-container-mobile {
         display: flex;
-        background-color: var(--secondary-background);
+        /* background-color: var(--secondary-background); */
         width: 100%;
         padding: 1rem;
         border-radius: 1rem;
@@ -1124,6 +1137,10 @@ button.status-menu-btn:hover {
         display: none
     }
 
+    #admin-container {
+        padding: 1rem 4rem;
+    }
+
 }
 
 /* Large devices (desktops, 901px and above) */
@@ -1155,6 +1172,10 @@ button.status-menu-btn:hover {
     #header-event-info-mobile,
     #header-event-time-mobile {
         display: block;
+    }
+
+    #admin-container {
+        padding: 1rem 4rem;
     }
 
 }

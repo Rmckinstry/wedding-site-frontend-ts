@@ -192,7 +192,9 @@ const GuestRow = (props: GuestRowProps) => {
                 onChange={handleNumberInputChange}
               />
             ) : (
-              <span>{guest.song_requests}</span>
+              <span style={{ color: "var(--secondary-text)" }} className="font-sm">
+                {guest.song_requests}
+              </span>
             )}
           </TableCell>
           <TableCell align="right">

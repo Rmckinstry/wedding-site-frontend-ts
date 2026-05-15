@@ -148,25 +148,21 @@ function AdminGuestEditor({
 
   return (
     <div id="admin-group-editor" className="flex-col flex-col-lg">
-      <div id="admin-groups-select-container" className="box border-box-100" style={{ padding: "1rem 2rem" }}>
-        <FormControl className="border-box-100">
-          <InputLabel id="group-select-label">Select Group</InputLabel>
-          <Select
-            labelId="group-select-label"
-            id="group-select"
-            value={selectedGroup?.group_name || ""}
-            label="Groups"
-            onChange={handleGroupChange}
-            fullWidth
-          >
-            {/* Map over the fetched groups to create MenuItem components */}
-            {groupData.map((group) => (
-              <MenuItem key={group.id} value={group.group_name}>
-                {group.group_name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+      <div
+        id="admin-groups-select-container"
+        className="box border-box-100 flex-col-start-sm"
+        style={{ padding: "1rem 2rem" }}
+      >
+        <span className="secondary-text">Select Group</span>
+
+        <Select id="group-select" value={selectedGroup?.group_name || ""} onChange={handleGroupChange} fullWidth>
+          {/* Map over the fetched groups to create MenuItem components */}
+          {groupData.map((group) => (
+            <MenuItem key={group.id} value={group.group_name}>
+              {group.group_name}
+            </MenuItem>
+          ))}
+        </Select>
       </div>
       {selectedGroup !== null ? (
         <>
@@ -196,10 +192,12 @@ function AdminGuestEditor({
             </div>
           </div>
           <div className="box border-box-100">
-            <p className="secondary-text font-sm-med">Add Guest to Group</p>
+            <p className="secondary-text font-sm-med" style={{ paddingBottom: "1rem" }}>
+              Add Guest to Group
+            </p>
             <FormGroup>
+              <span className="secondary-text">Guest Name</span>
               <TextField
-                label="Guest Name"
                 variant="outlined"
                 name="name" // Important for generic handler
                 value={newGuestData.name}

@@ -76,7 +76,7 @@ function AdminRSVPViewer({
           </span>
           {accepted.length === 0 ? (
             <div style={{ padding: "2rem 0rem" }}>
-              <span>No accepted guests</span>
+              <span style={{ color: "var(--secondary-text)" }}>No accepted guests</span>
             </div>
           ) : (
             <div>
@@ -119,7 +119,7 @@ function AdminRSVPViewer({
           </span>
           {declined.length === 0 ? (
             <div style={{ padding: "2rem 0rem" }}>
-              <span>No declined guests</span>
+              <span style={{ color: "var(--secondary-text)" }}>No declined guests</span>
             </div>
           ) : (
             <div>
@@ -160,7 +160,7 @@ function AdminRSVPViewer({
           </span>
           {notResponded.length === 0 ? (
             <div style={{ padding: "2rem 0rem" }}>
-              <span>No not responded guests</span>
+              <span style={{ color: "var(--secondary-text)" }}>No not responded guests</span>
             </div>
           ) : (
             <div>
@@ -189,7 +189,7 @@ function AdminRSVPViewer({
         <div id="rsvp-viewer-accepted" className="viewer-item">
           <Accordion>
             <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
-              <p className="font-sm-med strong-text underline contain-text-center">Accepted - {accepted.length}</p>
+              <p className="faq-title-mobile font-sm-med underline contain-text-center">Accepted - {accepted.length}</p>
             </AccordionSummary>
             <AccordionDetails>
               <div className="flex-col-start" style={{ marginTop: "1rem" }}>
@@ -201,18 +201,18 @@ function AdminRSVPViewer({
                       return (
                         <div className="rsvp-viewer-guest flex-col-start" style={{ gap: "1rem" }} key={index}>
                           <div className="flex-row-start" style={{ gap: "1rem" }}>
-                            <p className="font-sm strong-text">Name:</p>
-                            <p className="font-sm underline">{guest.name}</p>
+                            <p className="font-sm faq-title-mobile">Name:</p>
+                            <p className="font-sm underline faq-answer-mobile">{guest.name}</p>
                           </div>
                           {guest.additional_guest_type !== null && (
                             <div>
                               <div className="flex-row-start" style={{ gap: "1rem" }}>
-                                <p className="font-sm strong-text">Guest Type:</p>
-                                <p className="font-sm">{guest.additional_guest_type}</p>
+                                <p className="font-sm faq-title-mobile">Guest Type:</p>
+                                <p className="font-sm faq-answer-mobile">{guest.additional_guest_type}</p>
                               </div>
                               <div className="flex-row-start" style={{ gap: "1rem" }}>
-                                <p className="font-sm strong-text">Added By:</p>
-                                <p className="font-sm">
+                                <p className="font-sm faq-title-mobile">Added By:</p>
+                                <p className="font-sm faq-answer-mobile">
                                   {guestData.find((main) => main.guest_id === guest.added_by_guest_id)?.name}
                                 </p>
                               </div>
@@ -220,19 +220,19 @@ function AdminRSVPViewer({
                           )}
                           {rsvp.spotify !== "" && (
                             <div>
-                              <p className="font-sm strong-text">Spotify</p>
+                              <p className="font-sm faq-answer-mobile">Spotify</p>
                               {rsvp.spotify.split(separator).map((song) => (
-                                <p className="font-sm ">- {song}</p>
+                                <p className="font-sm faq-answer-mobile">- {song}</p>
                               ))}
                             </div>
                           )}
                           <div className="flex-row-start" style={{ gap: "1rem" }}>
-                            <p className="font-sm strong-text">Created At:</p>
-                            <p className="font-sm">{convertUtcToCst(rsvp.created_at) + "CST"}</p>
+                            <p className="font-sm faq-answer-mobile">Created At:</p>
+                            <p className="font-sm faq-answer-mobile">{convertUtcToCst(rsvp.created_at) + "CST"}</p>
                           </div>
                           <div className="flex-row-start" style={{ gap: "1rem" }}>
-                            <p className="font-sm strong-text">Updated At:</p>
-                            <p className="font-sm">
+                            <p className="font-sm faq-answer-mobile">Updated At:</p>
+                            <p className="font-sm faq-answer-mobile">
                               {rsvp.updated_at ? convertUtcToCst(rsvp.updated_at) + "CST" : "N/A"}
                             </p>
                           </div>
@@ -258,7 +258,7 @@ function AdminRSVPViewer({
         <div id="rsvp-viewer-declined" className="viewer-item">
           <Accordion>
             <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
-              <p className="font-sm-med strong-text underline contain-text-center">Declined - {declined.length}</p>
+              <p className="faq-title-mobile font-sm-med underline contain-text-center">Declined - {declined.length}</p>
             </AccordionSummary>
             <AccordionDetails>
               <div className="flex-col-start" style={{ marginTop: "1rem" }}>
@@ -274,16 +274,16 @@ function AdminRSVPViewer({
                           key={`${index}-declined`}
                         >
                           <div className="flex-row-start" style={{ gap: "1rem" }}>
-                            <p className="font-sm strong-text">Name:</p>
-                            <p className="font-sm underline">{guest.name}</p>
+                            <p className="font-sm faq-title-mobile">Name:</p>
+                            <p className="font-sm underline faq-answer-mobile">{guest.name}</p>
                           </div>
                           <div className="flex-row-start" style={{ gap: "1rem" }}>
-                            <p className="font-sm strong-text">Created At:</p>
-                            <p className="font-sm">{convertUtcToCst(rsvp.created_at) + "CST"}</p>
+                            <p className="font-sm faq-title-mobile">Created At:</p>
+                            <p className="font-sm faq-answer-mobile">{convertUtcToCst(rsvp.created_at) + "CST"}</p>
                           </div>
                           <div className="flex-row-start" style={{ gap: "1rem" }}>
-                            <p className="font-sm strong-text">Updated At:</p>
-                            <p className="font-sm">
+                            <p className="font-sm faq-title-mobile">Updated At:</p>
+                            <p className="font-sm faq-answer-mobile">
                               {rsvp.updated_at ? convertUtcToCst(rsvp.updated_at) + "CST" : "N/A"}
                             </p>
                           </div>
@@ -309,7 +309,7 @@ function AdminRSVPViewer({
         <div id="admin-not-responded" className="viewer-item">
           <Accordion>
             <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
-              <p className="font-sm-med strong-text underline contain-text-center">
+              <p className="font-sm-med faq-title-mobile underline contain-text-center">
                 Not Responded - {notResponded.length}
               </p>
             </AccordionSummary>
@@ -320,8 +320,7 @@ function AdminRSVPViewer({
                   .map((guest, index) => (
                     <div className="rsvp-viewer-guest flex-col-start" style={{ gap: "1rem" }} key={index}>
                       <div className="flex-row-start" style={{ gap: "1rem" }}>
-                        <p className="font-sm strong-text">Name:</p>
-                        <p className="font-sm">{guest.name}</p>
+                        <p className="font-sm faq-answer-mobile">{guest.name}</p>
                       </div>
                     </div>
                   ))}

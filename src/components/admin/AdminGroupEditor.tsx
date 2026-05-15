@@ -102,7 +102,7 @@ function AdminGroupEditor({ groupData, handleDataRefresh }: { groupData: Group[]
   return (
     <div id="admin-group-editor-container">
       <div className="box flex-col-start-sm border-box-100 admin-group-form-container">
-        <p className="secondary-text font-sm-med">Groups</p>
+        <p className="font-sm-med strong-text admin-header">Groups</p>
         <div className="flex-col-start-sm border-box-100">
           {groupData.map((group) => {
             return (
@@ -121,23 +121,27 @@ function AdminGroupEditor({ groupData, handleDataRefresh }: { groupData: Group[]
           })}
         </div>
       </div>
-      <div className="box flex-col-start-sm border-box-100 admin-group-form-container">
-        <p className="secondary-text font-sm-med">Create Group</p>
-        <TextField
-          value={newGroupName}
-          onChange={(e) => handleGroupNameChange(e.target.value)}
-          label="Group Name"
-          variant="outlined"
-          fullWidth
-        />
-        <div className="btn-container">
-          <button
-            className="btn-rsvp-sm"
-            disabled={addGroupMutation.isPending || !newGroupName}
-            onClick={handleGroupAdd}
-          >
-            Add Group
-          </button>
+      <div className="box flex-col-start border-box-100 admin-group-form-container">
+        <p className="font-sm-med strong-text admin-header">Create Group</p>
+        <div className="flex-col-start-sm">
+          <span className="secondary-text">Group Name</span>
+          <TextField
+            value={newGroupName}
+            onChange={(e) => handleGroupNameChange(e.target.value)}
+            placeholder="e.g Smith Family"
+            variant="outlined"
+            fullWidth
+          />
+          <div className="btn-container" style={{ width: "100%" }}>
+            <button
+              className="btn-rsvp-sm"
+              disabled={addGroupMutation.isPending || !newGroupName}
+              onClick={handleGroupAdd}
+              style={{ width: "100%" }}
+            >
+              Add Group
+            </button>
+          </div>
         </div>
       </div>
 
