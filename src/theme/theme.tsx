@@ -312,6 +312,22 @@ const theme = createTheme({
         },
       },
     },
+
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          fontFamily: "var(--font-main)",
+        },
+      },
+    },
+
+    MuiTableHead: {
+      styleOverrides: {
+        root: {
+          fontWeight: 600,
+        },
+      },
+    },
   },
   breakpoints: {
     values: {

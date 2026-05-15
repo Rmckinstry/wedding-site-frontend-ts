@@ -244,7 +244,7 @@ const SongEditForm = ({
               {songSubmitMutation.isSuccess && (
                 <Success
                   message={
-                    "Your song requests were successfully submitted. If you have remaining requests, you can add them at any point before Oct. 1st!"
+                    "Your song requests were successfully submitted. If you have remaining requests, you can add them at any point before July. 31st!"
                   }
                   btnMessage="Okay!"
                   handleAction={handleSongSuccess}

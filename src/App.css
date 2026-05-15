@@ -358,6 +358,12 @@ button:hover {
     display: none;
 }
 
+#admin-rsvp-viewer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
 /* classes */
 .App {
     padding: 0 7rem;
@@ -639,7 +645,8 @@ button:hover {
     font-size: 1.5rem;
 }
 
-.btn-stripped:hover {
+.btn-stripped:hover,
+.btn-stripped-text:hover {
     cursor: pointer;
     font-weight: var(--weight-medium)
 }
@@ -648,6 +655,15 @@ button:hover {
     cursor: not-allowed;
     color: rgb(83, 47, 17);
 }
+
+.btn-stripped-text {
+    all: unset;
+}
+
+.btn-stripped-text:hover {
+    color: var(--default-text);
+}
+
 
 /* --- FAQ Styles --- */
 /* .faq-mobile-container,

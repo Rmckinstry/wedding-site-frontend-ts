@@ -119,7 +119,11 @@ function AdminDashboard() {
           />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <AdminRSVPViewer guestData={allGuestsQuery.data ?? []} rsvpData={allRsvpsQuery.data ?? []} />
+          <AdminRSVPViewer
+            guestData={allGuestsQuery.data ?? []}
+            rsvpData={allRsvpsQuery.data ?? []}
+            handleDataRefresh={refreshData}
+          />
         </TabPanel>
         <TabPanel value={value} index={3}>
           <p className="font-med strong underline contain-text-center">After Party content is coming soon.</p>
