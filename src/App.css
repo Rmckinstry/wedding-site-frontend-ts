@@ -864,7 +864,7 @@ button.status-menu-btn:hover {
     }
 
     .App {
-        padding: 0 3rem;
+        padding: 0 1rem;
     }
 
     .font-xs {
@@ -943,6 +943,7 @@ button.status-menu-btn:hover {
     #page-container {
         padding-top: 2rem;
         padding-bottom: 1rem;
+        margin: 1rem;
     }
 
     #home-page-info-container-desktop {
