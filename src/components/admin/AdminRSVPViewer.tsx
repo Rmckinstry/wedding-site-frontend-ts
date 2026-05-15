@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Guest, RSVP } from "../../utility/types";
+import { CustomResponseType, ErrorType, Guest, RSVP } from "../../utility/types";
 import { convertUtcToCst } from "../../utility/util.ts";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -8,6 +8,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import GuestRow from "./GuestRow.tsx";
 import RSVPRow from "./RSVPRow.tsx";
+import { useMutation } from "@tanstack/react-query";
 
 function AdminRSVPViewer({
   guestData,
@@ -28,6 +29,37 @@ function AdminRSVPViewer({
     setDeclined(rsvpData.filter((rsvp) => rsvp.attendance === false));
     setNotResponded(guestData.filter((guest) => !rsvpData.find((rsvp) => rsvp.guest_id === guest.guest_id)));
   }, [guestData, rsvpData]);
+
+  const handleAttendanceChange = (attendance: boolean, id: number) => {
+    editAttendanceMutation.mutate({ attendance: attendance, rsvpId: id });
+  };
+
+  const editAttendanceMutation = useMutation<CustomResponseType, ErrorType, { attendance: any; rsvpId: number }>({
+    mutationFn: async ({ attendance, rsvpId }) => {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/rsvps/attendance/${rsvpId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ attendance: attendance }),
+      });
+
+      if (!response.ok) {
+        const errorBody: ErrorType = await response.json();
+        throw errorBody;
+      }
+
+      return response.json() as Promise<CustomResponseType>;
+    },
+    onSuccess: (data) => {
+      handleDataRefresh();
+      console.log("Response from server:", data);
+    },
+    onError: (error: ErrorType) => {
+      console.log(error);
+      console.error("Error updating Guest:", error.message);
+    },
+  });
 
   return (
     <div className="admin-rsvp-container">
@@ -205,7 +237,14 @@ function AdminRSVPViewer({
                             </p>
                           </div>
                           <div className="btn-container">
-                            <div className="btn-rsvp-sm">Change to Declined</div>
+                            <div
+                              className="btn-rsvp-sm"
+                              onClick={() => {
+                                handleAttendanceChange(false, rsvp.rsvp_id);
+                              }}
+                            >
+                              Change to Declined
+                            </div>
                           </div>
                         </div>
                       );
@@ -249,7 +288,14 @@ function AdminRSVPViewer({
                             </p>
                           </div>
                           <div className="btn-container">
-                            <div className="btn-rsvp-sm">Change to Accepted</div>
+                            <div
+                              className="btn-rsvp-sm"
+                              onClick={() => {
+                                handleAttendanceChange(true, rsvp.rsvp_id);
+                              }}
+                            >
+                              Change to Accepted
+                            </div>
                           </div>
                         </div>
                       );
