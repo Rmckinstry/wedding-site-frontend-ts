@@ -953,6 +953,7 @@ button.status-menu-btn:hover {
 
     #rsvp-card-container {
         background-color: var(--base-background-transparent);
+        padding: 2rem 1rem;
     }
 
     #rsvp-now-btn {
