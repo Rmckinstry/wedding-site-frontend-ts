@@ -827,12 +827,7 @@ button.status-menu-btn:hover {
 }
 
 .viewer-item {
-    width: 40%;
-    outline-style: solid;
-    outline-width: 3px;
-    outline-color: #6464400c;
-    padding: 1rem;
-    border-radius: 1rem;
+    width: 100%
 }
 
 .admin-group-form-container {
@@ -1036,10 +1031,6 @@ button.status-menu-btn:hover {
     .quickview-content {
         /* width: 100%; */
         gap: 5rem;
-    }
-
-    .viewer-item {
-        width: 80%;
     }
 
     #rsvp-form-continue-btn:disabled:hover {
