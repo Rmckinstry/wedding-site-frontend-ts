@@ -44,7 +44,7 @@ function UserLayout() {
 
 // A wrapper for the Admin routes that checks for authentication
 const PrivateAdminRoute = () => {
-  const isAdmin = sessionStorage.getItem('isAdmin');
+  const isAdmin = localStorage.getItem('isAdmin');
 
   return isAdmin ? <Outlet /> : <Navigate to="/admin-login" replace />;
 };

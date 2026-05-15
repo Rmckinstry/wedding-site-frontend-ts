@@ -12,7 +12,7 @@ function Navigation() {
   const { tabValue, handleTabChange } = useNavigation();
   const navigate = useNavigate();
 
-  const isAdmin = sessionStorage.getItem("isAdmin") === "true";
+  const isAdmin = localStorage.getItem("isAdmin") === "true";
 
   const handleNavTabChange = (event: React.SyntheticEvent | Event, newValue?: number) => {
     let selectedTab: number;
