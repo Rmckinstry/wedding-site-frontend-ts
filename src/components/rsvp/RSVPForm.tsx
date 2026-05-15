@@ -32,7 +32,7 @@ type RSVPPostObject = {
   attendance: boolean | "";
   spotify: string;
   dietaryRestriction: string;
-  afterParty: boolean | "";
+  afterParty: boolean | null;
 };
 
 type RSVPPostBody = {
@@ -286,7 +286,9 @@ function RSVPForm({
         guestId: guest!.guest_id,
         spotify: songString,
         dietaryRestriction: rsvp.dietaryRestrictions,
-        afterParty: rsvp.afterParty,
+        // in db afterParty can either be boolean or null
+        //if guests don't have the afterpartyallowed flag, then they shouldn't have a boolean values for this
+        afterParty: rsvp.afterParty === "" ? null : rsvp.afterParty,
       });
 
       if (rsvp.guestId === designatedDependentGuest?.guest_id && filteredChildren.length > 0) {
