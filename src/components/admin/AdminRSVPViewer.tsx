@@ -220,10 +220,16 @@ function AdminRSVPViewer({
                           )}
                           {rsvp.spotify !== "" && (
                             <div>
-                              <p className="font-sm faq-answer-mobile">Spotify</p>
+                              <p className="font-sm faq-answer-mobile">Spotify: </p>
                               {rsvp.spotify.split(separator).map((song) => (
                                 <p className="font-sm faq-answer-mobile">- {song}</p>
                               ))}
+                            </div>
+                          )}
+                          {rsvp.dietary_restrictions !== "" && (
+                            <div className="flex-row-start" style={{ gap: "1rem" }}>
+                              <p className="font-sm faq-title-mobile">Dietary Restriction:</p>
+                                <p className="font-sm faq-answer-mobile">{rsvp.dietary_restrictions}</p>
                             </div>
                           )}
                           <div className="flex-row-start" style={{ gap: "1rem" }}>
@@ -238,7 +244,7 @@ function AdminRSVPViewer({
                           </div>
                           <div className="btn-container">
                             <div
-                              className="btn-rsvp-sm"
+                              className="rsvp-btn-decline"
                               onClick={() => {
                                 handleAttendanceChange(false, rsvp.rsvp_id);
                               }}
@@ -289,7 +295,7 @@ function AdminRSVPViewer({
                           </div>
                           <div className="btn-container">
                             <div
-                              className="btn-rsvp-sm"
+                              className="rsvp-btn-accept"
                               onClick={() => {
                                 handleAttendanceChange(true, rsvp.rsvp_id);
                               }}

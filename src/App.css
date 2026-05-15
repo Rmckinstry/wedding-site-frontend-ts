@@ -858,6 +858,26 @@ button.status-menu-btn:hover {
     padding-bottom: 1rem;
 }
 
+.rsvp-btn-decline {
+  font-size: 1.5rem;
+  padding: .5rem 1.25rem;
+  color: var(--gradient-end);
+  background-color: var(--secondary-background);
+  border-radius: 1rem;
+  border-style: solid;
+  border-width: .25rem;
+}
+
+.rsvp-btn-accept {
+  font-size: 1.5rem;
+  padding: .5rem 1.25rem;
+  color: var(--secondary-text);
+  background-color: var(--accent);
+  border-radius: 1rem;
+  border-style: solid;
+  border-width: .25rem;
+}
+
 /* Media Queries */
 
 /* Small devices (phones, 600px and below) */
@@ -1146,7 +1166,7 @@ button.status-menu-btn:hover {
 /* Large devices (desktops, 901px and above) */
 @media (min-width: 901px) {
     html {
-        font-size: 16px;
+        font-size: 12px;
     }
 
     body {
@@ -1178,11 +1198,15 @@ button.status-menu-btn:hover {
         padding: 1rem 4rem;
     }
 
+    .img-box-c{
+        width: 80%;
+    }
+
 }
 
 @media (min-width: 1000px) {
     html {
-        font-size: 16px;
+        font-size: 12px;
     }
 
     #faq-data-desktop-container {
@@ -1194,7 +1218,7 @@ button.status-menu-btn:hover {
     }
 
     #header-name {
-        padding-top: 15%;
+        padding-top: 10rem;
     }
 
     .header-img {
@@ -1208,6 +1232,10 @@ button.status-menu-btn:hover {
     #header-event-info-mobile,
     #header-event-time-mobile {
         display: block;
+    }
+
+    .img-box-c{
+        width: 80%;
     }
 }
 

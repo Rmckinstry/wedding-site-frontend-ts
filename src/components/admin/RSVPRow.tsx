@@ -62,7 +62,7 @@ const RSVPRow = (props: RSVPRowProps) => {
           <TableCell align="right">{rsvp.updated_at ? rsvp.updated_at : rsvp.created_at}</TableCell>
           <TableCell align="right">
             <button
-              className="btn-stripped-text"
+              className="rsvp-btn-decline"
               onClick={() => {
                 handleAttendanceChange(false);
               }}
@@ -78,7 +78,7 @@ const RSVPRow = (props: RSVPRowProps) => {
           <TableCell align="right">{rsvp.updated_at ? rsvp.updated_at : rsvp.created_at}</TableCell>
           <TableCell align="right">
             <button
-              className="btn-stripped-text"
+              className="rsvp-btn-accept"
               onClick={() => {
                 handleAttendanceChange(true);
               }}
