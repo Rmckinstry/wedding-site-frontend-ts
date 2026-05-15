@@ -59,7 +59,7 @@ const RSVPRow = (props: RSVPRowProps) => {
           <TableCell align="right" style={{ maxWidth: "250px" }}>
             <div>{rsvp.dietary_restrictions}</div>
           </TableCell>
-          <TableCell align="right">{rsvp.updated_at}</TableCell>
+          <TableCell align="right">{rsvp.updated_at ? rsvp.updated_at : rsvp.created_at}</TableCell>
           <TableCell align="right">
             <button
               className="btn-stripped-text"
@@ -75,7 +75,7 @@ const RSVPRow = (props: RSVPRowProps) => {
       {status === "declined" && rsvp && (
         <TableRow key={rsvp.guest_id}>
           <TableCell>{guest.name}</TableCell>
-          <TableCell align="right">{rsvp.updated_at}</TableCell>
+          <TableCell align="right">{rsvp.updated_at ? rsvp.updated_at : rsvp.created_at}</TableCell>
           <TableCell align="right">
             <button
               className="btn-stripped-text"
