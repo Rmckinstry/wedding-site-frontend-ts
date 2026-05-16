@@ -33,7 +33,6 @@ const theme = createTheme({
             color: "var(--secondary-text)",
           },
           "&:hover": {
-            color: "var(--default-text)",
             fontWeight: "600",
           },
         },
