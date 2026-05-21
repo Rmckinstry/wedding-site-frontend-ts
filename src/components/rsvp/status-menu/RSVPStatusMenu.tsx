@@ -77,11 +77,11 @@ const SongEditForm = ({
 
   const isSongMenuInvalid = songValidationErrors.some((errObject) => errObject.artist || errObject.title);
 
-  //sets inital songs
+  //sets initial songs
   useEffect(() => {
     const submittedSongs = rsvp.spotify.split(separator).filter((song) => song !== "");
     setEmptySongs(Array(guest.song_requests - submittedSongs.length).fill(""));
-    //initalizing validation array to protect from errors when users add songs out of order
+    //initializing validation array to protect from errors when users add songs out of order
     setSongValidationErrors(
       Array(guest.song_requests - submittedSongs.length).fill({
         // Create the error object for the current index
@@ -338,7 +338,7 @@ function RSVPStatusMenu({
   const afterPartyCutoff = new Date(2026, 7, 1);
   const isAfterPartyEditable = new Date() < afterPartyCutoff;
 
-  // song seperator code
+  // song separator code
   const separator = "\u00A7";
 
   useEffect(() => {

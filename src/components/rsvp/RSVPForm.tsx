@@ -59,7 +59,7 @@ function RSVPForm({
   const [songValidationErrors, setSongValidationErrors] = useState<{ [guestId: string]: SongRequestError[] }>({});
   const [songInputsCount, setSongInputsCount] = useState<{ [guestId: string]: number }>({});
   const [directToRegistry, setDirectToRegistry] = useState<boolean>(false);
-  const [anyAdditionalSubbmited, setAnyAdditionalSubbmited] = useState<boolean>(false);
+  const [anyAdditionalSubmitted, setAnyAdditionalSubmitted] = useState<boolean>(false);
 
   // tracking if every guest has responded to rsvp form step 1
   const isRSVPStepValid = rsvps.every((rsvp) => rsvp.attendance !== "");
@@ -191,7 +191,7 @@ function RSVPForm({
       newActiveStep = newActiveStep + 1;
     }
 
-    // If the next step would be "Dietray Restrictions" AND it's disabled, skip it
+    // If the next step would be "Dietary Restrictions" AND it's disabled, skip it
     if (newActiveStep === 4 && isDietTabDisabled) {
       newActiveStep = newActiveStep + 1;
     }
@@ -257,7 +257,7 @@ function RSVPForm({
 
   //#region  submit
   const handleSubmit = async () => {
-    setAnyAdditionalSubbmited(false);
+    setAnyAdditionalSubmitted(false);
 
     // filtering out any children rsvps that have empty names (happens when add name is clicked and no name is entered or its deleted)
     const filteredChildren = childrenRsvps.length > 0 ? childrenRsvps.filter((rsvp) => rsvp.name.trim() !== "") : [];
@@ -292,12 +292,12 @@ function RSVPForm({
 
       if (rsvp.guestId === designatedDependentGuest?.guest_id && filteredChildren.length > 0) {
         filteredChildren.forEach((child) => submitBody.additional?.push(child));
-        setAnyAdditionalSubbmited(true);
+        setAnyAdditionalSubmitted(true);
       }
 
       if (rsvp.additionalGuests.length !== 0) {
         submitBody.additional?.push(rsvp.additionalGuests[0]);
-        setAnyAdditionalSubbmited(true);
+        setAnyAdditionalSubmitted(true);
       }
     });
 
@@ -322,7 +322,7 @@ function RSVPForm({
       return response.json() as Promise<RSVPResponseType>;
     },
     onSuccess: (data) => {
-      if (anyAdditionalSubbmited || rsvps.every((rsvp) => rsvp.attendance !== true)) {
+      if (anyAdditionalSubmitted || rsvps.every((rsvp) => rsvp.attendance !== true)) {
         //if children or plus ones already submitted direct to registry
         //if everyone said no in the group direct to registry
         setDirectToRegistry(true);
