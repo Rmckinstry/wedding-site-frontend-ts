@@ -70,11 +70,11 @@ function TravelPage() {
             <h2 className="title">Transportation</h2>
             <div className="info-container contain-text-center">
               <p className="primary-text font-med-lg">Destin-Fort Walton Beach Airport (VPS)</p>
-              <p className="secondary-text font-med">(Note: 20 miles West of beach)</p>
+              <p className="secondary-text font-med">(20 miles West of beach)</p>
             </div>
             <div className="info-container contain-text-center">
               <p className="primary-text font-med-lg">Northwest Florida Beaches International Airport (ECP)</p>
-              <p className="secondary-text font-med">(Note: 30 miles East of beach)</p>
+              <p className="secondary-text font-med">(30 miles East of beach)</p>
             </div>
           </div>
         </div>

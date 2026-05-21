@@ -25,7 +25,11 @@ const AlertDialog = (props: AlertDialogProps) => {
         <button onClick={() => onClose("cancel")} autoFocus className="btn-rsvp-sm btn-alt">
           Cancel
         </button>
-        <button onClick={() => onClose("confirm")} className="btn-rsvp-sm">
+        <button
+          onClick={() => onClose("confirm")}
+          className="btn-rsvp-sm"
+          style={{ backgroundColor: "var(--base-background)", color: "var(--default-text)" }}
+        >
           {confirmText}
         </button>
       </DialogActions>

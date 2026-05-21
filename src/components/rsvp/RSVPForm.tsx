@@ -168,8 +168,7 @@ function RSVPForm({
   }, [groupData, resetRSVPs]);
 
   const handleRegistryButtonClick = () => {
-    navigateTo(3);
-    //registry
+    window.open("https://withjoy.com/tyler-and-shelby-sep-26/registry", "_blank", "noreferrer");
   };
 
   //#region  stepper controls
@@ -802,7 +801,7 @@ function RSVPForm({
 
                     if (guest?.plus_one_allowed) {
                       return (
-                        <div key={index} className="flex-col-start" style={{ gap: "1rem", marginBottom: "1rem" }}>
+                        <div key={index} className="flex-col-start-sm">
                           <p className="font-sm">{guest.name} Plus One</p>
                           <div>
                             <TextField
@@ -1072,9 +1071,9 @@ function RSVPForm({
                       return (
                         <>
                           <FormControl key={`rsvp-guest-${rsvp.guestId}`}>
-                            <div className="guest-song-container">
+                            <div className="flex-col-start-sm">
                               <FormLabel>{guest?.name}</FormLabel>
-                              <div className="flex-col-start">
+                              <div style={{ minWidth: "20rem" }}>
                                 <TextField
                                   fullWidth
                                   multiline
@@ -1083,16 +1082,16 @@ function RSVPForm({
                                   onChange={(e) =>
                                     handleDietaryRestrictionsChange(e.target.value, "guest", rsvp.guestId)
                                   }
+                                  value={rsvp.dietaryRestrictions || ""}
                                 />
                               </div>
                             </div>
                           </FormControl>
                           {rsvp.additionalGuests.map((ag) => (
                             <FormControl key={`rsvp-guest-${ag.name}`}>
-                              <div className="guest-song-container">
+                              <div className="flex-col-start-sm">
                                 <FormLabel>{ag.name}</FormLabel>
-
-                                <div className="flex-col-start">
+                                <div style={{ minWidth: "20rem" }}>
                                   <TextField
                                     fullWidth
                                     multiline
@@ -1114,9 +1113,9 @@ function RSVPForm({
                           {guest.guest_id === designatedDependentGuest?.guest_id &&
                             childrenRsvps.map((child) => (
                               <FormControl key={`rsvp-guest-${child.name}`}>
-                                <div className="guest-song-container">
+                                <div className="flex-col-start-sm">
                                   <FormLabel>{child.name}</FormLabel>
-                                  <div className="flex-col-start">
+                                  <div style={{ minWidth: "20rem" }}>
                                     <TextField
                                       fullWidth
                                       multiline

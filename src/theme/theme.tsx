@@ -293,10 +293,19 @@ const theme = createTheme({
       },
     },
 
+    MuiDialog: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: "var(--secondary-background)",
+        },
+      },
+    },
+
     MuiDialogContentText: {
       styleOverrides: {
         root: {
           fontSize: "1.25rem",
+          color: "var(--secondary-text)",
         },
       },
     },
@@ -305,6 +314,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontSize: "1.5rem",
+          color: "var(--base-background)",
         },
       },
     },

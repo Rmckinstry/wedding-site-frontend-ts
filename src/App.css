@@ -242,7 +242,7 @@ button:hover {
     justify-content: center;
     gap: 1rem;
     margin-top: 2rem;
-    padding: 1rem;
+    padding: 2rem;
 }
 
 #rsvp-form-continue-btn {
@@ -253,7 +253,7 @@ button:hover {
     font-weight: var(--weight-regular);
     border-style: none;
     border-radius: .25rem;
-    font-size: 1.25rem;
+    font-size: 1rem;
     padding: .5rem 0rem;
     width: 100%;
 }
@@ -610,7 +610,7 @@ button:hover {
     color: var(--base-background);
     border-style: none;
     border-radius: .25rem;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     padding: .5rem 1.25rem;
 }
 
@@ -731,6 +731,8 @@ button:hover {
     outline-style: solid;
     padding: .5rem 1rem;
     border-radius: 1rem;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .user-confirm-rsvp-container {
@@ -796,7 +798,7 @@ button.status-menu-btn:hover {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding: 2rem 3rem 1rem 3rem;
+    padding: 2rem 3rem;
     outline-style: solid;
     outline-color: #6464400e;
     border-radius: 3rem;
@@ -983,6 +985,7 @@ button.status-menu-btn:hover {
     #rsvp-card-container {
         background-color: var(--base-background-transparent);
         padding: 2rem 1rem;
+        min-width: 0rem;
     }
 
     #rsvp-now-btn {
@@ -1019,11 +1022,6 @@ button.status-menu-btn:hover {
     .btn-rsvp {
         padding: 1rem;
         font-size: 2rem;
-    }
-
-    .btn-rsvp-sm {
-        font-size: 1.5rem;
-        padding: .5rem 1.25rem;
     }
 
     /* admin */
@@ -1108,6 +1106,11 @@ button.status-menu-btn:hover {
         padding: 1rem 1rem;
     }
 
+    #rsvp-card-container {
+        min-width: 40px;
+    }
+
+
     #rsvp-now-btn {
         padding: 1rem 4rem;
         font-size: 2rem;
@@ -1157,6 +1160,10 @@ button.status-menu-btn:hover {
 
 @media (min-width: 901px) {
 
+    html {
+        font-size: 12px;
+    }
+
     body {
         background: linear-gradient(180deg, var(--base-background) 40%, var(--gradient-end) 100%);
     }
@@ -1186,16 +1193,20 @@ button.status-menu-btn:hover {
         width: 80%;
     }
 
+    .btn-rsvp-sm {
+        font-size: 1.25rem;
+    }
+
+    #rsvp-card-container {
+        min-width: 40px;
+    }
+
 }
 
 @media (min-width: 1000px) {
 
     #faq-data-desktop-container {
         padding: 0 10%;
-    }
-
-    #confirmation-card-container {
-        width: 80% !important;
     }
 
     .header-img {

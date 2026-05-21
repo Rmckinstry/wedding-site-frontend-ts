@@ -17,7 +17,13 @@ const SimpleDialog = (props: SimpleDialgProps) => {
         <DialogContentText>{content}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <button onClick={onClose}>{confirmText}</button>
+        <button
+          onClick={onClose}
+          className="btn-rsvp-sm"
+          style={{ backgroundColor: "var(--base-background)", color: "var(--default-text)" }}
+        >
+          {confirmText}
+        </button>
       </DialogActions>
     </Dialog>
   );

@@ -219,7 +219,7 @@ const SongEditForm = ({
 
   //#region song template
   return (
-    <div className="guest-status-container flex-col-start" style={{ width: "fit-content", gap: "1rem" }}>
+    <div className="guest-status-container flex-col-start">
       {/* already submitted song display */}
       <p className="font-sm strong-text">{guest.name} Song Requests</p>
       {submittedSongs.length !== 0 && (
@@ -757,11 +757,7 @@ function RSVPStatusMenu({
                 const guest = groupData.guests.find((guest) => guest.guest_id === rsvp.guest_id);
                 if (guest) {
                   return (
-                    <div
-                      className="guest-status-container"
-                      style={{ width: "100%", boxSizing: "border-box" }}
-                      key={guest.guest_id}
-                    >
+                    <div className="guest-status-container" key={guest.guest_id}>
                       <div className="overview-guest-info flex-col-start" style={{ gap: "1rem" }}>
                         <div className="guest-name flex-row-start flex-row-gap">
                           <p className="font-sm secondary-text strong-text underline ">Guest:</p>
