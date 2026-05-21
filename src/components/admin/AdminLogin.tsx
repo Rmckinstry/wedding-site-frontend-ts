@@ -29,7 +29,7 @@ function AdminLogin() {
     },
     onSuccess: (data) => {
       console.log("Response from server:", data);
-      sessionStorage.setItem("isAdmin", "true");
+      localStorage.setItem("isAdmin", "true");
       navigate("/admin");
     },
     onError: (error: ErrorType) => {

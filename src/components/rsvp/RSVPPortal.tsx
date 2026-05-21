@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import RSVPForm from "./RSVPForm.tsx";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import RSVPStatusMenu from "./RSVPStatusMenu.tsx";
+import RSVPStatusMenu from "./status-menu/RSVPStatusMenu.tsx";
 import { ErrorType, GroupData, RSVP } from "../../utility/types.ts";
 import Error from "../utility/Error.tsx";
 import Loading from "../utility/Loading.tsx";
@@ -20,7 +20,7 @@ function RSVPPortal({ groupId, groupName }: { groupId: number; groupName: string
         const errorData: ErrorType = await response.json();
         throw errorData;
       }
-      const results = await response.json();
+      const results: RSVP[] = await response.json();
       return results.sort((a, b) => {
         const idA = a.guest_id;
         const idB = b.guest_id;
@@ -57,7 +57,7 @@ function RSVPPortal({ groupId, groupName }: { groupId: number; groupName: string
 
   // possible location for the flashing bug
   if (groupRSVPs.isPending || groupData.isPending) {
-    return <Loading loadingText={`Loading {groupName}'s Portal Information...`} />;
+    return <Loading loadingText={`Loading ${groupName}'s Portal Information...`} />;
   }
 
   // idk if i want / need this

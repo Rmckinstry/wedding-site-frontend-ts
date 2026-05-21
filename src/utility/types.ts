@@ -18,6 +18,7 @@ export type Guest = {
   name: string;
   plus_one_allowed: boolean;
   song_requests: number;
+  after_party: boolean;
 };
 
 export type RSVP = {
@@ -25,8 +26,10 @@ export type RSVP = {
   guest_id: number;
   attendance: boolean;
   spotify: string;
+  dietary_restrictions: string;
   created_at: string;
   updated_at: string | null;
+  after_party_attending: boolean;
 };
 
 export type ErrorType = {
@@ -67,9 +70,15 @@ export type AdditionalGuest = {
   name: string;
   type: AdditionalGuestType;
   guestId: number;
+  dietaryRestriction: string;
 };
 
 export type AdditionalGuestBodyType = {
   groupId: number;
   additional: AdditionalGuest[];
+};
+
+export type FAQ = {
+  question: string;
+  answer: string;
 };
