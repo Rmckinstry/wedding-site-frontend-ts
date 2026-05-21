@@ -27,7 +27,7 @@ function RSVPPage() {
         throw errorData;
       }
       const results = await response.json();
-      return results.sort((a, b) => {
+      return results.sort((a: { name: string; }, b: { name: string; }) => {
         const nameA = a.name.toUpperCase();
         const nameB = b.name.toUpperCase();
         if (nameA < nameB) {

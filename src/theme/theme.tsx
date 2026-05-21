@@ -13,7 +13,7 @@ const theme = createTheme({
     MuiTabs: {
       styleOverrides: {
         indicator: {
-          backgroundColor: "var(--default-text)",
+          backgroundColor: "var(--accent)",
         },
       },
     },
@@ -25,11 +25,14 @@ const theme = createTheme({
           marginRight: "1rem",
           marginLeft: "1rem",
           fontFamily: "var(--font-main)",
+          "&.Tab-admin": {
+            fontSize: "1rem",
+            color: "var(--secondary-text-transparent)",
+          },
           "&.Mui-selected": {
-            color: "var(--default-text)",
+            color: "var(--secondary-text)",
           },
           "&:hover": {
-            color: "var(--default-text)",
             fontWeight: "600",
           },
         },
@@ -45,7 +48,7 @@ const theme = createTheme({
     MuiAccordionSummary: {
       styleOverrides: {
         root: {
-          color: "var(--default-text)",
+          color: "var(--secondary-text)",
         },
       },
     },
@@ -80,6 +83,14 @@ const theme = createTheme({
         },
       },
     },
+    MuiSelect: {
+      styleOverrides: {
+        select: {
+          color: "var(--secondary-text)",
+        },
+      },
+    },
+
     MuiStepLabel: {
       styleOverrides: {
         root: {
@@ -121,11 +132,21 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "var(--default-text)",
+            borderColor: "var(--secondary-text)",
+          },
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: "var(--secondary-text)",
           },
         },
         notchedOutline: {
-          borderColor: "var(--default-text)",
+          borderColor: "var(--secondary-text)",
+
+          "& span": {
+            color: "var(--secondary-text)",
+          },
+        },
+        input: {
+          color: "var(--secondary-text)",
         },
       },
     },
@@ -176,9 +197,12 @@ const theme = createTheme({
     MuiSvgIcon: {
       styleOverrides: {
         root: {
-          color: "var(--default-text)",
+          color: "var(--secondary-text)",
           "&.Mui-active": {
-            color: "var(--default-text)",
+            color: "var(--secondary-text)",
+          },
+          "&:hover": {
+            color: "var(--secondary-text)",
           },
         },
       },
@@ -187,13 +211,21 @@ const theme = createTheme({
     MuiFormLabel: {
       styleOverrides: {
         root: ({ theme }) => ({
-          color: "var(--default-text)",
+          color: "var(--secondary-text)",
           fontSize: "1.25rem",
           fontFamily: "var(--font-main)",
           [theme.breakpoints.down("md")]: {
             fontSize: "1.75rem",
           },
         }),
+      },
+    },
+
+    MuiFormControlLabel: {
+      styleOverrides: {
+        label: {
+          color: "var(--secondary-text)",
+        },
       },
     },
 
@@ -213,7 +245,9 @@ const theme = createTheme({
     MuiInputBase: {
       styleOverrides: {
         input: {
+          fontFamily: "var(--font-main)",
           fontSize: "16px",
+          color: "var(--default-text)",
         },
       },
     },
@@ -222,9 +256,19 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           position: "unset",
+          backgroundColor: "transparent",
         },
         progress: {
           width: "100%",
+          backgroundColor: "var(--secondary-background)",
+        },
+      },
+    },
+
+    MuiLinearProgress: {
+      styleOverrides: {
+        barColorPrimary: {
+          backgroundColor: "var(--accent)",
         },
       },
     },
@@ -246,6 +290,57 @@ const theme = createTheme({
             },
           },
         }),
+      },
+    },
+
+    MuiDialogContentText: {
+      styleOverrides: {
+        root: {
+          fontSize: "1.25rem",
+        },
+      },
+    },
+
+    MuiDialogTitle: {
+      styleOverrides: {
+        root: {
+          fontSize: "1.5rem",
+        },
+      },
+    },
+
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontFamily: "var(--font-main)",
+          color: "var(--secondary-text)",
+        },
+      },
+    },
+
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          "&.Mui-disabled": {
+            cursor: "not-allowed",
+          },
+        },
+      },
+    },
+
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          fontFamily: "var(--font-main)",
+        },
+      },
+    },
+
+    MuiTableHead: {
+      styleOverrides: {
+        root: {
+          fontWeight: 600,
+        },
       },
     },
   },

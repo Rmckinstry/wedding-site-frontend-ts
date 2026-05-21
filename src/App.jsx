@@ -29,12 +29,11 @@ function UserLayout() {
         </div>
         <div id='page-container'>
           {tabValue === 0 && <HomePage />}
-          {tabValue === 1 && <TravelPage />}
-          {tabValue === 2 && <Registry />}
-          {tabValue === 3 && <FAQPage />}
-          {tabValue === 4 && <AdminDashboard />}
+          {tabValue === 1 && <RSVPPage />}
+          {tabValue === 2 && <TravelPage />}
+          {tabValue === 3 && <Registry />}
+          {tabValue === 4 && <FAQPage />}
           {/* {tabValue === 1 && <DayOf />} */}
-          {/* {tabValue === 2 && <RSVPPage />} */}
 
         </div>
         <Footer showText={tabValue > 0} />
@@ -45,13 +44,14 @@ function UserLayout() {
 
 // A wrapper for the Admin routes that checks for authentication
 const PrivateAdminRoute = () => {
-  const isAdmin = sessionStorage.getItem('isAdmin'); // Check if isAdmin is true
+  const isAdmin = localStorage.getItem('isAdmin');
 
-  return isAdmin === 'true' ? <Outlet /> : <Navigate to="/admin-login" replace />;
+  return isAdmin ? <Outlet /> : <Navigate to="/admin-login" replace />;
 };
 
 function App() {
   return (
+    <ThemeProvider theme={theme}>
       <NavigationProvider>
         <Router>
           <Routes>
@@ -69,6 +69,8 @@ function App() {
           </Routes>
         </Router>
       </NavigationProvider>
+    </ThemeProvider>
+
   );
 }
 

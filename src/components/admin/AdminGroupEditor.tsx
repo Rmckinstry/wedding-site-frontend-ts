@@ -1,100 +1,42 @@
-import {
-  Button,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
+import { TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { CustomResponseType, ErrorType, Group, Guest } from "../../utility/types";
 import { useMutation } from "@tanstack/react-query";
+import { Delete } from "@mui/icons-material";
+import AlertDialog from "../utility/AlertDialog";
 
-export type NewGuest = {
-  name: string;
-  email: null;
-  plusOneAllowed: boolean;
-  hasDependents: boolean;
-  groupId: number;
-  songRequests: number;
-};
-
-function AdminGroupEditor({
-  groupData,
-  guestData,
-  handleDataRefresh,
-  handleMenuClick,
-}: {
-  groupData: Group[];
-  guestData: Guest[];
-  handleDataRefresh: () => void;
-  handleMenuClick: () => void;
-}) {
-  const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
-
-  const initialNewGuestState: NewGuest = {
-    name: "",
-    email: null,
-    plusOneAllowed: false,
-    hasDependents: false,
-    groupId: selectedGroup?.id || 0,
-    songRequests: 2,
-  };
-  const [newGuestData, setNewGuestData] = useState<NewGuest>(initialNewGuestState);
+function AdminGroupEditor({ groupData, handleDataRefresh }: { groupData: Group[]; handleDataRefresh: () => void }) {
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [groupToDelete, setGroupToDelete] = useState<Group | null>(null);
+  const [newGroupName, setNewGroupName] = useState<string>("");
 
   useEffect(() => {
-    setNewGuestData(initialNewGuestState);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedGroup]);
-  const handleGroupChange = (event) => {
-    // Find the selected group object from the fetched data
-    const selectedGroupByName = groupData.find((group) => group.group_name === event.target.value);
-    setSelectedGroup(selectedGroupByName!);
+    // This runs only once when the component mounts
+    console.log("AdminGroupEditor mounted");
+
+    return () => {
+      // This runs only once when the component unmounts
+      console.log("AdminGroupEditor unmounted");
+    };
+  }, []);
+
+  const handleGroupNameChange = (name: string) => {
+    setNewGroupName(name);
   };
 
-  // Generic handler for all form fields
-  const handleNewGuestInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value, type } = event.target;
-
-    // For checkbox inputs, 'checked' property is on HTMLInputElement
-    if (type === "checkbox") {
-      const target = event.target as HTMLInputElement;
-      setNewGuestData((prevData) => ({
-        ...prevData,
-        [name]: target.checked,
-      }));
-    } else {
-      setNewGuestData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
+  //#region Add Group
+  const handleGroupAdd = () => {
+    addGroupMutation.mutate();
   };
 
-  // Handler for number inputs specifically (e.g., song_requests)
-  const handleNumberInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setNewGuestData((prevData) => ({
-      ...prevData,
-      [name]: Number(value), // Ensure it's stored as a number
-    }));
-  };
-
-  const handleGuestAdd = () => {
-    addGuestsMutation.mutate();
-  };
-
-  const addGuestsMutation = useMutation<CustomResponseType, ErrorType>({
+  const addGroupMutation = useMutation<CustomResponseType, ErrorType>({
     mutationFn: async () => {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/guests`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/groups`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newGuestData),
+        body: JSON.stringify({ name: newGroupName }),
       });
 
       if (!response.ok) {
@@ -106,7 +48,7 @@ function AdminGroupEditor({
     },
     onSuccess: (data) => {
       handleDataRefresh();
-      setNewGuestData(initialNewGuestState);
+      setNewGroupName("");
       console.log("Response from server:", data);
     },
     onError: (error: ErrorType) => {
@@ -114,108 +56,102 @@ function AdminGroupEditor({
       console.error("Error adding Guest:", error.message);
     },
   });
+  //#endregion
+
+  //#region Delete Group
+  const handleGroupDelete = (group: Group) => {
+    setGroupToDelete(group);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDeleteDialogClose = (action: string) => {
+    if (action === "confirm" && groupToDelete !== null) {
+      deleteGroupMutation.mutate();
+    }
+    setDeleteDialogOpen(false);
+    setGroupToDelete(null);
+  };
+
+  const deleteGroupMutation = useMutation<CustomResponseType, ErrorType>({
+    mutationFn: async () => {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/groups/${groupToDelete?.id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        const errorBody: ErrorType = await response.json();
+        throw errorBody;
+      }
+
+      return response.json() as Promise<CustomResponseType>;
+    },
+    onSuccess: (data) => {
+      handleDataRefresh();
+      console.log("Response from server:", data);
+    },
+    onError: (error: ErrorType) => {
+      console.log(error);
+      console.error("Error deleting Group:", error.message);
+    },
+  });
+  //#endregion
+
   return (
-    <div id="admin-group-editor" className="flex-col flex-col-lg">
-      <p className="font-sm-med strong underline">Group Editor</p>
-      <div id="admin-groups-select-container" className="flex-col" style={{ padding: "1rem" }}>
-        <FormControl sx={{ minWidth: "20rem" }}>
-          <InputLabel id="group-select-label">Groups</InputLabel>
-          {/* TODO - replace with autocomplete */}
-          <Select
-            labelId="group-select-label"
-            id="group-select"
-            value={selectedGroup?.group_name || ""}
-            label="Groups"
-            onChange={handleGroupChange}
-          >
-            {/* Map over the fetched groups to create MenuItem components */}
-            {groupData.map((group) => (
-              <MenuItem key={group.id} value={group.group_name}>
-                {group.group_name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+    <div id="admin-group-editor-container">
+      <div className="box flex-col-start-sm border-box-100 admin-group-form-container">
+        <p className="font-sm-med strong-text admin-header">Groups</p>
+        <div className="flex-col-start-sm border-box-100">
+          {groupData.map((group) => {
+            return (
+              <div key={group.id} className="flex-row flex-row-gap border-box-100 admin-group-item">
+                <p className="font-sm">{group.group_name}</p>
+                <button
+                  className="btn-stripped icon"
+                  onClick={() => {
+                    handleGroupDelete(group);
+                  }}
+                >
+                  <Delete />
+                </button>
+              </div>
+            );
+          })}
+        </div>
       </div>
-      {selectedGroup !== null ? (
-        <div id="admin-group-editor-container">
-          <div id="admin-group-editor-guest-list" className=" admin-group-editor-item">
-            <p className="font-med strong underline contain-text-center">Guests:</p>
-            {guestData
-              .filter((guest) => {
-                return guest.group_id === selectedGroup.id;
-              })
-              .map((guest) => {
-                return (
-                  <p className="font-sm-med" key={guest.guest_id} style={{ marginBottom: "1rem" }}>
-                    - {guest.name}
-                  </p>
-                );
-              })}
-          </div>
-          <div id="admin-group-editor-guest-add" className="flex-col-start admin-group-editor-item">
-            <p className="font-med strong underline contain-text-center">Add New Guest to {selectedGroup.group_name}</p>
-            <FormGroup>
-              <TextField
-                label="Guest Name"
-                variant="outlined"
-                name="name" // Important for generic handler
-                value={newGuestData.name}
-                onChange={handleNewGuestInputChange}
-                size="small"
-                fullWidth
-                margin="dense"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={newGuestData.hasDependents}
-                    onChange={handleNewGuestInputChange}
-                    name="hasDependents" // Important for generic handler
-                  />
-                }
-                label="Has Dependents"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={newGuestData.plusOneAllowed}
-                    onChange={handleNewGuestInputChange}
-                    name="plusOneAllowed" // Important for generic handler
-                  />
-                }
-                label="Plus One Allowed"
-              />
-              <TextField
-                label="Song Requests"
-                variant="outlined"
-                name="songRequests" // Important for generic handler
-                value={newGuestData.songRequests}
-                onChange={handleNumberInputChange} // Use specific handler for numbers
-                type="number" // Only allow number input
-                size="small"
-                fullWidth
-                margin="dense"
-              />
-            </FormGroup>
-            <Button
-              disabled={addGuestsMutation.isPending || newGuestData.name === ""}
-              variant="contained"
-              onClick={handleGuestAdd}
-              sx={{ marginTop: 2 }}
+      <div className="box flex-col-start border-box-100 admin-group-form-container">
+        <p className="font-sm-med strong-text admin-header">Create Group</p>
+        <div className="flex-col-start-sm">
+          <span className="secondary-text">Group Name</span>
+          <TextField
+            value={newGroupName}
+            onChange={(e) => handleGroupNameChange(e.target.value)}
+            placeholder="e.g Smith Family"
+            variant="outlined"
+            fullWidth
+          />
+          <div className="btn-container" style={{ width: "100%" }}>
+            <button
+              className="btn-rsvp-sm"
+              disabled={addGroupMutation.isPending || !newGroupName}
+              onClick={handleGroupAdd}
+              style={{ width: "100%" }}
             >
-              Add Guest
-            </Button>
+              Add Group
+            </button>
           </div>
         </div>
-      ) : (
-        <p className="contain-text-center strong font-sm">Select Group Name to edit group</p>
-      )}
-      <div className="btn-container">
-        <button className="btn-rsvp" onClick={handleMenuClick}>
-          Admin Menu
-        </button>{" "}
       </div>
+
+      <AlertDialog
+        open={deleteDialogOpen}
+        onClose={handleDeleteDialogClose}
+        title={`Delete ${groupToDelete?.group_name}'s Group?`}
+        content="Warning: Deleting a group also includes deleting all guests and RSVPs associated with the group."
+        confirmText="Delete"
+      />
     </div>
   );
 }

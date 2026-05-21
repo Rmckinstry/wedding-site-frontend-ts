@@ -13,30 +13,6 @@ function Registry() {
       <div id="registry-page-container" className="flex-col">
         <div id="registry-info-container" className="flex-col"></div>
         <div id="registry-btn-container" className="btn-container contain-text-center">
-          {/* <div id="registry-iframe-container" style={{ position: "relative", width: "100%", minHeight: "500px" }}> */}
-          {/* {iframeLoading && (
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  zIndex: 1,
-                }}
-              >
-                <Loading loadingText="Loading Registry Preview ..." />
-              </div>
-            )} */}
-          {/* <iframe
-              title="Registry Preview"
-              src="https://withjoy.com/tyler-and-shelby-sep-26/registry"
-              onLoad={handleIframeLoad}
-              className="registry-frame"
-              style={{ visibility: iframeLoading ? "hidden" : "visible" }}
-              id="registry-iframe"
-            ></iframe> */}
-          {/* </div> */}
           <a
             href="https://withjoy.com/tyler-and-shelby-sep-26/registry"
             target="_blank"
