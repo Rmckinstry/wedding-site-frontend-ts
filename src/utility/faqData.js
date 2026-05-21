@@ -1,7 +1,7 @@
 const faqData = [
     {
         question: "How do I RSVP?",
-        answer: "RSVP's will be sent out in May with a QR code leading to the RSVP page. You will be able to RSVP through this site then."
+        answer: "You can RSVP by selecting the 'RSVP' tab in the Navagation Bar. Deadline to RSVP is July 31st."
     },
     {
         question: "Is there seating at the beach venue?",
