@@ -38,7 +38,7 @@ body {
 
 /* elements */
 html {
-    font-size: 16px;
+    font-size: 8px;
     background-color: var(--gradient-end)
 }
 
@@ -116,7 +116,7 @@ button:hover {
     font-family: var(--font-main);
     font-weight: var(--weight-medium);
     letter-spacing: .33rem;
-    padding-top: 11rem;
+    padding-top: 10%;
     padding-bottom: 1rem;
 }
 
@@ -859,33 +859,29 @@ button.status-menu-btn:hover {
 }
 
 .rsvp-btn-decline {
-  font-size: 1.5rem;
-  padding: .5rem 1.25rem;
-  color: var(--gradient-end);
-  background-color: var(--secondary-background);
-  border-radius: 1rem;
-  border-style: solid;
-  border-width: .25rem;
+    font-size: 1.5rem;
+    padding: .5rem 1.25rem;
+    color: var(--gradient-end);
+    background-color: var(--secondary-background);
+    border-radius: 1rem;
+    border-style: solid;
+    border-width: .25rem;
 }
 
 .rsvp-btn-accept {
-  font-size: 1.5rem;
-  padding: .5rem 1.25rem;
-  color: var(--secondary-text);
-  background-color: var(--accent);
-  border-radius: 1rem;
-  border-style: solid;
-  border-width: .25rem;
+    font-size: 1.5rem;
+    padding: .5rem 1.25rem;
+    color: var(--secondary-text);
+    background-color: var(--accent);
+    border-radius: 1rem;
+    border-style: solid;
+    border-width: .25rem;
 }
 
 /* Media Queries */
 
 /* Small devices (phones, 600px and below) */
 @media (max-width: 600px) {
-
-    html {
-        font-size: 8px;
-    }
 
     a {
         text-underline-offset: 4px;
@@ -1125,10 +1121,6 @@ button.status-menu-btn:hover {
         max-width: 75% !important;
     }
 
-    #header-name {
-        padding-top: 10%;
-    }
-
     #header-event-info-desktop {
         display: none;
     }
@@ -1163,11 +1155,7 @@ button.status-menu-btn:hover {
 
 }
 
-/* Large devices (desktops, 901px and above) */
 @media (min-width: 901px) {
-    html {
-        font-size: 12px;
-    }
 
     body {
         background: linear-gradient(180deg, var(--base-background) 40%, var(--gradient-end) 100%);
@@ -1175,10 +1163,6 @@ button.status-menu-btn:hover {
 
     #faq-data-desktop-container {
         padding: 0 10%;
-    }
-
-    #header-name {
-        padding-top: 8rem;
     }
 
     .header-img {
@@ -1198,16 +1182,13 @@ button.status-menu-btn:hover {
         padding: 1rem 4rem;
     }
 
-    .img-box-c{
+    .img-box-c {
         width: 80%;
     }
 
 }
 
 @media (min-width: 1000px) {
-    html {
-        font-size: 12px;
-    }
 
     #faq-data-desktop-container {
         padding: 0 10%;
@@ -1215,10 +1196,6 @@ button.status-menu-btn:hover {
 
     #confirmation-card-container {
         width: 80% !important;
-    }
-
-    #header-name {
-        padding-top: 10rem;
     }
 
     .header-img {
@@ -1234,13 +1211,17 @@ button.status-menu-btn:hover {
         display: block;
     }
 
-    .img-box-c{
+    .img-box-c {
         width: 80%;
     }
 }
 
 /* Super-large devices (large monitors, 1921px and above) */
 @media (min-width: 1920px) {
+    html {
+        font-size: 16px;
+    }
+
     .App {
         max-width: 1920px;
         /* Limit width for extra-large screens */
@@ -1254,10 +1235,6 @@ button.status-menu-btn:hover {
 
     #page-container {
         margin: 1rem 15%;
-    }
-
-    #header-name {
-        padding-top: 12rem;
     }
 
     #header-img {
