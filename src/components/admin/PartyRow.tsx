@@ -3,25 +3,23 @@ import { CustomResponseType, ErrorType, Guest, RSVP } from "../../utility/types"
 import { useMutation } from "@tanstack/react-query";
 import { convertUtcToCst } from "../../utility/util";
 
-export interface RSVPRowProps {
+export interface PartyRowProps {
   rsvp?: RSVP;
   handleDataRefresh: () => void;
   status: string;
   guest: Guest;
 }
 
-const RSVPRow = (props: RSVPRowProps) => {
-  const separator = "\u00A7";
-
+const PartyRow = (props: PartyRowProps) => {
   const { rsvp, handleDataRefresh, status, guest } = props;
 
   const handleAttendanceChange = (attendance: boolean) => {
-    editAttendanceMutation.mutate({ attendance: attendance });
+    editPartyAttendanceMutation.mutate({ attendance: attendance });
   };
 
-  const editAttendanceMutation = useMutation<CustomResponseType, ErrorType, { attendance: any }>({
+  const editPartyAttendanceMutation = useMutation<CustomResponseType, ErrorType, { attendance: any }>({
     mutationFn: async ({ attendance }) => {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/rsvps/attendance/${rsvp?.rsvp_id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/rsvps/party/${rsvp?.rsvp_id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -50,16 +48,6 @@ const RSVPRow = (props: RSVPRowProps) => {
       {status === "accepted" && rsvp && (
         <TableRow key={rsvp.guest_id}>
           <TableCell>{guest.name}</TableCell>
-          <TableCell align="right">
-            <div className="flex-col-start" style={{ alignItems: "end" }}>
-              {rsvp.spotify.split(separator).map((song) => (
-                <div style={{ maxWidth: "250px" }}>{song}</div>
-              ))}
-            </div>
-          </TableCell>
-          <TableCell align="right" style={{ maxWidth: "250px" }}>
-            <div>{rsvp.dietary_restrictions}</div>
-          </TableCell>
           <TableCell align="right">{convertUtcToCst(rsvp.updated_at ? rsvp.updated_at : rsvp.created_at)}</TableCell>
           <TableCell align="right">
             <button
@@ -78,14 +66,18 @@ const RSVPRow = (props: RSVPRowProps) => {
           <TableCell>{guest.name}</TableCell>
           <TableCell align="right">{convertUtcToCst(rsvp.updated_at ? rsvp.updated_at : rsvp.created_at)}</TableCell>
           <TableCell align="right">
-            <button
-              className="rsvp-btn-accept"
-              onClick={() => {
-                handleAttendanceChange(true);
-              }}
-            >
-              Mark as Attending
-            </button>
+            {!rsvp.attendance ? (
+              <span className="secondary-text">Guest declined wedding invite</span>
+            ) : (
+              <button
+                className="rsvp-btn-accept"
+                onClick={() => {
+                  handleAttendanceChange(true);
+                }}
+              >
+                Mark as Attending
+              </button>
+            )}
           </TableCell>
         </TableRow>
       )}
@@ -98,4 +90,4 @@ const RSVPRow = (props: RSVPRowProps) => {
   );
 };
 
-export default RSVPRow;
+export default PartyRow;

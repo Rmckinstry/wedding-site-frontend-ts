@@ -9,6 +9,7 @@ import AdminGuestEditor from "./AdminGuestEditor.tsx";
 import AdminRSVPEditor from "./AdminRSVPEditor.tsx";
 import AdminQuickview from "./AdminQuickview.tsx";
 import { Box, Tab, Tabs } from "@mui/material";
+import AdminPartyEditor from "./AdminPartyEditor.tsx";
 
 const TabPanel = ({ children, value, index }: { children?: React.ReactNode; value: number; index: number }) => (
   <div role="tabpanel" hidden={value !== index} id={`admin-tabpanel-${index}`} aria-labelledby={`admin-tab-${index}`}>
@@ -126,7 +127,11 @@ function AdminDashboard() {
           />
         </TabPanel>
         <TabPanel value={value} index={3}>
-          <p className="font-med strong underline contain-text-center">After Party content is coming soon.</p>
+          <AdminPartyEditor
+            guestData={allGuestsQuery.data ?? []}
+            rsvpData={allRsvpsQuery.data ?? []}
+            handleDataRefresh={refreshData}
+          />
         </TabPanel>
       </Box>
 
