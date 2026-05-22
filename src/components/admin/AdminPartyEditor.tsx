@@ -41,13 +41,13 @@ function AdminPartyEditor(props: AdminPartyEditorProps) {
     );
   }, [guestData, rsvpData]);
 
-  const handleAttendanceChange = (attendance: boolean, id: number) => {
-    editAttendanceMutation.mutate({ attendance: attendance, rsvpId: id });
+  const handlePartyChange = (attendance: boolean, id: number) => {
+    editPartyAttendanceMutation.mutate({ attendance: attendance, rsvpId: id });
   };
 
-  const editAttendanceMutation = useMutation<CustomResponseType, ErrorType, { attendance: any; rsvpId: number }>({
+  const editPartyAttendanceMutation = useMutation<CustomResponseType, ErrorType, { attendance: any; rsvpId: number }>({
     mutationFn: async ({ attendance, rsvpId }) => {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/rsvps/attendance/${rsvpId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/rsvps/party/${rsvpId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -213,38 +213,6 @@ function AdminPartyEditor(props: AdminPartyEditorProps) {
                             <p className="font-sm faq-title-mobile">Name:</p>
                             <p className="font-sm underline faq-answer-mobile">{guest.name}</p>
                           </div>
-                          {guest.additional_guest_type !== null && (
-                            <div>
-                              <div className="flex-row-start" style={{ gap: "1rem" }}>
-                                <p className="font-sm faq-title-mobile">Guest Type:</p>
-                                <p className="font-sm faq-answer-mobile">{guest.additional_guest_type}</p>
-                              </div>
-                              <div className="flex-row-start" style={{ gap: "1rem" }}>
-                                <p className="font-sm faq-title-mobile">Added By:</p>
-                                <p className="font-sm faq-answer-mobile">
-                                  {guestData.find((main) => main.guest_id === guest.added_by_guest_id)?.name}
-                                </p>
-                              </div>
-                            </div>
-                          )}
-                          {rsvp.spotify !== "" && (
-                            <div>
-                              <p className="font-sm faq-answer-mobile">Spotify: </p>
-                              {rsvp.spotify.split(separator).map((song) => (
-                                <p className="font-sm faq-answer-mobile">- {song}</p>
-                              ))}
-                            </div>
-                          )}
-                          {rsvp.dietary_restrictions !== "" && (
-                            <div className="flex-row-start" style={{ gap: "1rem" }}>
-                              <p className="font-sm faq-title-mobile">Dietary Restriction:</p>
-                              <p className="font-sm faq-answer-mobile">{rsvp.dietary_restrictions}</p>
-                            </div>
-                          )}
-                          <div className="flex-row-start" style={{ gap: "1rem" }}>
-                            <p className="font-sm faq-answer-mobile">Created At:</p>
-                            <p className="font-sm faq-answer-mobile">{convertUtcToCst(rsvp.created_at) + "CST"}</p>
-                          </div>
                           <div className="flex-row-start" style={{ gap: "1rem" }}>
                             <p className="font-sm faq-answer-mobile">Updated At:</p>
                             <p className="font-sm faq-answer-mobile">
@@ -255,7 +223,7 @@ function AdminPartyEditor(props: AdminPartyEditorProps) {
                             <div
                               className="rsvp-btn-decline"
                               onClick={() => {
-                                handleAttendanceChange(false, rsvp.rsvp_id);
+                                handlePartyChange(false, rsvp.rsvp_id);
                               }}
                             >
                               Change to Declined
@@ -293,10 +261,6 @@ function AdminPartyEditor(props: AdminPartyEditorProps) {
                             <p className="font-sm underline faq-answer-mobile">{guest.name}</p>
                           </div>
                           <div className="flex-row-start" style={{ gap: "1rem" }}>
-                            <p className="font-sm faq-title-mobile">Created At:</p>
-                            <p className="font-sm faq-answer-mobile">{convertUtcToCst(rsvp.created_at) + "CST"}</p>
-                          </div>
-                          <div className="flex-row-start" style={{ gap: "1rem" }}>
                             <p className="font-sm faq-title-mobile">Updated At:</p>
                             <p className="font-sm faq-answer-mobile">
                               {rsvp.updated_at ? convertUtcToCst(rsvp.updated_at) + "CST" : "N/A"}
@@ -306,7 +270,7 @@ function AdminPartyEditor(props: AdminPartyEditorProps) {
                             <div
                               className="rsvp-btn-accept"
                               onClick={() => {
-                                handleAttendanceChange(true, rsvp.rsvp_id);
+                                handlePartyChange(true, rsvp.rsvp_id);
                               }}
                             >
                               Change to Accepted
