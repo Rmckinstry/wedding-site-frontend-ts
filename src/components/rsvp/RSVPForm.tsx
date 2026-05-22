@@ -348,6 +348,7 @@ function RSVPForm({
 
   //#region handle change
   const handleAttendanceChange = (guestId: number, attendance: boolean) => {
+    const guest = groupData.guests.find((guest) => guestId === guest.guest_id);
     setRsvps((prev) =>
       prev.map((rsvp) =>
         rsvp.guestId === guestId
@@ -356,6 +357,7 @@ function RSVPForm({
               attendance: attendance,
               spotify: !attendance ? Array(rsvp.spotify.length).fill("") : rsvp.spotify,
               additionalGuests: [],
+              afterParty: "",
             }
           : rsvp,
       ),
@@ -370,6 +372,21 @@ function RSVPForm({
 
     if (childrenRsvps.length !== 0 && guestId === childrenRsvps[0].guestId) {
       setChildrenRsvps([]);
+    }
+
+    // defaulting after party attendance to false if attendance is false and guest has invite
+
+    if (guest?.after_party && attendance === false) {
+      setRsvps((prev) =>
+        prev.map((rsvp) =>
+          rsvp.guestId === guestId
+            ? {
+                ...rsvp,
+                afterParty: false,
+              }
+            : rsvp,
+        ),
+      );
     }
   };
 
