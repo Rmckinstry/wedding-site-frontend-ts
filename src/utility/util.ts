@@ -20,22 +20,21 @@ export const isValidName = (input: string): boolean => {
 };
 
 export function convertUtcToCst(utcDateTimeString: string): string {
-  const date = new Date(utcDateTimeString);
+  // If the string doesn't end with 'Z', append it so JavaScript knows it's UTC
+  const standardizedString = utcDateTimeString.endsWith("Z") ? utcDateTimeString : `${utcDateTimeString}Z`;
 
-  // Explicitly type the options object as Intl.DateTimeFormatOptions
+  const date = new Date(standardizedString);
+
   const options: Intl.DateTimeFormatOptions = {
     timeZone: "America/Chicago",
-    year: "numeric", // Now TypeScript knows this 'numeric' is the *literal* string
+    year: "numeric",
     month: "2-digit",
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
-    hour12: false,
+    hourCycle: "h23",
   };
 
-  const cstFormatter = new Intl.DateTimeFormat("en-US", options);
-  const cstDateTime = cstFormatter.format(date);
-
-  return cstDateTime;
+  return new Intl.DateTimeFormat("en-US", options).format(date).replace(",", "");
 }

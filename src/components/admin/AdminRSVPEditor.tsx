@@ -5,12 +5,11 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
-import GuestRow from "./GuestRow.tsx";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import RSVPRow from "./RSVPRow.tsx";
 import { useMutation } from "@tanstack/react-query";
 
-function AdminRSVPViewer({
+function AdminRSVPEditor({
   guestData,
   rsvpData,
   handleDataRefresh,
@@ -229,7 +228,7 @@ function AdminRSVPViewer({
                           {rsvp.dietary_restrictions !== "" && (
                             <div className="flex-row-start" style={{ gap: "1rem" }}>
                               <p className="font-sm faq-title-mobile">Dietary Restriction:</p>
-                                <p className="font-sm faq-answer-mobile">{rsvp.dietary_restrictions}</p>
+                              <p className="font-sm faq-answer-mobile">{rsvp.dietary_restrictions}</p>
                             </div>
                           )}
                           <div className="flex-row-start" style={{ gap: "1rem" }}>
@@ -339,4 +338,4 @@ function AdminRSVPViewer({
   );
 }
 
-export default AdminRSVPViewer;
+export default AdminRSVPEditor;
