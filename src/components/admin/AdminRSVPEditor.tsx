@@ -192,70 +192,75 @@ function AdminRSVPEditor({
             </AccordionSummary>
             <AccordionDetails>
               <div className="flex-col-start" style={{ marginTop: "1rem" }}>
-                {rsvpData
-                  .filter((rsvp) => rsvp.attendance === true)
-                  .map((rsvp, index) => {
-                    let guest = guestData.find((guest) => guest.guest_id === rsvp.guest_id);
-                    if (guest) {
-                      return (
-                        <div className="rsvp-viewer-guest flex-col-start" style={{ gap: "1rem" }} key={index}>
-                          <div className="flex-row-start" style={{ gap: "1rem" }}>
-                            <p className="font-sm faq-title-mobile">Name:</p>
-                            <p className="font-sm underline faq-answer-mobile">{guest.name}</p>
-                          </div>
-                          {guest.additional_guest_type !== null && (
-                            <div>
-                              <div className="flex-row-start" style={{ gap: "1rem" }}>
-                                <p className="font-sm faq-title-mobile">Guest Type:</p>
-                                <p className="font-sm faq-answer-mobile">{guest.additional_guest_type}</p>
-                              </div>
-                              <div className="flex-row-start" style={{ gap: "1rem" }}>
-                                <p className="font-sm faq-title-mobile">Added By:</p>
-                                <p className="font-sm faq-answer-mobile">
-                                  {guestData.find((main) => main.guest_id === guest.added_by_guest_id)?.name}
-                                </p>
-                              </div>
-                            </div>
-                          )}
-                          {rsvp.spotify !== "" && (
-                            <div>
-                              <p className="font-sm faq-answer-mobile">Spotify: </p>
-                              {rsvp.spotify.split(separator).map((song) => (
-                                <p className="font-sm faq-answer-mobile">- {song}</p>
-                              ))}
-                            </div>
-                          )}
-                          {rsvp.dietary_restrictions !== "" && (
+                {accepted.length === 0 ? (
+                  <div style={{ padding: "2rem 0rem" }}>
+                    <span style={{ color: "var(--secondary-text)" }}>No accepted guests</span>
+                  </div>
+                ) : (
+                  <>
+                    {accepted.map((rsvp, index) => {
+                      let guest = guestData.find((guest) => guest.guest_id === rsvp.guest_id);
+                      if (guest) {
+                        return (
+                          <div className="rsvp-viewer-guest flex-col-start" style={{ gap: "1rem" }} key={index}>
                             <div className="flex-row-start" style={{ gap: "1rem" }}>
-                              <p className="font-sm faq-title-mobile">Dietary Restriction:</p>
-                              <p className="font-sm faq-answer-mobile">{rsvp.dietary_restrictions}</p>
+                              <p className="font-sm faq-title-mobile">Name:</p>
+                              <p className="font-sm underline faq-answer-mobile">{guest.name}</p>
                             </div>
-                          )}
-                          <div className="flex-row-start" style={{ gap: "1rem" }}>
-                            <p className="font-sm faq-answer-mobile">Created At:</p>
-                            <p className="font-sm faq-answer-mobile">{convertUtcToCst(rsvp.created_at) + "CST"}</p>
-                          </div>
-                          <div className="flex-row-start" style={{ gap: "1rem" }}>
-                            <p className="font-sm faq-answer-mobile">Updated At:</p>
-                            <p className="font-sm faq-answer-mobile">
-                              {rsvp.updated_at ? convertUtcToCst(rsvp.updated_at) + "CST" : "N/A"}
-                            </p>
-                          </div>
-                          <div className="btn-container">
-                            <div
-                              className="rsvp-btn-decline"
-                              onClick={() => {
-                                handleAttendanceChange(false, rsvp.rsvp_id);
-                              }}
-                            >
-                              Change to Declined
+                            {guest.additional_guest_type !== null && (
+                              <div>
+                                <div className="flex-row-start" style={{ gap: "1rem" }}>
+                                  <p className="font-sm faq-title-mobile">Guest Type:</p>
+                                  <p className="font-sm faq-answer-mobile">{guest.additional_guest_type}</p>
+                                </div>
+                                <div className="flex-row-start" style={{ gap: "1rem" }}>
+                                  <p className="font-sm faq-title-mobile">Added By:</p>
+                                  <p className="font-sm faq-answer-mobile">
+                                    {guestData.find((main) => main.guest_id === guest.added_by_guest_id)?.name}
+                                  </p>
+                                </div>
+                              </div>
+                            )}
+                            {rsvp.spotify !== "" && (
+                              <div>
+                                <p className="font-sm faq-answer-mobile">Spotify: </p>
+                                {rsvp.spotify.split(separator).map((song) => (
+                                  <p className="font-sm faq-answer-mobile">- {song}</p>
+                                ))}
+                              </div>
+                            )}
+                            {rsvp.dietary_restrictions !== "" && (
+                              <div className="flex-row-start" style={{ gap: "1rem" }}>
+                                <p className="font-sm faq-title-mobile">Dietary Restriction:</p>
+                                <p className="font-sm faq-answer-mobile">{rsvp.dietary_restrictions}</p>
+                              </div>
+                            )}
+                            <div className="flex-row-start" style={{ gap: "1rem" }}>
+                              <p className="font-sm faq-answer-mobile">Created At:</p>
+                              <p className="font-sm faq-answer-mobile">{convertUtcToCst(rsvp.created_at) + "CST"}</p>
+                            </div>
+                            <div className="flex-row-start" style={{ gap: "1rem" }}>
+                              <p className="font-sm faq-answer-mobile">Updated At:</p>
+                              <p className="font-sm faq-answer-mobile">
+                                {rsvp.updated_at ? convertUtcToCst(rsvp.updated_at) + "CST" : "N/A"}
+                              </p>
+                            </div>
+                            <div className="btn-container">
+                              <div
+                                className="rsvp-btn-decline"
+                                onClick={() => {
+                                  handleAttendanceChange(false, rsvp.rsvp_id);
+                                }}
+                              >
+                                Change to Declined
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                    }
-                    return null;
-                  })}
+                        );
+                      }
+                    })}
+                  </>
+                )}
               </div>
             </AccordionDetails>
           </Accordion>
@@ -267,46 +272,52 @@ function AdminRSVPEditor({
             </AccordionSummary>
             <AccordionDetails>
               <div className="flex-col-start" style={{ marginTop: "1rem" }}>
-                {rsvpData
-                  .filter((rsvp) => rsvp.attendance === false)
-                  .map((rsvp, index) => {
-                    let guest = guestData.find((guest) => guest.guest_id === rsvp.guest_id);
-                    if (guest) {
-                      return (
-                        <div
-                          className="rsvp-viewer-guest flex-col-start"
-                          style={{ gap: "1rem" }}
-                          key={`${index}-declined`}
-                        >
-                          <div className="flex-row-start" style={{ gap: "1rem" }}>
-                            <p className="font-sm faq-title-mobile">Name:</p>
-                            <p className="font-sm underline faq-answer-mobile">{guest.name}</p>
-                          </div>
-                          <div className="flex-row-start" style={{ gap: "1rem" }}>
-                            <p className="font-sm faq-title-mobile">Created At:</p>
-                            <p className="font-sm faq-answer-mobile">{convertUtcToCst(rsvp.created_at) + "CST"}</p>
-                          </div>
-                          <div className="flex-row-start" style={{ gap: "1rem" }}>
-                            <p className="font-sm faq-title-mobile">Updated At:</p>
-                            <p className="font-sm faq-answer-mobile">
-                              {rsvp.updated_at ? convertUtcToCst(rsvp.updated_at) + "CST" : "N/A"}
-                            </p>
-                          </div>
-                          <div className="btn-container">
-                            <div
-                              className="rsvp-btn-accept"
-                              onClick={() => {
-                                handleAttendanceChange(true, rsvp.rsvp_id);
-                              }}
-                            >
-                              Change to Accepted
+                {declined.length === 0 ? (
+                  <div style={{ padding: "2rem 0rem" }}>
+                    <span style={{ color: "var(--secondary-text)" }}>No declined guests</span>
+                  </div>
+                ) : (
+                  <>
+                    {declined.map((rsvp, index) => {
+                      let guest = guestData.find((guest) => guest.guest_id === rsvp.guest_id);
+                      if (guest) {
+                        return (
+                          <div
+                            className="rsvp-viewer-guest flex-col-start"
+                            style={{ gap: "1rem" }}
+                            key={`${index}-declined`}
+                          >
+                            <div className="flex-row-start" style={{ gap: "1rem" }}>
+                              <p className="font-sm faq-title-mobile">Name:</p>
+                              <p className="font-sm underline faq-answer-mobile">{guest.name}</p>
+                            </div>
+                            <div className="flex-row-start" style={{ gap: "1rem" }}>
+                              <p className="font-sm faq-title-mobile">Created At:</p>
+                              <p className="font-sm faq-answer-mobile">{convertUtcToCst(rsvp.created_at) + "CST"}</p>
+                            </div>
+                            <div className="flex-row-start" style={{ gap: "1rem" }}>
+                              <p className="font-sm faq-title-mobile">Updated At:</p>
+                              <p className="font-sm faq-answer-mobile">
+                                {rsvp.updated_at ? convertUtcToCst(rsvp.updated_at) + "CST" : "N/A"}
+                              </p>
+                            </div>
+                            <div className="btn-container">
+                              <div
+                                className="rsvp-btn-accept"
+                                onClick={() => {
+                                  handleAttendanceChange(true, rsvp.rsvp_id);
+                                }}
+                              >
+                                Change to Accepted
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                    }
-                    return null;
-                  })}
+                        );
+                      }
+                      return null;
+                    })}
+                  </>
+                )}
               </div>
             </AccordionDetails>
           </Accordion>
