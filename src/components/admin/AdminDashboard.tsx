@@ -5,8 +5,8 @@ import Loading from "../utility/Loading.tsx";
 import Error from "../utility/Error.tsx";
 import { useNavigate } from "react-router-dom";
 import AdminGroupEditor from "./AdminGroupEditor.tsx";
-import AdminRSVPViewer from "./AdminRSVPViewer.tsx";
 import AdminGuestEditor from "./AdminGuestEditor.tsx";
+import AdminRSVPEditor from "./AdminRSVPEditor.tsx";
 import AdminQuickview from "./AdminQuickview.tsx";
 import { Box, Tab, Tabs } from "@mui/material";
 
@@ -119,7 +119,7 @@ function AdminDashboard() {
           />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <AdminRSVPViewer
+          <AdminRSVPEditor
             guestData={allGuestsQuery.data ?? []}
             rsvpData={allRsvpsQuery.data ?? []}
             handleDataRefresh={refreshData}
