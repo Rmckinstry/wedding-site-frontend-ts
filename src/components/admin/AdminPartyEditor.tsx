@@ -266,16 +266,16 @@ function AdminPartyEditor(props: AdminPartyEditorProps) {
                               {rsvp.updated_at ? convertUtcToCst(rsvp.updated_at) + "CST" : "N/A"}
                             </p>
                           </div>
-                          <div className="btn-container">
-                            <div
+                          {!rsvp.attendance ? (<span className="secondary-text">Guest declined wedding invite</span>) : (<div className="btn-container">
+                            <button
                               className="rsvp-btn-accept"
                               onClick={() => {
                                 handlePartyChange(true, rsvp.rsvp_id);
                               }}
                             >
                               Change to Accepted
-                            </div>
-                          </div>
+                            </button>
+                          </div>)}
                         </div>
                       );
                     }
