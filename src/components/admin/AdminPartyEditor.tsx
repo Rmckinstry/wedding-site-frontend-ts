@@ -17,7 +17,6 @@ export interface AdminPartyEditorProps {
 
 function AdminPartyEditor(props: AdminPartyEditorProps) {
   const { guestData, rsvpData, handleDataRefresh } = props;
-  const separator = "\u00A7";
   const [accepted, setAccepted] = useState<RSVP[]>([]);
   const [declined, setDeclined] = useState<RSVP[]>([]);
   const [notResponded, setNotResponded] = useState<Guest[]>([]);
@@ -202,38 +201,44 @@ function AdminPartyEditor(props: AdminPartyEditorProps) {
             </AccordionSummary>
             <AccordionDetails>
               <div className="flex-col-start" style={{ marginTop: "1rem" }}>
-                {rsvpData
-                  .filter((rsvp) => rsvp.attendance === true)
-                  .map((rsvp, index) => {
-                    let guest = guestData.find((guest) => guest.guest_id === rsvp.guest_id);
-                    if (guest) {
-                      return (
-                        <div className="rsvp-viewer-guest flex-col-start" style={{ gap: "1rem" }} key={index}>
-                          <div className="flex-row-start" style={{ gap: "1rem" }}>
-                            <p className="font-sm faq-title-mobile">Name:</p>
-                            <p className="font-sm underline faq-answer-mobile">{guest.name}</p>
-                          </div>
-                          <div className="flex-row-start" style={{ gap: "1rem" }}>
-                            <p className="font-sm faq-answer-mobile">Updated At:</p>
-                            <p className="font-sm faq-answer-mobile">
-                              {rsvp.updated_at ? convertUtcToCst(rsvp.updated_at) + "CST" : "N/A"}
-                            </p>
-                          </div>
-                          <div className="btn-container">
-                            <div
-                              className="rsvp-btn-decline"
-                              onClick={() => {
-                                handlePartyChange(false, rsvp.rsvp_id);
-                              }}
-                            >
-                              Change to Declined
+                {accepted.length === 0 ? (
+                  <div style={{ padding: "2rem 0rem" }}>
+                    <span style={{ color: "var(--secondary-text)" }}>No accepted after party guests. </span>
+                  </div>
+                ) : (
+                  <>
+                    {accepted.map((rsvp, index) => {
+                      let guest = guestData.find((guest) => guest.guest_id === rsvp.guest_id);
+                      if (guest) {
+                        return (
+                          <div className="rsvp-viewer-guest flex-col-start" style={{ gap: "1rem" }} key={index}>
+                            <div className="flex-row-start" style={{ gap: "1rem" }}>
+                              <p className="font-sm faq-title-mobile">Name:</p>
+                              <p className="font-sm underline faq-answer-mobile">{guest.name}</p>
+                            </div>
+                            <div className="flex-row-start" style={{ gap: "1rem" }}>
+                              <p className="font-sm faq-answer-mobile">Updated At:</p>
+                              <p className="font-sm faq-answer-mobile">
+                                {rsvp.updated_at ? convertUtcToCst(rsvp.updated_at) + "CST" : "N/A"}
+                              </p>
+                            </div>
+                            <div className="btn-container">
+                              <div
+                                className="rsvp-btn-decline"
+                                onClick={() => {
+                                  handlePartyChange(false, rsvp.rsvp_id);
+                                }}
+                              >
+                                Change to Declined
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                    }
-                    return null;
-                  })}
+                        );
+                      }
+                      return null;
+                    })}
+                  </>
+                )}
               </div>
             </AccordionDetails>
           </Accordion>
@@ -245,42 +250,52 @@ function AdminPartyEditor(props: AdminPartyEditorProps) {
             </AccordionSummary>
             <AccordionDetails>
               <div className="flex-col-start" style={{ marginTop: "1rem" }}>
-                {rsvpData
-                  .filter((rsvp) => rsvp.attendance === false)
-                  .map((rsvp, index) => {
-                    let guest = guestData.find((guest) => guest.guest_id === rsvp.guest_id);
-                    if (guest) {
-                      return (
-                        <div
-                          className="rsvp-viewer-guest flex-col-start"
-                          style={{ gap: "1rem" }}
-                          key={`${index}-declined`}
-                        >
-                          <div className="flex-row-start" style={{ gap: "1rem" }}>
-                            <p className="font-sm faq-title-mobile">Name:</p>
-                            <p className="font-sm underline faq-answer-mobile">{guest.name}</p>
+                {declined.length === 0 ? (
+                  <div style={{ padding: "2rem 0rem" }}>
+                    <span style={{ color: "var(--secondary-text)" }}>No declined after party guests. </span>
+                  </div>
+                ) : (
+                  <>
+                    {declined.map((rsvp, index) => {
+                      let guest = guestData.find((guest) => guest.guest_id === rsvp.guest_id);
+                      if (guest) {
+                        return (
+                          <div
+                            className="rsvp-viewer-guest flex-col-start"
+                            style={{ gap: "1rem" }}
+                            key={`${index}-declined`}
+                          >
+                            <div className="flex-row-start" style={{ gap: "1rem" }}>
+                              <p className="font-sm faq-title-mobile">Name:</p>
+                              <p className="font-sm underline faq-answer-mobile">{guest.name}</p>
+                            </div>
+                            <div className="flex-row-start" style={{ gap: "1rem" }}>
+                              <p className="font-sm faq-title-mobile">Updated At:</p>
+                              <p className="font-sm faq-answer-mobile">
+                                {rsvp.updated_at ? convertUtcToCst(rsvp.updated_at) + "CST" : "N/A"}
+                              </p>
+                            </div>
+                            {!rsvp.attendance ? (
+                              <span className="secondary-text strong">Guest declined wedding invite</span>
+                            ) : (
+                              <div className="btn-container">
+                                <button
+                                  className="rsvp-btn-accept"
+                                  onClick={() => {
+                                    handlePartyChange(true, rsvp.rsvp_id);
+                                  }}
+                                >
+                                  Change to Accepted
+                                </button>
+                              </div>
+                            )}
                           </div>
-                          <div className="flex-row-start" style={{ gap: "1rem" }}>
-                            <p className="font-sm faq-title-mobile">Updated At:</p>
-                            <p className="font-sm faq-answer-mobile">
-                              {rsvp.updated_at ? convertUtcToCst(rsvp.updated_at) + "CST" : "N/A"}
-                            </p>
-                          </div>
-                          {!rsvp.attendance ? (<span className="secondary-text">Guest declined wedding invite</span>) : (<div className="btn-container">
-                            <button
-                              className="rsvp-btn-accept"
-                              onClick={() => {
-                                handlePartyChange(true, rsvp.rsvp_id);
-                              }}
-                            >
-                              Change to Accepted
-                            </button>
-                          </div>)}
-                        </div>
-                      );
-                    }
-                    return null;
-                  })}
+                        );
+                      }
+                      return null;
+                    })}
+                  </>
+                )}
               </div>
             </AccordionDetails>
           </Accordion>
@@ -294,15 +309,13 @@ function AdminPartyEditor(props: AdminPartyEditorProps) {
             </AccordionSummary>
             <AccordionDetails>
               <div className="flex-col-start" style={{ marginTop: "1rem" }}>
-                {guestData
-                  .filter((guest) => !rsvpData.find((rsvp) => rsvp.guest_id === guest.guest_id))
-                  .map((guest, index) => (
-                    <div className="rsvp-viewer-guest flex-col-start" style={{ gap: "1rem" }} key={index}>
-                      <div className="flex-row-start" style={{ gap: "1rem" }}>
-                        <p className="font-sm faq-answer-mobile">{guest.name}</p>
-                      </div>
+                {notResponded.map((guest, index) => (
+                  <div className="rsvp-viewer-guest flex-col-start" style={{ gap: "1rem" }} key={index}>
+                    <div className="flex-row-start" style={{ gap: "1rem" }}>
+                      <p className="font-sm faq-answer-mobile">{guest.name}</p>
                     </div>
-                  ))}
+                  </div>
+                ))}
               </div>
             </AccordionDetails>
           </Accordion>
