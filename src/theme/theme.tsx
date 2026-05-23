@@ -81,6 +81,12 @@ const theme = createTheme({
           fontSize: "1.25rem",
           fontFamily: "var(--font-main)",
         },
+        select : {
+          color: "var(--secondary-text)",
+          '& option': {
+          color: "var(--secondary-text)",
+          },
+        },
       },
     },
     MuiSelect: {

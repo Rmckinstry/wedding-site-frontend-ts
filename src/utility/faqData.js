@@ -1,7 +1,7 @@
 const faqData = [
     {
         question: "How do I RSVP?",
-        answer: "You can RSVP by selecting the 'RSVP' tab in the Navagation Bar. Deadline to RSVP is July 31st."
+        answer: "You can RSVP by selecting the 'RSVP' tab in the Navigation Bar. Deadline to RSVP is July 31st."
     },
     {
         question: "Is there seating at the beach venue?",
@@ -29,7 +29,7 @@ const faqData = [
     // },
     {
         question: "How do I access the wedding registry?",
-        answer: "TBA"
+        answer: "The wedding registry can be accessed via the 'Registry' tab or by going to https://withjoy.com/tyler-and-shelby-sep-26/registry ."
     },
     {
         question: "What kind of ceremony is this?",
