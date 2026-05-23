@@ -1308,8 +1308,12 @@ button.status-menu-btn:hover {
 
 @media (min-width: 1000px) {
 
-    #faq-data-desktop-container {
-        padding: 0 10%;
+    .App {
+        padding: 0 10rem;
+    }
+
+    #registry-page-container, #travel-page-container, #faq-data-desktop-container{
+        max-width: 80%;
     }
 
     .header-img {

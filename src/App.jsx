@@ -27,7 +27,7 @@ function UserLayout() {
         <div id="nav-container">
           <Navigation />
         </div>
-        <div id='page-container'>
+        <div id='page-container' className='flex-col'>
           {tabValue === 0 && <HomePage />}
           {tabValue === 1 && <RSVPPage />}
           {tabValue === 2 && <TravelPage />}
