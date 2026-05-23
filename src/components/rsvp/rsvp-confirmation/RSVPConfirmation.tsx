@@ -41,7 +41,7 @@ const RSVPConfirmation = (props: RSVPConfirmationProps) => {
           <div className="flex-col">
             <span className="font-med-lg strong-text">We'll miss you!</span>
             <span
-              className="font-sm"
+              className="font-sm contain-text-center"
               style={{ color: "var(--secondary-background-lite)", fontWeight: "var(--weight-light)" }}
             >
               Your response has been received. We're sorry you can't make it, but we appreciate you letting us know.
@@ -59,7 +59,7 @@ const RSVPConfirmation = (props: RSVPConfirmationProps) => {
           <div className="flex-col">
             <span className="font-med-lg strong-text">You're on the list!</span>
             <span
-              className="font-sm"
+              className="font-sm contain-text-center"
               style={{ color: "var(--secondary-background-lite)", fontWeight: "var(--weight-light)" }}
             >
               Your RSVP(s) was submitted successfully. We can't wait to celebrate with you.
