@@ -46,7 +46,8 @@ function TravelPage() {
             <span className="alt-text strong-text font-sm-med">Lodging</span>
           </div>
           <div className="divider"></div>
-          <div id="hotel-info-container" className="flex-col-start-sm">
+          <span className="contain-text-center font-sm alt-text">TBA - Check back later for more details on a block rate</span>
+          {/* <div id="hotel-info-container" className="flex-col-start-sm">
             <span className="alt-text weight-medium font-sm">Courtyard Memphis Collierville</span>
             <a
               href="https://maps.app.goo.gl/QBmsoeupeWr9yDH87"
@@ -89,7 +90,7 @@ function TravelPage() {
           </div>
           <span style={{ color: "var(--secondary-text-transparent)", lineHeight: "1.55" }} className="font-xs">
             Located in Carriage Crossing Outdoor Mall — restaurants, bars, and shops all within walking distance.
-          </span>
+          </span> */}
         </div>
         {/* transportation */}
         <div id="transportation-container" className="secondary-card flex-col-start">
