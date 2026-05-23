@@ -13,10 +13,10 @@ import { useMutation } from "@tanstack/react-query";
 import Error from "../utility/Error.tsx";
 import Loading from "../utility/Loading.tsx";
 import EventIcon from "@mui/icons-material/Event";
-import { useNavigation } from "../../context/NavigationContext.tsx";
 import { isValidInput, isValidName } from "../../utility/util.ts";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import SimpleDialog from "../utility/SimpleDialog.tsx";
+import RSVPConfirmation from "./rsvp-confirmation/RSVPConfirmation.tsx";
 
 type RSVPFormObject = {
   guestId: number;
@@ -58,7 +58,7 @@ function RSVPForm({
 
   const [songValidationErrors, setSongValidationErrors] = useState<{ [guestId: string]: SongRequestError[] }>({});
   const [songInputsCount, setSongInputsCount] = useState<{ [guestId: string]: number }>({});
-  const [directToRegistry, setDirectToRegistry] = useState<boolean>(false);
+  const [onlyRegistry, setOnlyRegistry] = useState<boolean>(false);
   const [anyAdditionalSubmitted, setAnyAdditionalSubmitted] = useState<boolean>(false);
 
   // tracking if every guest has responded to rsvp form step 1
@@ -73,8 +73,6 @@ function RSVPForm({
     return true;
   });
 
-  //used for navigation context
-  const { navigateTo } = useNavigation();
   //steps for stepper component
   const steps = [
     "RSVPs",
@@ -166,10 +164,6 @@ function RSVPForm({
   useEffect(() => {
     resetRSVPs();
   }, [groupData, resetRSVPs]);
-
-  const handleRegistryButtonClick = () => {
-    window.open("https://withjoy.com/tyler-and-shelby-sep-26/registry", "_blank", "noreferrer");
-  };
 
   //#region  stepper controls
   const handleNext = () => {
@@ -322,20 +316,7 @@ function RSVPForm({
       return response.json() as Promise<RSVPResponseType>;
     },
     onSuccess: (data) => {
-      if (anyAdditionalSubmitted || rsvps.every((rsvp) => rsvp.attendance !== true)) {
-        //if children or plus ones already submitted direct to registry
-        //if everyone said no in the group direct to registry
-        setDirectToRegistry(true);
-      } else {
-        const createdRSVPs = data.data?.createdRSVPs;
-
-        const hasChildOrDep = createdRSVPs?.some((rsvp) => {
-          const guest = groupData.guests.find((guest) => guest.guest_id === rsvp.guest_id);
-          return rsvp.attendance && (guest?.has_dependents || guest?.plus_one_allowed);
-        });
-
-        setDirectToRegistry(!hasChildOrDep);
-      }
+      setOnlyRegistry(rsvps.every((rsvp) => !rsvp.attendance));
 
       console.log("Response from server:", data);
     },
@@ -677,55 +658,7 @@ function RSVPForm({
               </div>
             )}
             {submitRsvpsMutation.isSuccess && (
-              <div className="flex-col" style={{ gap: "2rem", marginTop: "2rem" }}>
-                <p className="font-med contain-text-center">Your RSVP(s) were successfully submitted. Thank you!</p>
-                {directToRegistry ? (
-                  <div className="flex-col outline" style={{ gap: "2rem" }}>
-                    <div className="flex-col">
-                      <p className="font-sm-med contain-text-center">
-                        If you are looking for gift ideas, our registry is available through the button below or you can
-                        use the menu above.
-                      </p>
-                      <button className="btn-rsvp" onClick={handleRegistryButtonClick}>
-                        Registry
-                      </button>
-                    </div>
-                    {/* only show portal msg if there is at least one person attending */}
-                    {rsvps.some((rsvp) => rsvp.attendance === true) && (
-                      <div className="flex-col">
-                        <p className="font-sm contain-text-center">
-                          Want to make a song request, update your info, or view your confirmation? Head over to our
-                          RSVP portal.
-                        </p>
-                        <button className="btn-rsvp-sm" onClick={sendRefresh}>
-                          RSVP Portal
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <div className="flex-col outline" style={{ gap: "2rem" }}>
-                    <div className="flex-col">
-                      <p className="font-sm-med contain-text-center">
-                        Ready to add a plus-one or child to your RSVP? You can do that, make a song request, update your
-                        info, or view your confirmation by heading over to our RSVP portal.
-                      </p>
-                      <button className="btn-rsvp" onClick={sendRefresh}>
-                        RSVP Portal
-                      </button>
-                    </div>
-                    <div className="flex-col">
-                      <p className="font-sm contain-text-center">
-                        If you are looking for gift ideas, our registry is available through the button below or you can
-                        use the menu above.
-                      </p>
-                      <button className="btn-rsvp-sm" onClick={handleRegistryButtonClick}>
-                        Registry
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
+              <RSVPConfirmation onlyRegistry={onlyRegistry} sendRefresh={sendRefresh} />
             )}
           </div>
         ) : (

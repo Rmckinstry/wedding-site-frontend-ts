@@ -9,14 +9,19 @@
 
     /* --secondary-background: #f7ac7d; */
     --secondary-background: #FEF0E4;
+    --secondary-background-lite: #fef0e4d8;
 
     --default-text: #FFF3E0;
     --default-text-transparent: #FFF3E042;
 
     --secondary-text: #1B434D;
-    --secondary-text-transparent: #1b434d6c;
+    --secondary-text-transparent: #1b434db0;
+    --secondary-text-lite: #1b434d31;
+
     --accent: #D4FF35;
     --btn-disabled: #D1B8A0;
+
+    /* --light-gray: #1b434d1f; */
 
     /* Font Variables */
     --font-main: 'Bricolage Grotesque';
@@ -274,6 +279,13 @@ button:hover {
     font-weight: 500;
 }
 
+#rsvp-registry-container {
+    background-color: var(--secondary-background);
+    border-radius: 1rem;
+    padding: 2rem;
+    max-width: 55rem;
+}
+
 #confirmation-card-container {
     width: 100%;
 }
@@ -411,6 +423,21 @@ button:hover {
     text-align: center;
 }
 
+.divider {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: var(--secondary-text-lite);
+    height: 1px;
+}
+
+.desktop {
+    display: block;
+}
+
+.mobile {
+    display: none;
+}
+
 .flex-col {
     display: flex;
     flex-direction: column;
@@ -524,6 +551,16 @@ button:hover {
     margin: 0px;
 }
 
+.alt-text {
+    color: var(--secondary-text);
+    margin: 0px;
+}
+
+.alt-text-lite {
+    color: var(--secondary-text-transparent);
+    margin: 0px;
+}
+
 .underline {
     text-decoration: underline;
     text-decoration-color: var(--accent);
@@ -619,6 +656,7 @@ button:hover {
     color: var(--default-text);
 }
 
+
 .btn-rsvp:hover,
 .btn-rsvp-sm:hover {
     cursor: pointer;
@@ -658,6 +696,27 @@ button:hover {
 
 .btn-stripped-text:hover {
     color: var(--default-text);
+}
+
+.btn-rsvp-registry {
+    all: unset;
+    font-family: var(--font-main), Verdana, sans-serif;
+    font-weight: var(--weight-medium);
+    font-size: 1.5rem;
+    border-radius: .5rem;
+    border-color: var(--secondary-text-transparent);
+    border-style: solid;
+    border-width: 1px;
+    padding: .5rem 1.5rem;
+    min-width: 9rem;
+    text-align: center;
+    background-color: var(--secondary-text);
+    color: var(--secondary-background);
+}
+
+.btn-rsvp-registry:hover {
+    color: var(--base-background);
+    transform: scale(1.1);
 }
 
 
@@ -880,6 +939,21 @@ button.status-menu-btn:hover {
     border-width: .25rem;
 }
 
+.rsvp-registry-icon-container {
+    width: 4rem;
+    height: 4rem;
+    flex-shrink: 0;
+    border-radius: 1rem;
+}
+
+.rsvp-registry-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    width: 100%;
+}
+
 /* Media Queries */
 
 /* Small devices (phones, 600px and below) */
@@ -916,6 +990,14 @@ button.status-menu-btn:hover {
     .font-med-lg {
         font-size: 2.75rem;
         /* font-size: 2.75rem; */
+    }
+
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: block;
     }
 
     #nav-mobile-container {
@@ -1100,6 +1182,14 @@ button.status-menu-btn:hover {
 
     a {
         text-underline-offset: 7px;
+    }
+
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: block;
     }
 
     #status-menu-grid {
