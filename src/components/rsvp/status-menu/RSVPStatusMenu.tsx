@@ -799,10 +799,9 @@ function RSVPStatusMenu({
                             ))}
                         </div>
                       )}
-                      {!everyAttendanceNo && rsvp.spotify.length === 0 && (
+                      {rsvp.attendance && rsvp.spotify.length === 0 && (
                         <p className="overview-guest-no-song font-xs">
-                          No songs requested. Song Requests are closed, if you have any must have's the DJ is your guy
-                          to see at the wedding! See you there!
+                          No songs requested. Head over to to the Song Request Menu to request some.
                         </p>
                       )}
                       {!everyAttendanceNo && rsvp.attendance && guest.plus_one_allowed && (
