@@ -55,10 +55,10 @@ function TravelPage() {
               className="flex-col-start-sm"
               style={{ gap: ".25rem" }}
             >
-              <span className="alt-text weight-light">4640 Merchants Park Cir</span>
-              <span className="alt-text weight-light">Collierville, TN 38017</span>
+              <span className="alt-text weight-light font-xs">4640 Merchants Park Cir</span>
+              <span className="alt-text weight-light font-xs">Collierville, TN 38017</span>
             </a>
-            <span className="underline strong-text alt-text">(901) 850-9390</span>
+            <span className="underline strong-text alt-text font-xs">(901) 850-9390</span>
           </div>
           <div id="hotel-deadline-container" className="flex-col-start-sm">
             <span
@@ -67,11 +67,11 @@ function TravelPage() {
                 padding: ".5rem",
                 borderRadius: ".5rem",
               }}
-              className="warning-text uppercase strong-text"
+              className="warning-text uppercase strong-text font-xs"
             >
               Book by Oct 21
             </span>
-            <span className="warning-text">
+            <span className="warning-text font-xs" >
               Use our room block for the discounted rate of $129/night. If the block shows full online, call and ask for
               Ashley — she can add you manually.
             </span>
@@ -87,7 +87,7 @@ function TravelPage() {
               Book Block Rate
             </a>
           </div>
-          <span style={{ color: "var(--secondary-text-transparent)", lineHeight: "1.55" }}>
+          <span style={{ color: "var(--secondary-text-transparent)", lineHeight: "1.55" }} className="font-xs">
             Located in Carriage Crossing Outdoor Mall — restaurants, bars, and shops all within walking distance.
           </span>
         </div>
@@ -107,7 +107,7 @@ function TravelPage() {
               </div>
               <div className="flex-col-start-sm">
                 <span className="alt-text strong-text font-sm">Destin–Fort Walton Beach Airport</span>
-                <span style={{ color: "var(--secondary-text-transparent)" }}>~20 miles west of the venue</span>
+                <span style={{ color: "var(--secondary-text-transparent)" }} className="font-xs">~20 miles west of the venue</span>
               </div>
             </div>
             <div className="divider"></div>
@@ -117,10 +117,10 @@ function TravelPage() {
               </div>
               <div className="flex-col-start-sm">
                 <span className="alt-text weight-medium font-sm">Northwest Florida Beaches Intl.</span>
-                <span style={{ color: "var(--secondary-text-transparent)" }}>~30 miles east of the venue</span>
+                <span style={{ color: "var(--secondary-text-transparent)" }} className="font-xs">~30 miles east of the venue</span>
               </div>
             </div>
-            <span style={{ color: "var(--secondary-text-transparent)" }}>
+            <span style={{ color: "var(--secondary-text-transparent)" }} className="font-xs">
               Two airports serve the Santa Rosa Beach area — either works depending on your origin.
             </span>
           </div>
