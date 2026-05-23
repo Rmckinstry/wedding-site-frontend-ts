@@ -1209,6 +1209,10 @@ button.status-menu-btn:hover {
         display: block;
     }
 
+    #travel-grid-container {
+        grid-template-columns: 1fr;
+    }
+    
     #status-menu-grid {
         padding: 1rem 1rem;
     }
