@@ -967,6 +967,10 @@ button.status-menu-btn:hover {
     padding: 2rem;
 }
 
+.rsvp-page-container{
+    width: 100%;
+}
+
 /* Media Queries */
 
 /* Small devices (phones, 600px and below) */
