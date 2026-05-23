@@ -4,7 +4,7 @@
 /* Variables */
 :root {
     --base-background: #F38B4E;
-    --base-background-transparent: #F38B4E98;
+    --base-background-transparent: #f38b4e70;
     --gradient-end: #FF7518;
 
     /* --secondary-background: #f7ac7d; */
@@ -20,6 +20,8 @@
 
     --accent: #D4FF35;
     --btn-disabled: #D1B8A0;
+
+    --warning-text: #854F0B;
 
     /* Font Variables */
     --font-main: 'Bricolage Grotesque';
@@ -68,13 +70,11 @@ h3 {
 }
 
 a {
-    text-underline-offset: 9px;
-    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
 }
 
 a:hover {
     transform: scale(1.05);
-    color: var(--accent);
     cursor: pointer;
 }
 
@@ -192,23 +192,18 @@ button:hover {
     font-weight: var(--weight-semibold);
 }
 
-#venue-container {
-    margin-bottom: 4.5rem;
-}
-
 #travel-grid-container {
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: start;
-    margin-bottom: 2rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    /* align-items: start;
+    margin-bottom: 2rem; */
 }
 
-#travel-divider {
-    height: 100%;
-    width: 1px;
-    background-color: var(--default-text);
-    margin: 0 2rem;
-    /* padding-right: 1rem; */
+#hotel-deadline-container {
+    background-color: #1b434d12;
+    padding: 1rem;
+    border-radius: 1rem;
 }
 
 #faq-data-mobile-container {
@@ -517,30 +512,35 @@ button:hover {
     font-size: 4rem;
 }
 
-.home-footer p {
-    margin: 0px;
-    letter-spacing: .25rem;
+/* font weights */
+
+.weight-extra-light {
+    font-weight: var(--weight-extralight);
 }
 
-.title {
-    text-decoration: underline;
-    /* text-decoration-color: var(--default-text); */
-    text-decoration-color: var(--accent);
-    text-decoration-thickness: 3px;
-    text-underline-offset: 1rem;
-    padding-bottom: 1rem;
+.weight-light {
+    font-weight: var(--weight-light);
+}
+
+.weight-regular {
+    font-weight: var(--weight-regular);
+}
+
+.weight-medium {
+    font-weight: var(--weight-medium);
 }
 
 .strong-text {
     font-weight: var(--weight-semibold);
 }
 
-.uppercase {
-    text-transform: uppercase;
+.home-footer p {
+    margin: 0px;
+    letter-spacing: .25rem;
 }
 
-.primary-text {
-    font-weight: var(--weight-medium);
+.uppercase {
+    text-transform: uppercase;
 }
 
 .secondary-text {
@@ -559,19 +559,15 @@ button:hover {
     margin: 0px;
 }
 
+.warning-text {
+    color: var(--warning-text);
+    margin: 0px;
+}
+
 .underline {
     text-decoration: underline;
     text-decoration-color: var(--accent);
     text-underline-offset: 4px;
-}
-
-.info-container {
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2rem;
 }
 
 /* --- BUTTONS --- */
@@ -614,6 +610,14 @@ button:hover {
     text-decoration: none;
 }
 
+.btn-link-accent {
+    background-color: var(--accent);
+    color: var(--secondary-text);
+    font-weight: var(--weight-medium);
+    width: auto;
+    padding: .25rem;
+}
+
 .btn-link:hover {
     cursor: pointer;
     transform: scale(1.1);
@@ -654,6 +658,10 @@ button:hover {
     color: var(--default-text);
 }
 
+.btn-accent {
+    background-color: var(--accent);
+    color: var(--secondary-text);
+}
 
 .btn-rsvp:hover,
 .btn-rsvp-sm:hover {

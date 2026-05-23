@@ -1,9 +1,9 @@
-import { CheckCircleOutline, Favorite, FavoriteBorder, LocalShipping } from "@mui/icons-material";
+import { CheckCircleOutline, Favorite, LocalShipping } from "@mui/icons-material";
 
 const Registry = () => {
   return (
-    <div className="flex-col flex-col-lg">
-      <div className="btn-container contain-text-center">
+    <div id="registry-page-container" className="flex-col flex-col-lg">
+      <div className="btn-container contain-text-center" style={{ paddingBottom: "1rem" }}>
         <a
           href="https://withjoy.com/tyler-and-shelby-sep-26/registry"
           target="_blank"
