@@ -672,6 +672,7 @@ button:hover {
 .btn-rsvp:disabled,
 .btn-rsvp-sm:disabled {
     background-color: var(--btn-disabled);
+    color: var(--secondary-text);
 }
 
 .btn-rsvp:disabled:hover,
