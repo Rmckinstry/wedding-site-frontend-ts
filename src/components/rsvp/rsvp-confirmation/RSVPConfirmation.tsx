@@ -1,15 +1,30 @@
 import { FavoriteBorder, Check } from "@mui/icons-material";
 import RSVPRegistryDesktop from "./RSVPConfirmationHeroDesktop";
 import RSVPRegistryMobile from "./RSVPConfirmationHeroMobile";
+import { useEffect, useRef } from "react";
 
 export interface RSVPConfirmationProps {
   onlyRegistry: boolean;
+  sendRefresh: () => void;
 }
 
 const RSVPConfirmation = (props: RSVPConfirmationProps) => {
-  const { onlyRegistry } = props;
+  const { onlyRegistry, sendRefresh } = props;
+  const targetRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      targetRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 50);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="flex-col flex-col-lg" style={{ marginTop: "2rem" }}>
+    <div className="flex-col flex-col-lg" style={{ marginTop: "2rem" }} ref={targetRef}>
       {onlyRegistry ? (
         <>
           <div
@@ -53,10 +68,10 @@ const RSVPConfirmation = (props: RSVPConfirmationProps) => {
         </>
       )}
       <div className="desktop">
-        <RSVPRegistryDesktop onlyRegistry={onlyRegistry} />
+        <RSVPRegistryDesktop onlyRegistry={onlyRegistry} sendRefresh={sendRefresh} />
       </div>
       <div className="mobile">
-        <RSVPRegistryMobile onlyRegistry={onlyRegistry} />
+        <RSVPRegistryMobile onlyRegistry={onlyRegistry} sendRefresh={sendRefresh} />
       </div>
     </div>
   );

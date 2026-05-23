@@ -1,36 +1,56 @@
 import { Redeem, BorderColor, Newspaper } from "@mui/icons-material";
+import { useNavigation } from "../../../context/NavigationContext";
 
 export interface RSVPConfirmationHeroDesktopProps {
   onlyRegistry: boolean;
+  sendRefresh: () => void;
 }
 
 const RSVPConfirmationHeroDesktop = (props: RSVPConfirmationHeroDesktopProps) => {
-  const { onlyRegistry } = props;
+  const { onlyRegistry, sendRefresh } = props;
+  const { navigateTo } = useNavigation();
+
+  const handleClick = (page: string) => {
+    if (page === "registry") {
+      window.open("https://withjoy.com/tyler-and-shelby-sep-26/registry", "_blank", "noreferrer");
+    }
+
+    if (page === "portal") {
+      sendRefresh();
+    }
+
+    if (page === "faq") {
+      navigateTo(4);
+    }
+  };
 
   return (
     <div className="flex-col-start" id="rsvp-registry-container">
       <div className="rsvp-registry-section">
-        <div className="flex-row-start flex-row-gap-lg rsvp-registry-section flex-row-start-sm">
+        <div className="flex-row-start flex-row-gap-lg flex-row-start-sm">
           <div style={{ backgroundColor: "var(--secondary-text)" }} className="flex-col rsvp-registry-icon-container">
             <Redeem sx={{ color: "var(--secondary-background)", fontSize: "2rem" }} />
           </div>
           <div className="flex-col-start-sm">
             <span className="alt-text strong-text font-sm-med">Browse the Registry</span>
-            {onlyRegistry ? (
-              <span className="alt-text-lite font-sm">Find gift ideas the couple has curated!</span>
-            ) : (
-              <span className="alt-text-lite font-sm">
-                You're still welcome to celebrate with a gift. Find ideas the couple has curated just for the occasion.
-              </span>
-            )}
+            <span className="alt-text-lite font-sm">
+              Needing gift ideas? Check out the registry that we have curated just for the occasion.
+            </span>
           </div>
         </div>
-        <button className="btn-rsvp-registry">Registry</button>
+        <button
+          onClick={() => {
+            handleClick("registry");
+          }}
+          className="btn-rsvp-registry"
+        >
+          Registry
+        </button>
       </div>
 
       {!onlyRegistry && (
         <div className="rsvp-registry-section">
-          <div className="flex-row-start flex-row-gap-lg rsvp-registry-section flex-row-start-sm">
+          <div className="flex-row-start flex-row-gap-lg flex-row-start-sm">
             <div style={{ backgroundColor: "var(--accent)" }} className="flex-col rsvp-registry-icon-container">
               <BorderColor sx={{ color: "var(--secondary-text)", fontSize: "2rem" }} />
             </div>
@@ -41,7 +61,14 @@ const RSVPConfirmationHeroDesktop = (props: RSVPConfirmationHeroDesktopProps) =>
               </span>
             </div>
           </div>
-          <button className="btn-rsvp-registry">RSVP Portal</button>
+          <button
+            onClick={() => {
+              handleClick("portal");
+            }}
+            className="btn-rsvp-registry"
+          >
+            RSVP Portal
+          </button>
         </div>
       )}
       <div className="rsvp-registry-section">
@@ -59,7 +86,14 @@ const RSVPConfirmationHeroDesktop = (props: RSVPConfirmationHeroDesktopProps) =>
             </span>
           </div>
         </div>
-        <button className="btn-rsvp-registry">FAQ Page</button>
+        <button
+          onClick={() => {
+            handleClick("faq");
+          }}
+          className="btn-rsvp-registry"
+        >
+          FAQ Page
+        </button>
       </div>
     </div>
   );

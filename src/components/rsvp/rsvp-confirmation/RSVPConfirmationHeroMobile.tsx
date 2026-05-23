@@ -1,11 +1,28 @@
 import { Redeem, BorderColor, Newspaper } from "@mui/icons-material";
+import { useNavigation } from "../../../context/NavigationContext";
 
 export interface RSVPConfirmationHeroMobileProps {
   onlyRegistry: boolean;
+  sendRefresh: () => void;
 }
 
 const RSVPConfirmationHeroMobile = (props: RSVPConfirmationHeroMobileProps) => {
-  const { onlyRegistry } = props;
+  const { onlyRegistry, sendRefresh } = props;
+  const { navigateTo } = useNavigation();
+
+  const handleClick = (page: string) => {
+    if (page === "registry") {
+      window.open("https://withjoy.com/tyler-and-shelby-sep-26/registry", "_blank", "noreferrer");
+    }
+
+    if (page === "portal") {
+      sendRefresh();
+    }
+
+    if (page === "faq") {
+      navigateTo(4);
+    }
+  };
 
   return (
     <div className="flex-col-start" id="rsvp-registry-container" style={{ gap: "3rem" }}>
@@ -17,15 +34,17 @@ const RSVPConfirmationHeroMobile = (props: RSVPConfirmationHeroMobileProps) => {
           <span className="alt-text strong-text font-sm-med">Browse the Registry</span>
           <div className="flex-col rsvp-registry-icon-container"></div>
         </div>
-        {onlyRegistry ? (
-          <span className="alt-text-lite font-sm">Find gift ideas the couple has curated!</span>
-        ) : (
-          <span className="alt-text-lite font-sm">
-            You're still welcome to celebrate with a gift. Find ideas the couple has curated just for the occasion.
-          </span>
-        )}
+        <span className="alt-text-lite font-sm">
+          Needing gift ideas? Check out the registry that we have curated just for the occasion.
+        </span>
         <div className="btn-container border-box-100">
-          <button style={{ width: "100%" }} className="btn-rsvp-registry">
+          <button
+            onClick={() => {
+              handleClick("registry");
+            }}
+            style={{ width: "100%" }}
+            className="btn-rsvp-registry"
+          >
             Registry
           </button>
         </div>
@@ -47,7 +66,13 @@ const RSVPConfirmationHeroMobile = (props: RSVPConfirmationHeroMobileProps) => {
               Update your dietary restrictions, song requests or other information any time before the deadline.
             </span>
             <div className="btn-container border-box-100">
-              <button style={{ width: "100%" }} className="btn-rsvp-registry">
+              <button
+                onClick={() => {
+                  handleClick("portal");
+                }}
+                style={{ width: "100%" }}
+                className="btn-rsvp-registry"
+              >
                 RSVP Portal
               </button>
             </div>
@@ -70,7 +95,13 @@ const RSVPConfirmationHeroMobile = (props: RSVPConfirmationHeroMobileProps) => {
           Read the FAQ page for more details about the day, travel, and more.
         </span>
         <div className="btn-container border-box-100">
-          <button style={{ width: "100%" }} className="btn-rsvp-registry">
+          <button
+            onClick={() => {
+              handleClick("faq");
+            }}
+            style={{ width: "100%" }}
+            className="btn-rsvp-registry"
+          >
             FAQ Page
           </button>
         </div>

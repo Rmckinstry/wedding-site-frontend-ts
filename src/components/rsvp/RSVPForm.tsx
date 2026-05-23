@@ -13,7 +13,6 @@ import { useMutation } from "@tanstack/react-query";
 import Error from "../utility/Error.tsx";
 import Loading from "../utility/Loading.tsx";
 import EventIcon from "@mui/icons-material/Event";
-import { useNavigation } from "../../context/NavigationContext.tsx";
 import { isValidInput, isValidName } from "../../utility/util.ts";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import SimpleDialog from "../utility/SimpleDialog.tsx";
@@ -74,8 +73,6 @@ function RSVPForm({
     return true;
   });
 
-  //used for navigation context
-  const { navigateTo } = useNavigation();
   //steps for stepper component
   const steps = [
     "RSVPs",
@@ -167,10 +164,6 @@ function RSVPForm({
   useEffect(() => {
     resetRSVPs();
   }, [groupData, resetRSVPs]);
-
-  const handleRegistryButtonClick = () => {
-    window.open("https://withjoy.com/tyler-and-shelby-sep-26/registry", "_blank", "noreferrer");
-  };
 
   //#region  stepper controls
   const handleNext = () => {
@@ -664,7 +657,9 @@ function RSVPForm({
                 />
               </div>
             )}
-            {submitRsvpsMutation.isSuccess && <RSVPConfirmation onlyRegistry={onlyRegistry} />}
+            {submitRsvpsMutation.isSuccess && (
+              <RSVPConfirmation onlyRegistry={onlyRegistry} sendRefresh={sendRefresh} />
+            )}
           </div>
         ) : (
           <div id="rsvp-card-container" className="box">
