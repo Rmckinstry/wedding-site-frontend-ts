@@ -9,7 +9,7 @@ function TravelPage() {
     <div id="travel-page-container" className="flex-col flex-col-lg">
       {/* lodging */}
       <div id="venue-container" className="flex-col">
-        <span className="weight-light font-sm-med">Wedding Venue</span>
+        <span className="weight-light font-sm-med uppercase">Wedding Venue</span>
         <div id="venue-info" className="flex-col flex-col-lg contain-text-center">
           <div className="flex-col">
             <p className="weight-medium font-med-lg">Fort Panic (Beach Access Point)</p>
@@ -31,7 +31,7 @@ function TravelPage() {
               className="btn-rsvp btn-alt flex-row-gap"
             >
               <LocationOn style={{ color: "var(--default-text)" }} />
-              <span>Open in Maps</span>
+              <span className="uppercase">Open in Maps</span>
             </button>
           </div>
         </div>
@@ -47,7 +47,7 @@ function TravelPage() {
           </div>
           <div className="divider"></div>
           <div id="hotel-info-container" className="flex-col-start-sm">
-            <span className="alt-text strong-text font-sm">Courtyard Memphis Collierville</span>
+            <span className="alt-text weight-medium font-sm">Courtyard Memphis Collierville</span>
             <a
               href="https://maps.app.goo.gl/QBmsoeupeWr9yDH87"
               target="_blank"
@@ -113,10 +113,10 @@ function TravelPage() {
             <div className="divider"></div>
             <div className="flex-row-start flex-row-gap">
               <div style={{ backgroundColor: "#1b434d12" }} className="rsvp-registry-icon-container flex-col">
-                <span className="alt-text strong-text font-sm">ECP</span>
+                <span className="alt-text weight-medium font-sm">ECP</span>
               </div>
               <div className="flex-col-start-sm">
-                <span className="alt-text strong-text font-sm">Northwest Florida Beaches Intl.</span>
+                <span className="alt-text weight-medium font-sm">Northwest Florida Beaches Intl.</span>
                 <span style={{ color: "var(--secondary-text-transparent)" }}>~30 miles east of the venue</span>
               </div>
             </div>
