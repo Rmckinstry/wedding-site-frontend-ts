@@ -61,7 +61,7 @@ function TravelPage() {
             <span className="underline strong-text alt-text font-xs">(850) 650-7611</span>
           </div>
           <div id="hotel-deadline-container" className="flex-col-start-sm">
-            <span
+            {/* <span
               style={{
                 backgroundColor: "var(--base-background-transparent)",
                 padding: ".5rem",
@@ -70,7 +70,7 @@ function TravelPage() {
               className="warning-text uppercase strong-text font-xs"
             >
               Book by Oct 21
-            </span>
+            </span> */}
             <span className="warning-text font-xs" >
               Use our room block for the discounted rate of $129/night. If the block shows full online, call and ask for
               Leslie Murry — she can assist you. Make sure to confirm room & guest count on website.
