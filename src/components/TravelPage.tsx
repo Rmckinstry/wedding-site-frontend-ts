@@ -46,20 +46,19 @@ function TravelPage() {
             <span className="alt-text strong-text font-sm-med">Lodging</span>
           </div>
           <div className="divider"></div>
-          <span className="contain-text-center font-sm alt-text">TBA - Check back later for more details on a block rate</span>
-          {/* <div id="hotel-info-container" className="flex-col-start-sm">
-            <span className="alt-text weight-medium font-sm">Courtyard Memphis Collierville</span>
+          <div id="hotel-info-container" className="flex-col-start-sm">
+            <span className="alt-text weight-medium font-sm">Hyatt Place Sandestin/at Grand Boulevard</span>
             <a
-              href="https://maps.app.goo.gl/QBmsoeupeWr9yDH87"
+              href="https://maps.app.goo.gl/kMyJjFYo9j8Kb7mV8"
               target="_blank"
               rel="noreferrer"
               className="flex-col-start-sm"
               style={{ gap: ".25rem" }}
             >
-              <span className="alt-text weight-light font-xs">4640 Merchants Park Cir</span>
-              <span className="alt-text weight-light font-xs">Collierville, TN 38017</span>
+              <span className="alt-text weight-light font-xs">325 Grand Blvd</span>
+              <span className="alt-text weight-light font-xs">Destin, FL 32550</span>
             </a>
-            <span className="underline strong-text alt-text font-xs">(901) 850-9390</span>
+            <span className="underline strong-text alt-text font-xs">(850) 650-7611</span>
           </div>
           <div id="hotel-deadline-container" className="flex-col-start-sm">
             <span
@@ -74,12 +73,12 @@ function TravelPage() {
             </span>
             <span className="warning-text font-xs" >
               Use our room block for the discounted rate of $129/night. If the block shows full online, call and ask for
-              Ashley — she can add you manually.
+              Leslie Murry — she can assist you. Make sure to confirm room & guest count on website.
             </span>
           </div>
           <div className="border-box-100">
             <a
-              href="https://www.marriott.com/event-reservations/reservation-link.mi?id=1736975742584&key=GRP&guestreslink2=true&app=resvlink"
+              href="https://www.hyatt.com/shop/rooms/ecpzs?location=Hyatt%20Place%20Sandestin%2Fat%20Grand%20Boulevard&checkinDate=2026-09-18&checkoutDate=2026-09-20&rooms=1&adults=1&kids=0&corp_id=G-BMWW"
               target="_blank"
               className="btn-link btn-link-accent uppercase font-sm strong-text"
               rel="noreferrer"
@@ -89,8 +88,8 @@ function TravelPage() {
             </a>
           </div>
           <span style={{ color: "var(--secondary-text-transparent)", lineHeight: "1.55" }} className="font-xs">
-            Located in Carriage Crossing Outdoor Mall — restaurants, bars, and shops all within walking distance.
-          </span> */}
+          Discover art-themed ambiance and deluxe amenities such as complimentary breakfast at Hyatt Place Sandestin/At Grand Boulevard. Enjoy shopping, dining and entertainment within walking distance of our hotel as well as sugar-sand beaches a short drive away.
+          </span>
         </div>
         {/* transportation */}
         <div id="transportation-container" className="secondary-card flex-col-start">
