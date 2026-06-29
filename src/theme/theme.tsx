@@ -88,7 +88,7 @@ const theme = createTheme({
           },
         },
         icon: {
-          fontSize: "3rem", // Adjust this to match your design (e.g., 2rem or 32px)
+          fontSize: "4rem", // Adjust this to match your design (e.g., 2rem or 32px)
         },
       },
     },
