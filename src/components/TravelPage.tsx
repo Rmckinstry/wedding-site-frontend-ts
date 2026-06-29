@@ -28,7 +28,7 @@ function TravelPage() {
               onClick={() => {
                 handleMapsClick();
               }}
-              className="btn-rsvp btn-alt flex-row-gap"
+              className="btn-rsvp btn-alt flex-row flex-row-gap"
             >
               <LocationOn style={{ color: "var(--default-text)" }} />
               <span className="uppercase">Open in Maps</span>
