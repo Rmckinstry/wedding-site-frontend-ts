@@ -81,11 +81,14 @@ const theme = createTheme({
           fontSize: "1.25rem",
           fontFamily: "var(--font-main)",
         },
-        select : {
+        select: {
           color: "var(--secondary-text)",
           '& option': {
-          color: "var(--secondary-text)",
+            color: "var(--secondary-text)",
           },
+        },
+        icon: {
+          fontSize: "4rem", // Adjust this to match your design (e.g., 2rem or 32px)
         },
       },
     },

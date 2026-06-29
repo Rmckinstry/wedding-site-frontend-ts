@@ -20,13 +20,13 @@ function MobileSelectNav({
         <NativeSelect
           value={tabValue}
           onChange={handleChange}
+          fullWidth
           sx={{
             color: "var(--default-text)",
             fontSize: "2rem",
             fontFamily: "Jost",
             fontWeight: 600,
           }}
-          IconComponent={() => <ArrowDropDownIcon sx={{ fontSize: 32 }} />}
         >
           <option value={0}>Home</option>
           <option value={1}>RSVP</option>
