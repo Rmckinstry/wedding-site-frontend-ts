@@ -29,10 +29,10 @@ function UserLayout() {
         </div>
         <div id='page-container' className='flex-col'>
           {tabValue === 0 && <HomePage />}
-          {tabValue === 1 && <RSVPPage />}
-          {tabValue === 2 && <TravelPage />}
-          {tabValue === 3 && <Registry />}
-          {tabValue === 4 && <FAQPage />}
+          {/* {tabValue === 1 && <RSVPPage />} */}
+          {tabValue === 1 && <TravelPage />}
+          {tabValue === 2 && <Registry />}
+          {tabValue === 3 && <FAQPage />}
           {/* {tabValue === 1 && <DayOf />} */}
 
         </div>

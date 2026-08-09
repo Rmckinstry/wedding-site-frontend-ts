@@ -29,10 +29,10 @@ function MobileSelectNav({
           }}
         >
           <option value={0}>Home</option>
-          <option value={1}>RSVP</option>
-          <option value={2}>Travel</option>
-          <option value={3}>Registry</option>
-          <option value={4}>FAQ</option>
+          {/* <option value={1}>RSVP</option> */}
+          <option value={1}>Travel</option>
+          <option value={2}>Registry</option>
+          <option value={3}>FAQ</option>
           {isAdmin && <option value={5}>Admin</option>}
           {/* <option value={1}>Day of Info</option> */}
         </NativeSelect>
